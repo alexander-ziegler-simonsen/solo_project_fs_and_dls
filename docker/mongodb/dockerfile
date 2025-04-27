@@ -1,0 +1,8 @@
+FROM mongo:latest
+
+WORKDIR /
+
+COPY .env /
+
+
+EXPOSE 27017

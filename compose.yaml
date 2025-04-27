@@ -1,0 +1,48 @@
+services:
+  ors-mongo:
+    build: ./docker/mongodb
+    ports:
+      - "27018:27017"
+    networks:
+      - backend
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MON_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MON_PASSWORD}
+    volumes:
+      - mongodata:/data/db
+  
+  ors-postgres:
+    build: ./docker/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: ${POST_USERNAME}
+      POSTGRES_PASSWORD: ${POST_PASSWORD}
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+  
+  ors-rabbitmq:
+    build: ./docker/rabbitmq
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    networks:
+      - backend
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+
+volumes:
+  mongodata:
+    driver: local
+  postgresdata:
+    driver: local
+  rabbitmqdata:
+    driver: local
+
+networks:
+  backend:

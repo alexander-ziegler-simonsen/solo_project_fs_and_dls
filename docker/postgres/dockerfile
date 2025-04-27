@@ -1,0 +1,9 @@
+
+FROM postgres:alpine
+
+WORKDIR /
+
+COPY .env /
+
+EXPOSE 5432
+

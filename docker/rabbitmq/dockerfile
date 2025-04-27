@@ -1,0 +1,7 @@
+FROM rabbitmq:management-alpine
+
+WORKDIR /
+
+COPY .env /
+
+EXPOSE 5672
