@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config ./config_files/vite.config.ts",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest --config ./vite.config.ts",
-    "test:ui": "vitest --ui --config ./vite.config.ts",
-    "coverage": "vitest run --coverage  --config ./vitest.config.ts",
+    "lint": "eslint . --config ./config_files/eslint.config.js",
+    "preview": "vite preview --config ./config_files/vite.config.ts",
+    "test": "vitest --config ./config_files/vite.config.ts",
+    "test:ui": "vitest --ui --config ./config_files/vite.config.ts",
+    "coverage": "vitest run --coverage  --config ./config_files/vitest.config.ts",
     "doc": "npx typedoc --entryPointStrategy Expand src"
   },
   "dependencies": {
