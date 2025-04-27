@@ -3,6 +3,7 @@
 
 # all the documentation of the code
 docs/
+.react-router/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,venv,dotenv,macos
