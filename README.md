@@ -11,3 +11,8 @@ These are some of the techologies I wll be using:
 - vite
 - chakra ui
 - git
+- mongodb
+- postgres
+- rabbitmq
+- vitest
+- TypeDoc
