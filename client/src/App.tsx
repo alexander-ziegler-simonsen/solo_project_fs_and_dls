@@ -7,7 +7,7 @@ function App() {
       <div>
         <img src={orsLogo} className="logo" alt="Online Rizz Shop logo" />
       </div>
-      <h1>Online Rizz Shop</h1>
+      <h1>Online Rizz Shop - app page</h1>
     </>
   )
 }
