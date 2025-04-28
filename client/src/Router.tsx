@@ -1,5 +1,4 @@
-import React from 'react'
-import { createBrowserRouter, createRoutesFromElements, Route, Router } from 'react-router'
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router'
 import Layout from './Layout'
 import AboutPage from './pages/AboutPage';
 import CategoryPage from './pages/CategoryPage';
