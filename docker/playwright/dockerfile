@@ -1,0 +1,10 @@
+
+FROM mcr.microsoft.com/playwright:v1.52.0-noble
+
+WORKDIR /home/pwuser
+
+COPY .env /
+
+EXPOSE 3000
+
+RUN npx -y playwright@1.52.0 run-server --port 3000 --host 0.0.0.0
