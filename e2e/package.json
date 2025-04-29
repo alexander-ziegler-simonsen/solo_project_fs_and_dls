@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "startdb": "cd .. && docker compose up -d"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -11,6 +13,7 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.15.3",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "start-server-and-test": "^2.0.11"
   }
 }
