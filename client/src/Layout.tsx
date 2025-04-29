@@ -2,21 +2,27 @@ import React from 'react'
 import { Outlet } from 'react-router'
 import { Provider } from './components/ui/provider'
 import orsLogo from './assets/ors-192x192.png'
+import { Center, Container, Flex, Text } from '@chakra-ui/react'
 
 function Layout() {
     return (
         <Provider>
-            <div id="header">
-                <h1>Online Rizz Shop</h1> <img src={orsLogo} width={50} className="logo" alt="Online Rizz Shop logo" />
-            </div>
+            <Container id="header" backgroundColor={'red.600'} p={3} maxW={"1/1"}>
+                <Flex gap={5}>
+                    <img src={orsLogo} width={50} className="logo" alt="Online Rizz Shop logo" />
+                    <Text>test</Text>
+                </Flex>
+            </Container>
 
-            <div id="main">
+            <Container id="main" maxW={"1/1"} p={3} minH={300} backgroundColor={'green.500'}>
                 <Outlet />
-            </div>
+            </Container>
 
-            <div id="footer">
-                <p>this website is copyrighted by me, do not steal..... I will know if you did.</p>
-            </div>
+            <Container id="footer" maxW={"1/1"} p={3} backgroundColor={'yellow.200'}>
+                <Center>
+                    <Text>this website is copyrighted by me, do not steal..... I will know if you did.</Text>
+                </Center>
+            </Container>
         </Provider >
     )
 }
