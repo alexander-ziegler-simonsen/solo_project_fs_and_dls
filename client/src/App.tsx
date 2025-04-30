@@ -1,5 +1,4 @@
 import orsLogo from './assets/ors-192x192.png'
-import './App.css'
 
 function App() {
   return (
