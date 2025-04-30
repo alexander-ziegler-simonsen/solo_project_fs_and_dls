@@ -1,10 +1,13 @@
-import React from 'react'
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import { Provider } from './components/ui/provider'
 import orsLogo from './assets/ors-192x192.png'
 import { Center, Container, Flex, Text } from '@chakra-ui/react'
+import App from './App'
 
 function Layout() {
+    const location = useLocation();
+
+
     return (
         <Provider>
             <Container id="header" backgroundColor={'red.600'} p={3} maxW={"1/1"}>
@@ -15,7 +18,7 @@ function Layout() {
             </Container>
 
             <Container id="main" maxW={"1/1"} p={3} minH={300} backgroundColor={'green.500'}>
-                <Outlet />
+                { location.pathname === "/" ? <App /> : <Outlet />}
             </Container>
 
             <Container id="footer" maxW={"1/1"} p={3} backgroundColor={'yellow.200'}>
