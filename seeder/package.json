@@ -1,24 +1,21 @@
 {
   "name": "seeder",
   "version": "1.0.0",
-  "main": "seeder.js",
-  "type": "module",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node seeder.ts",
-    "build": "npx tsc",
-    "dev": "npm run build && npx nodemon ./dist/seeder.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "ts-node seeder.ts",
+    "dev": "nodemon --exec tsx seeder.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2"
-  },
-  "dependencies": {
     "dotenv": "^16.5.0",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.22"
+    "mongoose": "^8.14.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4"
   }
 }
