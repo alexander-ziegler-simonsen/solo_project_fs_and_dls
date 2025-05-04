@@ -4,7 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "ts-node seeder.ts",
+    "seed": "ts-node seeder.ts",
     "dev": "nodemon --exec tsx seeder.ts"
   },
   "keywords": [],
