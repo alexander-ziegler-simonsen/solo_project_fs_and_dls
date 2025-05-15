@@ -4,6 +4,8 @@
 # all the documentation of the code
 docs/
 
+# all builded k8s files
+k8s/
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,venv,dotenv,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,venv,dotenv,macos
