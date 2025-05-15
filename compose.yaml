@@ -1,6 +1,11 @@
+version: '3'
+name: online-rizz-shop
 services:
-  ors-mongo:
-    build: ./docker/mongodb
+  service-mongo:
+    build: 
+      context: ./docker/mongodb
+    image: my-mongo:lastest
+    pull_policy: never
     ports:
       - "27018:27017"
     networks:
@@ -11,8 +16,11 @@ services:
     volumes:
       - mongodata:/data/db
   
-  ors-postgres:
-    build: ./docker/postgres
+  service-postgres:
+    build: 
+      context: ./docker/postgres
+    image: my-postgres:lastest
+    pull_policy: never
     ports:
       - "5433:5432"
     networks:
@@ -23,8 +31,11 @@ services:
     volumes:
       - postgresdata:/var/lib/postgresql/data
   
-  ors-rabbitmq:
-    build: ./docker/rabbitmq
+  service-rabbitmq:
+    build: 
+      context: ./docker/rabbitmq
+    image: my-rabbitmq:lastest
+    pull_policy: never
     ports:
       - "5673:5672"
       - "15673:15672"
