@@ -4,12 +4,16 @@ services:
   service-mongo:
     build: 
       context: ./docker/mongodb
-    image: my-mongo:lastest
+    image: my-mongo
     pull_policy: never
+    
     ports:
       - "27018:27017"
     networks:
       - backend
+    labels:
+      kompose.node-selector: ors-data
+      kompose.service.type: nodeport
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MON_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MON_PASSWORD}
@@ -19,12 +23,15 @@ services:
   service-postgres:
     build: 
       context: ./docker/postgres
-    image: my-postgres:lastest
+    image: my-postgres
     pull_policy: never
     ports:
       - "5433:5432"
     networks:
       - backend
+    labels:
+      kompose.node-selector: ors-data
+      kompose.service.type: nodeport
     environment:
       POSTGRES_USER: ${POST_USERNAME}
       POSTGRES_PASSWORD: ${POST_PASSWORD}
@@ -34,8 +41,11 @@ services:
   service-rabbitmq:
     build: 
       context: ./docker/rabbitmq
-    image: my-rabbitmq:lastest
+    image: my-rabbitmq
     pull_policy: never
+    labels:
+      kompose.node-selector: ors-data
+      kompose.service.type: nodeport
     ports:
       - "5673:5672"
       - "15673:15672"
