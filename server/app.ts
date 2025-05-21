@@ -57,6 +57,24 @@ app.delete("/storage", (req, res) => {
     res.send({ data: "this is data" })
 })
 
+// order   -----------------------------------
+
+app.get("/order", (req, res) => {
+    res.send({ data: "this is data" })
+})
+
+app.post("/order", (req, res) => {
+    res.send({ data: "this is data" })
+})
+
+app.put("/order", (req, res) => {
+    res.send({ data: "this is data" })
+})
+
+app.delete("/order", (req, res) => {
+    res.send({ data: "this is data" })
+})
+
 // user (+ login)  -----------------------------------
 
 app.post("/login", (req, res) => {
