@@ -1,9 +1,9 @@
 
 echo "building Docker images..."
 
-Docker build -t my-mongo ./docker/mongodb
-Docker build -t my-rabbitmq ./docker/rabbitmq
-Docker build -t my-postgres ./docker/postgres
+Docker build -t my-mongo ../docker/mongodb
+Docker build -t my-rabbitmq ../docker/rabbitmq
+Docker build -t my-postgres ../docker/postgres
 
 echo "adding it to minikube.."
 
