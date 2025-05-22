@@ -5,7 +5,7 @@ import * as fs from 'fs'
 const mongodbUrl = process.env.DATABASE_URL
 
 // some test data
-const rawProducts = fs.readFileSync("./data/Products.json", "utf-8")
+const rawProducts = fs.readFileSync("./data/Items.json", "utf-8")
 const ProductData = JSON.parse(rawProducts)
 
 // the schema that is build like our data 
