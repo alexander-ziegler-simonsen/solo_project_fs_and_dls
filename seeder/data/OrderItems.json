@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "fk_item_id": "1",
+    "fk_order_id": "1",
+    "count": 2,
+    "price": 25.99
+  },
+  {
+    "id": "2",
+    "fk_item_id": "5",
+    "fk_order_id": "1",
+    "count": 1,
+    "price": 129.95
+  },
+  {
+    "id": "3",
+    "fk_item_id": "3",
+    "fk_order_id": "2",
+    "count": 1,
+    "price": 199.99
+  },
+  {
+    "id": "4",
+    "fk_item_id": "14",
+    "fk_order_id": "2",
+    "count": 1,
+    "price": 89.0
+  }
+]
