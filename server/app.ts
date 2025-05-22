@@ -1,99 +1,25 @@
 import express from "express";
 
+import ItemRouter from "./Routes/ItemRouter";
+import ItemGroupRouter from "./Routes/ItemGroupRouter";
+import UserRouter from "./Routes/UserRouter";
+import StorageRouter from "./Routes/StorageRouter";
+import OrderItemRouter from "./Routes/OrderItemRouter";
+import OrderRouter from "./Routes/OrderRouter";
+
 const app = express();
+app.use(express.json());
 
-// product -----------------------------------
+app.use(ItemRouter);
+app.use(UserRouter);
+app.use(StorageRouter);
+app.use(OrderItemRouter);
+app.use(OrderRouter);
+app.use(ItemGroupRouter);
 
-app.get("/item", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.post("/item", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.put("/item", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.delete("/item", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-// product_group  -----------------------------------
-
-app.get("/item_group", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.post("/item_group", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.put("/item_group", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.delete("/item_group", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-// storage  -----------------------------------
-
-
-app.get("/storage", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.post("/storage", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.put("/storage", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.delete("/storage", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-// order   -----------------------------------
-
-app.get("/order", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.post("/order", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.put("/order", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.delete("/order", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-// user (+ login)  -----------------------------------
+// login  -----------------------------------
 
 app.post("/login", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.get("/user", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.post("/user", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.put("/user", (req, res) => {
-    res.send({ data: "this is data" })
-})
-
-app.delete("/user", (req, res) => {
     res.send({ data: "this is data" })
 })
 
