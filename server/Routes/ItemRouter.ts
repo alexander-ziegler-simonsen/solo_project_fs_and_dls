@@ -4,6 +4,7 @@ import ItemGroup from "../entities/ItemGroup";
 
 const ItemRouter = Router();
 
+// mongo
 ItemRouter.get("/item", async (req, res) => {
     const response = await console.log("item get");
     res.send({ data: "item get" })
@@ -14,6 +15,7 @@ ItemRouter.get("/item:id", async (req, res) => {
     res.send({ data: "item get by id" });
 })
 
+// postgres
 ItemRouter.post("/item", async (req, res) => {
     const response = await console.log("item post");
     res.send({ data: "item added" });

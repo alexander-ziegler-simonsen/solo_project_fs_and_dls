@@ -4,6 +4,7 @@ import Storage from "../entities/Storage";
 
 const StorageRouter = Router();
 
+// mongo
 StorageRouter.get("/storage", async (req, res) => {
     const response = await console.log("storage get");
     res.send({ data: "storage get" })
@@ -14,6 +15,7 @@ StorageRouter.get("/storage:id", async (req, res) => {
     res.send({ data: "storage get by id" });
 })
 
+// postgres
 StorageRouter.post("/storage", async (req, res) => {
     const response = await console.log("storage post");
     res.send({ data: "storage added" });

@@ -4,6 +4,7 @@ import Order from "../entities/Order";
 
 const OrderRouter = Router();
 
+// mongo
 OrderRouter.get("/order", async (req, res) => {
     const response = await console.log("order get");
     res.send({ data: "order get" })
@@ -14,6 +15,7 @@ OrderRouter.get("/order:id", async (req, res) => {
     res.send({ data: "order get by id" });
 })
 
+// postgres
 OrderRouter.post("/order", async (req, res) => {
     const response = await console.log("order post");
     res.send({ data: "order added" });
