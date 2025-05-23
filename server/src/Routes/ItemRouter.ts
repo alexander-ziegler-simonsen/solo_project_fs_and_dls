@@ -1,8 +1,11 @@
 import { Router } from "express";
 
-import ItemGroup from "../entities/ItemGroup";
+//import { PostgresDataSource, MongodbDataSource } from "../DataSources";
+import { Item, Item_post } from "../entities/Item";
 
 const ItemRouter = Router();
+
+//const temp = new ItemGroup();
 
 // mongo
 ItemRouter.get("/item", async (req, res) => {

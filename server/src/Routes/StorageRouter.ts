@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import Storage from "../entities/Storage";
+import {Storage, Storage_post} from "../entities/Storage";
 
 const StorageRouter = Router();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import Order from "../entities/Order";
+import {Order, Order_post} from "../entities/Order";
 
 const OrderRouter = Router();
 

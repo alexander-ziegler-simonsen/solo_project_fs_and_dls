@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import User from "../entities/User";
+import {User, User_post} from "../entities/User";
 
 const UserRouter = Router();
 
