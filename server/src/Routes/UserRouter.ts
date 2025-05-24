@@ -1,18 +1,23 @@
 import { Router } from "express";
 
 import {User, User_post} from "../entities/User";
+import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 
 const UserRouter = Router();
+const UserRespository = MongodbDataSource.getMongoRepository(User);
 
 // mongo
 UserRouter.get("/user", async (req, res) => {
-    const response = await console.log("user get");
-    res.send("all user data");
+    let output = await UserRespository.find();
+
+    res.send({ data: output });
 })
 
-UserRouter.get("/user:id", async (req, res) => {
-    const response = await console.log("user get by id");
-    res.send("one user data");
+UserRouter.get("/user/:id", async (req, res) => {
+    let UserId = req.params.id;
+    let output = await UserRespository.findOneBy({id: UserId});
+
+    res.send({ data: output });
 })
 
 // postgres

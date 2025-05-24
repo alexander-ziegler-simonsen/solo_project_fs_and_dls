@@ -1,18 +1,23 @@
 import { Router } from "express";
 
-import {Order, Order_post} from "../entities/Order";
+import { Order, Order_post } from "../entities/Order";
+import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 
 const OrderRouter = Router();
+const orderRespository = MongodbDataSource.getMongoRepository(Order);
 
 // mongo
 OrderRouter.get("/order", async (req, res) => {
-    const response = await console.log("order get");
-    res.send({ data: "order get" })
+    let output = await orderRespository.find();
+
+    res.send({ data: output });
 })
 
-OrderRouter.get("/order:id", async (req, res) => {
-    const response = await console.log("order get by id");
-    res.send({ data: "order get by id" });
+OrderRouter.get("/order/:id", async (req, res) => {
+    let orderId = req.params.id;
+    let output = await orderRespository.findOneBy({id: orderId});
+
+    res.send({ data: output });
 })
 
 // postgres

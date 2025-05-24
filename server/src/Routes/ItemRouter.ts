@@ -1,21 +1,24 @@
 import { Router } from "express";
 
-//import { PostgresDataSource, MongodbDataSource } from "../DataSources";
+import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 import { Item, Item_post } from "../entities/Item";
 
 const ItemRouter = Router();
-
-//const temp = new ItemGroup();
+const itemRespository = MongodbDataSource.getMongoRepository(Item);
 
 // mongo
+// TODO - change this to use search parms (get all item is insane)
 ItemRouter.get("/item", async (req, res) => {
-    const response = await console.log("item get");
-    res.send({ data: "item get" })
+    let output = await itemRespository.find();
+
+    res.send({ data: output })
 })
 
-ItemRouter.get("/item:id", async (req, res) => {
-    const response = await console.log("item get by id");
-    res.send({ data: "item get by id" });
+ItemRouter.get("/item/:id", async (req, res) => {
+    let itemId = req.params.id;
+    let output = await itemRespository.findOneBy({id: itemId});
+
+    res.send({ data: output });
 })
 
 // postgres

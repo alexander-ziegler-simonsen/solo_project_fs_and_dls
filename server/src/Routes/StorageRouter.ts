@@ -1,18 +1,23 @@
 import { Router } from "express";
 
 import {Storage, Storage_post} from "../entities/Storage";
+import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 
 const StorageRouter = Router();
+const StorageRespository = MongodbDataSource.getMongoRepository(Storage);
 
 // mongo
 StorageRouter.get("/storage", async (req, res) => {
-    const response = await console.log("storage get");
-    res.send({ data: "storage get" })
+    let output = await StorageRespository.find();
+
+    res.send({ data: output });
 })
 
-StorageRouter.get("/storage:id", async (req, res) => {
-    const response = await console.log("storage get by id");
-    res.send({ data: "storage get by id" });
+StorageRouter.get("/storage/:id", async (req, res) => {
+    let StorageId = req.params.id;
+    let output = await StorageRespository.findOneBy({id: StorageId});
+
+    res.send({ data: output });
 })
 
 // postgres
