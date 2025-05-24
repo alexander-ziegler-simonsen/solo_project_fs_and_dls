@@ -2,6 +2,9 @@ import { Router } from "express";
 
 import {Storage, Storage_post} from "../entities/Storage";
 import { PostgresDataSource, MongodbDataSource } from "../DataSources";
+import RabbitMQHelper from "../Helpers/RabbitMqHelper";
+
+
 
 const StorageRouter = Router();
 const StorageRespository = MongodbDataSource.getMongoRepository(Storage);
@@ -22,18 +25,21 @@ StorageRouter.get("/storage/:id", async (req, res) => {
 
 // postgres
 StorageRouter.post("/storage", async (req, res) => {
-    const response = await console.log("storage post");
-    res.send({ data: "storage added" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("posts", "post", "storage", req.body );
+    response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 StorageRouter.put("/storage", async (req, res) => {
-    const response = await console.log("storage updated");
-    res.send({ data: "storage updated" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("updates", "put", "storage", req.body );
+    response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 StorageRouter.delete("/storage", async (req, res) => {
-    const response = await console.log("storage delete");
-    res.send({ data: "storage delete" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("deletes", "delete", "storage", req.body );
+    response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 
 export default StorageRouter;

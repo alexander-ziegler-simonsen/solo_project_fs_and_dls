@@ -3,6 +3,8 @@ import { Router } from "express";
 import { Order, Order_post } from "../entities/Order";
 import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 
+import RabbitMQHelper from "../Helpers/RabbitMqHelper";
+
 const OrderRouter = Router();
 const orderRespository = MongodbDataSource.getMongoRepository(Order);
 
@@ -22,18 +24,21 @@ OrderRouter.get("/order/:id", async (req, res) => {
 
 // postgres
 OrderRouter.post("/order", async (req, res) => {
-    const response = await console.log("order post");
-    res.send({ data: "order added" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("posts", "post", "order", req.body );
+    response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 OrderRouter.put("/order", async (req, res) => {
-    const response = await console.log("order updated");
-    res.send({ data: "order updated" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("updates", "put", "order", req.body );
+    response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 OrderRouter.delete("/order", async (req, res) => {
-    const response = await console.log("order delete");
-    res.send({ data: "order delete" });
+const rabbitHelper = new RabbitMQHelper();
+    let response = rabbitHelper.handlePostToChannel("deletes", "delete", "order", req.body );
+    response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 
 export default OrderRouter;
