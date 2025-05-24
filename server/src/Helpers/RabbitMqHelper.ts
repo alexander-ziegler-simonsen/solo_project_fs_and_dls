@@ -27,7 +27,7 @@ class RabbitMQHelper {
             const connection = rabbitHelper.getConnection();
 
             const channel = (await connection).createChannel();
-;
+
             const queue = channelName;
             const message = { endpointName: endpointName, typeOfAction: typeOfAction, data: data };
 
