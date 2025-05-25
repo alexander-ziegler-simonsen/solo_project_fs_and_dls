@@ -1,36 +1,32 @@
-interface ItemData {
-    id: number;
-    name: string;
-    price: number;
-    info: string;
-    description: string;
-    image: string;
-    fk_group_id: string
-}
+import { PostgresDataSource } from "../DataSource";
+import { Item_post } from "../Entites/Item_post";
 
 async function ItemDelete(data) {
-    
+
 }
-    
+
 async function ItemUpdate(data) {
 
 }
 
 async function ItemPost(data) {
+    try {
+        await PostgresDataSource.manager.save(Item_post.fromData(data));
+    }
+    catch (error) {
+        console.error("queueHandler - Item post error:", error);
+    }
 
 }
 
 export async function ItemHandler(typeOfAction, data) {
-    if(typeOfAction == "post")
-    {
-        ItemPost(data);
+    if (typeOfAction == "post") {
+        await ItemPost(data);
     }
-    else if(typeOfAction == "put")
-    {
-        ItemUpdate(data);
+    else if (typeOfAction == "put") {
+        await ItemUpdate(data);
     }
-    else if(typeOfAction == "delete")
-    {
-        ItemDelete(data);
+    else if (typeOfAction == "delete") {
+        await ItemDelete(data);
     }
 }
