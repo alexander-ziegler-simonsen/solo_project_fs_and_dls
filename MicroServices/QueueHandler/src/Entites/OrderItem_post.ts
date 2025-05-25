@@ -2,10 +2,10 @@ import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from
 import "reflect-metadata";
 
 @Entity("OrderItem")
- export class OrderItem_post {
-    
+export class OrderItem_post {
+
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     fk_item_id: string;
@@ -16,6 +16,18 @@ import "reflect-metadata";
     @Column()
     count: number;
 
-    @Column()
+    @Column("decimal")
     price: number;
+
+    static fromData(data) {
+        let res = new OrderItem_post();
+
+        res.id = data.id;
+        res.fk_item_id = data.fk_item_id;
+        res.fk_order_id = data.fk_order_id;
+        res.count = data.count;
+        res.price = data.price;
+
+        return res;
+    }
 }
