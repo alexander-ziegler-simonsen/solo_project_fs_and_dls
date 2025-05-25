@@ -5,8 +5,17 @@ import "reflect-metadata";
  export class ItemGroup_post {
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;
+
+    static fromData(data){
+        let res = new ItemGroup_post();
+
+        res.id = data.id;
+        res.name = data.name;
+
+        return res;
+    }
 }

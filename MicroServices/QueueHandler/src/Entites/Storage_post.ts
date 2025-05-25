@@ -5,8 +5,17 @@ import "reflect-metadata";
  export class Storage_post {
     
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;
+
+    static fromData(data) {
+        let res = new Storage_post();
+
+        res.id = data.id;
+        res.name = data.name;
+
+        return res;
+    }
 }
