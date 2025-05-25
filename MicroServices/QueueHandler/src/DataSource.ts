@@ -21,7 +21,7 @@ export const PostgresDataSource = new DataSource({
     host: "localhost",
     port: 5433,
     synchronize: true,
-    entities: [Item_post, User_post, OrderItem_post, Order_post, Storage_post],
+    entities: [Item_post, User_post, OrderItem_post, Order_post, Storage_post, ItemGroup_post],
     username: post_use,
     password: post_pass,
     database: post_db,
