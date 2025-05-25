@@ -24,7 +24,7 @@ import "reflect-metadata";
  export class Item_post{
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;
@@ -32,7 +32,7 @@ import "reflect-metadata";
     @Column()
     description: string;
 
-    @Column()
+    @Column("decimal")
     price: number;
 
     @Column()

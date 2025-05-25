@@ -15,7 +15,7 @@ import "reflect-metadata";
  export class Storage_post {
     
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;

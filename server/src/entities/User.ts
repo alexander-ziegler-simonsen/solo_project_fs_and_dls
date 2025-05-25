@@ -27,7 +27,7 @@ import "reflect-metadata";
  export class User_post{
     
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
     
     @Column()
     username: string;

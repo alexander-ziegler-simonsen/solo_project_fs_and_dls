@@ -15,7 +15,7 @@ import "reflect-metadata";
  export class Order_post{
     
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     fk_user_id: string;

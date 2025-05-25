@@ -24,7 +24,7 @@ import "reflect-metadata";
  export class OrderItem_post {
     
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     fk_item_id: string;
@@ -35,6 +35,6 @@ import "reflect-metadata";
     @Column()
     count: number;
 
-    @Column()
+    @Column("decimal")
     price: number;
 }
