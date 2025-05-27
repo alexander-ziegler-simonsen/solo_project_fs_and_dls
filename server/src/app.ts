@@ -1,5 +1,6 @@
 import express from "express";
 import "reflect-metadata";
+import bodyParser from "body-parser";
 
 // routes
 import ItemRouter from "./Routes/ItemRouter";
@@ -25,7 +26,15 @@ async function main() {
     await PostgresDataSource.initialize()
     console.log("postgres DataSource has been initialized!");
     
-    app.use(express.json());
+    app.use(bodyParser.json());
+
+    // when json errors, DON'T leak errors to the client
+    app.use((err, req, res, next) => {
+        if (err instanceof SyntaxError && 'body' in err) {
+            return res.status(400).json({ error: 'Invalid JSON' });
+        }
+        next(err);
+    });
 
     // use routes
     app.use(ItemRouter);

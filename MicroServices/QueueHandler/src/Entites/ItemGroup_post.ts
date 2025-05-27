@@ -1,16 +1,6 @@
 import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from "typeorm";
 import "reflect-metadata";
 
-@Entity()
- export class ItemGroup {
-
-    @ObjectIdColumn()
-    id: string;
-
-    @Column()
-    name: string;
-}
-
 @Entity("ItemGroup")
  export class ItemGroup_post {
 
@@ -19,4 +9,13 @@ import "reflect-metadata";
 
     @Column()
     name: string;
+
+    static fromData(data){
+        let res = new ItemGroup_post();
+
+        res.id = data.id;
+        res.name = data.name;
+
+        return res;
+    }
 }
