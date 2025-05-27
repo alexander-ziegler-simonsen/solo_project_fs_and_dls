@@ -2,16 +2,15 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import Layout from './Layout'
 import AboutPage from './pages/AboutPage';
 import CategoryPage from './pages/CategoryPage';
-import ProductPage from './pages/ProductPage';
+// import ProductPage from './pages/ProductPage';
 import Error404Page from './pages/Error404Page';
-
 
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Layout />}>
         <Route path='/about' element={<AboutPage />} />
-        <Route path='/product' element={<ProductPage />} />
+        {/* <Route path='/product' element={<ProductPage {} />} /> */}
         <Route path='/category' element={<CategoryPage />} />
         <Route path='*' element={<Error404Page />} />
 
