@@ -1,5 +1,5 @@
-import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+// import React from 'react'
 import orsLogo from '../assets/ors-192x192.png'
 import { Product } from '../domain/Product';
 
