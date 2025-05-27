@@ -19,7 +19,7 @@ export class OrderItem_post {
     @Column("decimal")
     price: number;
 
-    static fromData(data) {
+    static fromData(data:any) {
         let res = new OrderItem_post();
 
         res.id = data.id;

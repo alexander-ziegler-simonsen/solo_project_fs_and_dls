@@ -10,7 +10,7 @@ import "reflect-metadata";
     @Column()
     name: string;
 
-    static fromData(data){
+    static fromData(data:any){
         let res = new ItemGroup_post();
 
         res.id = data.id;

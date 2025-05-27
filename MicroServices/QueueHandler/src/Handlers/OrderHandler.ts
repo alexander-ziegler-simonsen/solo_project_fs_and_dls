@@ -1,15 +1,15 @@
 import { PostgresDataSource } from "../DataSource";
 import { Order_post } from "../Entites/Order_post";
 
-async function OrderDelete(data) {
-
+async function OrderDelete(data:any) {
+    console.log(data);
 }
 
-async function OrderUpdate(data) {
-
+async function OrderUpdate(data:any) {
+    console.log(data);
 }
 
-async function OrderPost(data) {
+async function OrderPost(data:any) {
     try {
         await PostgresDataSource.manager.save(Order_post.fromData(data));
     }
@@ -18,7 +18,7 @@ async function OrderPost(data) {
     }
 }
 
-export async function OrderHandler(typeOfAction, data) {
+export async function OrderHandler(typeOfAction:string, data:any) {
     if (typeOfAction == "post") {
         await OrderPost(data);
     }

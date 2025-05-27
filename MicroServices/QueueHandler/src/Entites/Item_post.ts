@@ -19,7 +19,7 @@ export class Item_post {
     @Column()
     fk_group_id: string;
 
-    static fromData(data) {
+    static fromData(data:any) {
         let res = new Item_post();
 
         res.id = data.id ? +data.id : undefined;

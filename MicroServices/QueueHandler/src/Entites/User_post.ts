@@ -1,8 +1,8 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, BaseEntity } from "typeorm";
 import "reflect-metadata";
 
 @Entity("User")
-export class User_post {
+export class User_post{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -22,7 +22,7 @@ export class User_post {
     @Column()
     address: string;
 
-    static fromData(data) {
+    static fromData(data:any) {
         let res = new User_post();
 
         res.id = data.id;

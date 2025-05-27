@@ -10,7 +10,7 @@ import "reflect-metadata";
     @Column()
     fk_user_id: string;
 
-    static fromData(data){
+    static fromData(data:any){
         let res = new Order_post();
 
         res.id = data.id;
