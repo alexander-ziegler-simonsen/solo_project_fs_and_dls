@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "nodemon -w src --ext ts --exec ts-node src/app.ts"
   },
   "keywords": [],
