@@ -14,10 +14,9 @@ import OrderRouter from "./Routes/OrderRouter";
 import { MongodbDataSource, PostgresDataSource } from "./DataSources";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 8082;
 
 async function main() {
-
     // connect to mongodb
     await MongodbDataSource.initialize()
     console.log("mongodb DataSource has been initialized!");
