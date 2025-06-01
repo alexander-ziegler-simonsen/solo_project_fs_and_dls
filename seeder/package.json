@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node seeder.ts",
-    "dev": "nodemon --ext ts --exec ts-node app.ts"
+    "start": "nodemon --ext ts --exec ts-node app.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "mongodb": "^6.16.0",
+    "pg": "^8.16.0",
     "typeorm": "^0.3.24"
   }
 }
