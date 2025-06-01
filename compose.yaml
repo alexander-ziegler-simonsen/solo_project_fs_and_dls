@@ -88,7 +88,6 @@ services:
   #       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   #       POSTGRES_DB: ${POSTGRES_DB}
   #       POSTGRES_HOST: ${POSTGRES_HOST}
-  #       PORT: ${PORT}
 
   service-client:
     build: 
@@ -121,10 +120,11 @@ services:
         restart: true
     pull_policy: never
     ports:
-      - "8082:8080"
+      - "3003:3003"
     networks:
       - backend
     environment:
+        API_PORT: ${API_PORT}
         MONGO_HOST: ${MONGO_HOST}
         MONGO_PORT: ${MONGO_PORT}
         MONGO_USERNAME: ${MONGO_USERNAME}
@@ -137,7 +137,10 @@ services:
         POSTGRES_USERNAME: ${POSTGRES_USERNAME}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: ${POSTGRES_DB}
-        PORT: ${PORT}
+        RABBITMQ_HOST: ${RABBITMQ_HOST}
+        RABBITMQ_PORT: ${RABBITMQ_PORT}
+        RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+        RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
     volumes:
       - client-api:/data/
   
