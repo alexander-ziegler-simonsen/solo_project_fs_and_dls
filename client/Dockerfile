@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:alpine AS builder
 
 # set working directory
 RUN mkdir -p /usr/src/app
@@ -14,6 +14,16 @@ RUN npm install
 # Build the app
 RUN npm run build
 
-EXPOSE 5174
+# nginx state for serving content
+FROM nginx:alpine
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
 
-CMD ["npm", "run", "dev"]
+
+# Copy static assets from builder stage
+COPY --from=builder /usr/src/app/dist .
+COPY --from=builder /usr/src/app/nginx/default.conf /etc/nginx/conf.d/default.conf
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
