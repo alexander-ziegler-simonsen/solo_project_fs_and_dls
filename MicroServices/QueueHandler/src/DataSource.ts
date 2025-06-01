@@ -12,13 +12,14 @@ import { Storage_post } from "./Entites/Storage_post";
 
 // TODO - fix postgres port
 const post_port = process.env.POSTGRES_PORT;
-const post_use: string = process.env.POSTGRES_USERNAME || "username";
+const post_use: string = process.env.POSTGRES_USERNAME || "admin";
 const post_pass: string = process.env.POSTGRES_PASSWORD || "password";
-const post_db = process.env.POSTGRES_DB;
+const post_db = process.env.POSTGRES_DB || "rizz";
+const post_host = process.env.POSTGRES_HOST || "localhost";
 
 export const PostgresDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
+    host: post_host,
     port: 5433,
     synchronize: true,
     entities: [Item_post, User_post, OrderItem_post, Order_post, Storage_post, ItemGroup_post],
