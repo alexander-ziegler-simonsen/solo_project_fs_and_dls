@@ -16,3 +16,11 @@ These are some of the techologies I wll be using:
 - rabbitmq
 - vitest
 - TypeDoc
+
+# tips
+
+remember to create your docker network with this command
+
+```
+docker network create -d bridge backend
+```
