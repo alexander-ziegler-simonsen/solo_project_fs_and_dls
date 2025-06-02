@@ -9,7 +9,13 @@ WORKDIR /usr/src/app
 # Copy the rest of the application
 COPY . .
 
+# install native binary for LINUX and not mac
+RUN npm uninstall @rollup/rollup-darwin-arm64
+RUN npm install @rollup/rollup-linux-arm64-musl
+
+
 RUN npm install
+
 
 # Build the app
 RUN npm run build
