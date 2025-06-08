@@ -1,5 +1,5 @@
 
-import { MongoClient } from "mongodb";
+import { MongoClient, OptionalUnlessRequiredId } from "mongodb";
 import 'dotenv/config';
 
 const mon_user= process.env.MONGO_USERNAME;
@@ -17,7 +17,7 @@ export async function setDbAndFirstUser() {
     try {
         // TODO - check if this is the first time this code is running, if no, then don't run it
         await client.connect();
-        client.db("test", )
+        client.db("test", );
         const db = client.db(mon_new_db);
         await db.collection("init").insertOne({done:true});
 
@@ -35,3 +35,25 @@ export async function setDbAndFirstUser() {
     }
 }
 
+export async function AddData<T>( insertData: OptionalUnlessRequiredId<T>[], tablename: string) {
+    try {
+        await client.connect();
+
+        // data
+        const data: OptionalUnlessRequiredId<T>[] = insertData;
+
+        // db
+        const database = client.db(mon_new_db);
+
+        // schema 
+        const item = database.collection<T>(tablename);
+
+        const result = await item.insertMany(insertData);
+        
+        console.log(`${result.insertedCount} documents were inserted`);
+    } catch (err) {
+        console.error("Error adding Items:", err);
+    } finally {
+        await client.close();
+    }
+}
