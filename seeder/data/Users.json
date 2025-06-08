@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "_id": 1,
     "username": "johndoe",
     "password": "pass123",
     "email": "johndoe@example.com",
@@ -8,7 +8,7 @@
     "address": "123 Elm Street"
   },
   {
-    "id": "2",
+    "_id": 2,
     "username": "janedoe",
     "password": "secure456",
     "email": "janedoe@example.com",
@@ -16,7 +16,7 @@
     "address": "456 Oak Avenue"
   },
   {
-    "id": "3",
+    "_id": 3,
     "username": "alicew",
     "password": "mypassword789",
     "email": "alicew@example.com",
