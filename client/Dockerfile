@@ -1,4 +1,4 @@
-FROM node:alpine AS builder
+FROM node:20 AS builder
 
 # set working directory
 RUN mkdir -p /usr/src/app
@@ -10,8 +10,8 @@ WORKDIR /usr/src/app
 COPY . .
 
 # install native binary for LINUX and not mac
-RUN npm uninstall @rollup/rollup-darwin-arm64
-RUN npm install @rollup/rollup-linux-arm64-musl
+#RUN npm uninstall @rollup/rollup-darwin-arm64
+#RUN npm install @rollup/rollup-linux-arm64-musl
 
 
 RUN npm install
