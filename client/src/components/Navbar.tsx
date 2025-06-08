@@ -4,7 +4,8 @@ import { NavLink } from "react-router";
 const links = [
   { name: "Home", to: "/" },
   { name: "About", to: "/about" },
-  { name: "Category", to: "/category" }
+  { name: "Category", to: "/category" },
+  { name: "Product", to: "/product" }
 ];
 
 function Navbar() {
