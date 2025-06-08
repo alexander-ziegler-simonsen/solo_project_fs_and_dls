@@ -2,6 +2,8 @@ import { Outlet, useLocation } from 'react-router'
 import orsLogo from './assets/ors-192x192.png'
 import { Center, Container, Flex, Text } from '@chakra-ui/react'
 import App from './App'
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function Layout() {
     const location = useLocation();
@@ -9,22 +11,13 @@ function Layout() {
 
     return (
         <>
-            <Container id="header" backgroundColor={'red.600'} p={3} maxW={"1/1"}>
-                <Flex gap={5}>
-                    <img src={orsLogo} width={50} className="logo" alt="Online Rizz Shop logo" />
-                    <Text>test</Text>
-                </Flex>
-            </Container>
+            <Header />
 
             <Container id="main" maxW={"1/1"} p={3} minH={300} backgroundColor={'green.500'}>
                 {location.pathname === "/" ? <App /> : <Outlet />}
             </Container>
 
-            <Container id="footer" maxW={"1/1"} p={3} backgroundColor={'yellow.200'}>
-                <Center>
-                    <Text>this website is copyrighted by me, do not steal..... I will know if you did.</Text>
-                </Center>
-            </Container>
+            <Footer />
         </ >
     )
 }
