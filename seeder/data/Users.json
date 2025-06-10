@@ -1,18 +1,18 @@
 [
   {
     "_id": 1,
-    "username": "johndoe",
+    "username": "johndoe1",
     "password": "pass123",
-    "email": "johndoe@example.com",
-    "phoneNumber": "+1234567890",
+    "email": "johndoe1@example.com",
+    "phone": "+1234567890",
     "address": "123 Elm Street"
   },
   {
     "_id": 2,
-    "username": "janedoe",
+    "username": "janedoe2",
     "password": "secure456",
-    "email": "janedoe@example.com",
-    "phoneNumber": "+1234567891",
+    "email": "janedoe2@example.com",
+    "phone": "+1234567891",
     "address": "456 Oak Avenue"
   },
   {
@@ -20,7 +20,7 @@
     "username": "alicew",
     "password": "mypassword789",
     "email": "alicew@example.com",
-    "phoneNumber": "+1234567892",
+    "phone": "+1234567892",
     "address": "789 Pine Road"
   }
 ]
