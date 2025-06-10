@@ -17,15 +17,15 @@ import { MongodbDataSource, PostgresDataSource } from "./DataSources";
 const app = express();
 const PORT = Number(process.env.API_PORT) || 3003;
 
-const CLIENT_HOST = process.env.CLIENT_HOST;
+const CLIENT_HOST = process.env.CLIENT_HOST || "http://localhost:8083";
 
 async function main() {
     // connect to mongodb
-    await MongodbDataSource.initialize()
+    await MongodbDataSource.initialize();
     console.log("mongodb DataSource has been initialized!");
 
     // connect to postgres
-    await PostgresDataSource.initialize()
+    await PostgresDataSource.initialize();
     console.log("postgres DataSource has been initialized!");
     
     app.use(bodyParser.json());
@@ -33,7 +33,7 @@ async function main() {
     app.use(cors({
         origin: CLIENT_HOST,
         credentials: true
-    }))
+    }));
 
     // when json errors, DON'T leak errors to the client
     app.use((err, req, res, next) => {
