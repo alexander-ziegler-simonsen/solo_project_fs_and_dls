@@ -1,9 +1,11 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, PrimaryColumn } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, PrimaryColumn, JoinColumn, ManyToOne } from "typeorm";
 import "reflect-metadata";
+import { Item_post } from "./Item";
+import { Order_post } from "./Order";
 
 @Entity()
- export class OrderItem{
-    
+export class OrderItem {
+
     @PrimaryColumn()
     _id: number;
 
@@ -20,21 +22,23 @@ import "reflect-metadata";
     price: number;
 }
 
-@Entity("OrderItem")
- export class OrderItem_post {
-    
+@Entity("orderitem")
+export class OrderItem_post {
+
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column()
-    fk_item_id: number;
+    @ManyToOne(() => Item_post, (item) => item.orderItems, { nullable: false })
+    @JoinColumn({ name: 'fk_item_id' })
+    item: Item_post;
 
-    @Column()
-    fk_order_id: number;
+    @ManyToOne(() => Order_post, (order) => order.orderItems, { nullable: false })
+    @JoinColumn({ name: 'fk_order_id' })
+    order: Order_post;
 
     @Column()
     count: number;
 
-    @Column("decimal")
+    @Column('numeric', { precision: 10, scale: 2 })
     price: number;
 }
