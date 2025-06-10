@@ -5,7 +5,7 @@ import "reflect-metadata";
  export class ItemGroup_post {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    _id: number;
 
     @Column()
     name: string;
@@ -13,7 +13,7 @@ import "reflect-metadata";
     static fromData(data:any){
         let res = new ItemGroup_post();
 
-        res.id = data.id;
+        res._id = data.id;
         res.name = data.name;
 
         return res;

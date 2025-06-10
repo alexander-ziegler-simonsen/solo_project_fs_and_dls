@@ -5,7 +5,7 @@ import "reflect-metadata";
 export class OrderItem_post {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    _id: number;
 
     @Column()
     fk_item_id: string;
@@ -22,7 +22,7 @@ export class OrderItem_post {
     static fromData(data:any) {
         let res = new OrderItem_post();
 
-        res.id = data.id;
+        res._id = data.id;
         res.fk_item_id = data.fk_item_id;
         res.fk_order_id = data.fk_order_id;
         res.count = data.count;

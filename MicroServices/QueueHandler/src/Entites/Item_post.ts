@@ -5,7 +5,7 @@ import "reflect-metadata";
 export class Item_post {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    _id: number;
 
     @Column()
     name: string;
@@ -22,7 +22,7 @@ export class Item_post {
     static fromData(data:any) {
         let res = new Item_post();
 
-        res.id = data.id ? +data.id : undefined;
+        res._id = data.id ? +data.id : undefined;
         res.name = data.name;
         res.description = data.description;
         res.price = +data.price;

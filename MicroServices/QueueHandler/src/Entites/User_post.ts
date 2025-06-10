@@ -5,7 +5,7 @@ import "reflect-metadata";
 export class User_post{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    _id: number;
 
     @Column()
     username: string;
@@ -25,7 +25,7 @@ export class User_post{
     static fromData(data:any) {
         let res = new User_post();
 
-        res.id = data.id;
+        res._id = data.id;
         res.username = data.username;
         res.password = data.password;
         res.email = data.email;
