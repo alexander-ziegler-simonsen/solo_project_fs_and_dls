@@ -1,5 +1,5 @@
 import { PostgresDataSource } from "../DataSource"
-import { OrderItem_post } from "../Entites/OrderItem_post";
+import { OrderItem_post } from "../Entites_OLD/OrderItem_post";
 
 async function OrderItemDelete(data) {
 

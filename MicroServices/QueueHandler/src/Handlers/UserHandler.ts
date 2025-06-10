@@ -1,4 +1,4 @@
-import { User_post } from "../Entites/User_post";
+import { User_post } from "../Entites_OLD/User_post";
 import { PostgresDataSource } from "../DataSource";
 
 async function UserDelete(data) {

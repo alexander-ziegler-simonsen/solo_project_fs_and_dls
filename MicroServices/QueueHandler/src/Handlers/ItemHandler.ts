@@ -1,5 +1,5 @@
 import { PostgresDataSource } from "../DataSource";
-import { Item_post } from "../Entites/Item_post";
+import { Item_post } from "../Entites_OLD/Item_post";
 
 async function ItemDelete(data:any) {
     console.log(data);
