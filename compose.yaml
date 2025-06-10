@@ -103,7 +103,8 @@ services:
     networks:
       - backend
     environment:
-      CLIENT_HOST: ${CLIENT_HOST}
+      VITE_API_HOST: ${VITE_API_HOST}
+      VITE_API_PORT: ${VITE_API_PORT}
     volumes:
       - client-data:/data/
   
@@ -141,6 +142,7 @@ services:
         RABBITMQ_PORT: ${RABBITMQ_PORT}
         RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
         RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+        CLIENT_HOST: ${CLIENT_HOST}
     volumes:
       - client-api:/data/
   
