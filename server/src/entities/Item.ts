@@ -13,6 +13,9 @@ export class Item {
     name: string;
 
     @Column()
+    price: number;
+
+    @Column()
     info: string;
 
     @Column()
@@ -20,9 +23,6 @@ export class Item {
 
     @Column()
     image: string;
-
-    @Column()
-    price: number;
 
     @Column()
     fk_group_id: number;

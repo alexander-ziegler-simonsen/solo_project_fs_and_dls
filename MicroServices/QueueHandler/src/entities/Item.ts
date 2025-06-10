@@ -6,7 +6,7 @@ import { OrderItem_post } from "./OrderItem";
 @Entity()
 export class Item {
 
-    @PrimaryColumn()
+@PrimaryColumn()
     _id: number;
 
     @Column()
