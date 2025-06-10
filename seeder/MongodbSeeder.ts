@@ -17,9 +17,8 @@ export async function setDbAndFirstUser() {
     try {
         // TODO - check if this is the first time this code is running, if no, then don't run it
         await client.connect();
-        client.db("test", );
         const db = client.db(mon_new_db);
-        await db.collection("init").insertOne({done:true});
+        await db.collection("init").insertOne({done: (new Date().toISOString())});
 
         const commandResult = await db.command({
             createUser: mon_new_user,
