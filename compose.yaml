@@ -56,39 +56,6 @@ services:
     volumes:
       - rabbitmqdata:/var/lib/rabbitmq
 
-  # service-seeder:
-  #   build: 
-  #     context: ./seeder/
-  #   image: my-seeder
-  #   depends_on:
-  #     service-mongo:
-  #       condition: service_started
-  #       restart: true
-  #     service-postgres:
-  #       condition: service_started
-  #       restart: true
-  #   profiles:
-  #     - manual
-  #   pull_policy: never
-  #   labels:
-  #     kompose.node-selector: ors-data
-  #     kompose.service.type: nodeport
-  #   networks:
-  #     - backend
-  #   environment:
-  #       MONGO_HOST: ${MONGO_HOST}
-  #       MONGO_PORT: ${MONGO_PORT}
-  #       MONGO_USERNAME: ${MONGO_USERNAME}
-  #       MONGO_PASSWORD: ${MONGO_PASSWORD}
-  #       MONGO_NEW_USERNAME: ${MONGO_NEW_USERNAME}
-  #       MONGO_NEW_PASSWORD: ${MONGO_NEW_PASSWORD}
-  #       MONGO_NEW_DB: ${MONGO_NEW_DB}
-  #       POSTGRES_PORT: ${POSTGRES_PORT}
-  #       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-  #       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  #       POSTGRES_DB: ${POSTGRES_DB}
-  #       POSTGRES_HOST: ${POSTGRES_HOST}
-
   service-client:
     build: 
       context: ./client/
