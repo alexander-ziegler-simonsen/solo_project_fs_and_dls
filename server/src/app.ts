@@ -1,6 +1,7 @@
 import express from "express";
 import "reflect-metadata";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 // routes
 import ItemRouter from "./Routes/ItemRouter";
@@ -16,6 +17,8 @@ import { MongodbDataSource, PostgresDataSource } from "./DataSources";
 const app = express();
 const PORT = Number(process.env.API_PORT) || 3003;
 
+const CLIENT_HOST = process.env.CLIENT_HOST;
+
 async function main() {
     // connect to mongodb
     await MongodbDataSource.initialize()
@@ -26,6 +29,11 @@ async function main() {
     console.log("postgres DataSource has been initialized!");
     
     app.use(bodyParser.json());
+
+    app.use(cors({
+        origin: CLIENT_HOST,
+        credentials: true
+    }))
 
     // when json errors, DON'T leak errors to the client
     app.use((err, req, res, next) => {
