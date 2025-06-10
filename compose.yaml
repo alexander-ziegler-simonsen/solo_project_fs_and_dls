@@ -103,7 +103,7 @@ services:
     networks:
       - backend
     environment:
-      URL1: "not-yet-in-use"
+      CLIENT_HOST: ${CLIENT_HOST}
     volumes:
       - client-data:/data/
   
