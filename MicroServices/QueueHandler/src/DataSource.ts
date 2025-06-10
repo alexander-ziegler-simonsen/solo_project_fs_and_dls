@@ -3,12 +3,12 @@ import 'dotenv/config';
 import "reflect-metadata";
 
 // entites
-import { Item_post } from "./Entites/Item_post";
-import { ItemGroup_post } from "./Entites/ItemGroup_post";
-import { Order_post } from "./Entites/Order_post";
-import { OrderItem_post } from "./Entites/OrderItem_post";
-import { User_post } from "./Entites/User_post";
-import { Storage_post } from "./Entites/Storage_post";
+import { Item_post } from "./Entites_OLD/Item_post";
+import { ItemGroup_post } from "./Entites_OLD/ItemGroup_post";
+import { Order_post } from "./Entites_OLD/Order_post";
+import { OrderItem_post } from "./Entites_OLD/OrderItem_post";
+import { User_post } from "./Entites_OLD/User_post";
+import { Storage_post } from "./Entites_OLD/Storage_post";
 
 // TODO - fix postgres port
 const post_port = process.env.POSTGRES_PORT;
