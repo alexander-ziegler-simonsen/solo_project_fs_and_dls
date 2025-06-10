@@ -37,21 +37,21 @@ const userDescription = {
 
 async function main() {
     // mongo
-    //await setDbAndFirstUser();
-    //await AddData<Item>(ItemData, "item");
-    //await AddData<Order>(OrderData, "order");
-    //await AddData<OrderItem>(OrderItemData, "orderItem");
-    //await AddData<ItemGroup>(ItemGroupData, "itemGroup");
-
+    await setDbAndFirstUser();
+    await AddData<Item>(ItemData, "item");
+    await AddData<Order>(OrderData, "order");
+    await AddData<OrderItem>(OrderItemData, "orderitem");
+    await AddData<ItemGroup>(ItemGroupData, "itemgroup");
+    await AddData<User>(UserData, "user");
     // postgres
     await setPostgresDb();
 
     // drop tables
-    // await DropTable("user");
-    // await DropTable("itemgroup");
-    // await DropTable("item");
-    // await DropTable("order");
-    // await DropTable("orderitem");
+    await DropTable("user");
+    await DropTable("itemgroup");
+    await DropTable("item");
+    await DropTable("order");
+    await DropTable("orderitem");
 
     await setAllTables();
 
