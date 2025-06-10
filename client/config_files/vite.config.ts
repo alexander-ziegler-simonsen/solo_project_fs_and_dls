@@ -7,5 +7,6 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
     outDir: "dist"
-  }
+  },
+  server: {port: 8083}
 })
