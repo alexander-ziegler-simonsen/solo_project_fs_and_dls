@@ -28,21 +28,21 @@ OrderRouter.get("/order/:id", async (req, res) => {
 OrderRouter.post("/order", async (req, res) => {
     const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("posts", "post", "order", req.body );
+    let response = await rabbitHelper.handlePostToChannel("posts", "post", "order", req.body );
     response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 OrderRouter.put("/order", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("updates", "put", "order", req.body );
+    let response = await rabbitHelper.handlePostToChannel("updates", "put", "order", req.body );
     response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 OrderRouter.delete("/order", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("deletes", "delete", "order", req.body );
+    let response = await rabbitHelper.handlePostToChannel("deletes", "delete", "order", req.body );
     response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 

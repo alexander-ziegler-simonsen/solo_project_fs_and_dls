@@ -27,21 +27,21 @@ StorageRouter.get("/storage/:id", async (req, res) => {
 StorageRouter.post("/storage", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("posts", "post", "storage", req.body );
+    let response = await rabbitHelper.handlePostToChannel("posts", "post", "storage", req.body );
     response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 StorageRouter.put("/storage", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("updates", "put", "storage", req.body );
+    let response = await rabbitHelper.handlePostToChannel("updates", "put", "storage", req.body );
     response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 StorageRouter.delete("/storage", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("deletes", "delete", "storage", req.body );
+    let response = await rabbitHelper.handlePostToChannel("deletes", "delete", "storage", req.body );
     response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 

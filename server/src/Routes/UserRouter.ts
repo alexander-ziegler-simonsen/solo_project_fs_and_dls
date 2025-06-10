@@ -27,21 +27,21 @@ UserRouter.get("/user/:id", async (req, res) => {
 UserRouter.post("/user", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("posts", "post", "user", req.body );
+    let response = await rabbitHelper.handlePostToChannel("posts", "post", "user", req.body );
     response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 UserRouter.put("/user", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("updates", "put", "user", req.body );
+    let response = await rabbitHelper.handlePostToChannel("updates", "put", "user", req.body );
     response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 UserRouter.delete("/user", async (req, res) => {
 const rabbitHelper = new RabbitMQHelper();
 
-    let response = rabbitHelper.handlePostToChannel("deletes", "delete", "user", req.body );
+    let response = await rabbitHelper.handlePostToChannel("deletes", "delete", "user", req.body );
     response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 
