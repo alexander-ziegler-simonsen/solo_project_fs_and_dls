@@ -1,7 +1,7 @@
 import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, BaseEntity } from "typeorm";
 import "reflect-metadata";
 
-@Entity("User")
+@Entity("user")
 export class User_post{
 
     @PrimaryGeneratedColumn()
