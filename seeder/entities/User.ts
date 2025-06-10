@@ -1,10 +1,10 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, PrimaryColumn } from "typeorm";
 import "reflect-metadata";
 
 @Entity()
  export class User{
     
-    @Column()
+    @PrimaryColumn()
     _id: number;
     
     @Column()
@@ -17,7 +17,7 @@ import "reflect-metadata";
     email: string;
     
     @Column()
-    phoneNumber: string;
+    phone: string;
     
     @Column()
     address: string;
@@ -39,7 +39,7 @@ import "reflect-metadata";
     email: string;
     
     @Column()
-    phoneNumber: string;
+    phone: string;
     
     @Column()
     address: string;

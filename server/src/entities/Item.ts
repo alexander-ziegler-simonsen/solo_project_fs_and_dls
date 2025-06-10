@@ -4,7 +4,7 @@ import "reflect-metadata";
 @Entity()
  export class Item{
 
-    @Column()
+    @PrimaryColumn()
     _id: number;
 
     @Column()

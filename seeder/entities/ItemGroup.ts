@@ -1,10 +1,10 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, PrimaryColumn, ObjectIdColumn, Column } from "typeorm";
 import "reflect-metadata";
 
 @Entity()
  export class ItemGroup {
 
-    @Column()
+    @PrimaryColumn()
     _id: number;
 
     @Column()

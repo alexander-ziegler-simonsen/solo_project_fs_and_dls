@@ -17,7 +17,7 @@ export class User_post{
     email: string;
 
     @Column()
-    phoneNumber: string;
+    phone: string;
 
     @Column()
     address: string;
@@ -29,7 +29,7 @@ export class User_post{
         res.username = data.username;
         res.password = data.password;
         res.email = data.email;
-        res.phoneNumber = data.phoneNumber;
+        res.phone = data.phone;
         res.address = data.address;
 
         return res;

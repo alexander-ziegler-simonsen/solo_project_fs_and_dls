@@ -1,10 +1,10 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, PrimaryColumn } from "typeorm";
 import "reflect-metadata";
 
 @Entity()
  export class Order{
     
-    @Column()
+    @PrimaryColumn()
     _id: number;
 
     @Column()
