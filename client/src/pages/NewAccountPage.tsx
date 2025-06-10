@@ -2,6 +2,8 @@ import { Box, Field, Center, Input, Button, HStack } from "@chakra-ui/react";
 import { PasswordInput } from "../components/ui/password-input";
 import { useState } from "react";
 import { toaster, Toaster } from "../components/ui/toaster";
+import { PostOneData } from "../helpers/HandleApiCalls";
+import { User } from "../entities/User";
 
 function NewAccountPage() {
   const [formData, setFormData] = useState({
@@ -27,7 +29,13 @@ function NewAccountPage() {
   const handleSubmit = async () => {
     try {
       // TODO - make this call the API
-      console.log("account made", JSON.stringify(formData));
+      await PostOneData<User>("user", {
+        "username": formData.username,
+        "password": formData.password,
+        "email": formData.email,
+        "phone": formData.phone,
+        "address": formData.address
+      } as User );
 
       toast({
         title: "Account created.",
