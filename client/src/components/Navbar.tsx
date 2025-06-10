@@ -5,7 +5,8 @@ const links = [
   { name: "Home", to: "/" },
   { name: "About", to: "/about" },
   { name: "Category", to: "/category" },
-  { name: "Product", to: "/product" }
+  { name: "Product", to: "/product" },
+  { name: "Login", to: "/login" }
 ];
 
 function Navbar() {
