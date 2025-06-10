@@ -1,5 +1,6 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, PrimaryColumn, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, PrimaryColumn, ObjectIdColumn, Column, OneToMany } from "typeorm";
 import "reflect-metadata";
+import { Item_post } from "./Item";
 
 @Entity()
  export class ItemGroup {
@@ -11,12 +12,15 @@ import "reflect-metadata";
     name: string;
 }
 
-@Entity("ItemGroup")
+@Entity("itemgroup")
  export class ItemGroup_post {
 
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column()
+    @Column("text",{nullable:false})
     name: string;
+
+    @OneToMany(() => Item_post, (item) => item.group)
+    items: Item_post[];
 }

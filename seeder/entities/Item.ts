@@ -1,8 +1,10 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, PrimaryColumn, Column } from "typeorm";
+import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, PrimaryColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
 import "reflect-metadata";
+import { ItemGroup_post } from "./ItemGroup";
+import { OrderItem_post } from "./OrderItem";
 
 @Entity()
- export class Item{
+export class Item {
 
     @PrimaryColumn()
     _id: number;
@@ -11,7 +13,13 @@ import "reflect-metadata";
     name: string;
 
     @Column()
+    info: string;
+
+    @Column()
     description: string;
+
+    @Column()
+    image: string;
 
     @Column()
     price: number;
@@ -20,20 +28,33 @@ import "reflect-metadata";
     fk_group_id: number;
 }
 
-@Entity("Item")
- export class Item_post{
+@Entity("item")
+export class Item_post {
 
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column()
+    @Column({ nullable: false })
     name: string;
+
+    @Column('numeric', { precision: 10, scale: 2 })
+    price: number;
+
+    @Column()
+    info: string;
 
     @Column()
     description: string;
 
-    @Column("decimal")
-    price: number;
+    @Column()
+    image: string;
+
+    @ManyToOne(() => ItemGroup_post, (group) => group.items, { nullable: true })
+    @JoinColumn({ name: 'fk_group_id' })
+    group: ItemGroup_post;
+
+    @OneToMany(() => OrderItem_post, (orderItem) => orderItem.item)
+    orderItems: OrderItem_post[];
 
     @Column()
     fk_group_id: number;

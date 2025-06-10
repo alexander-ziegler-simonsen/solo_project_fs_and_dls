@@ -11,12 +11,12 @@ import "reflect-metadata";
     name: string;
 }
 
-@Entity("Storage")
+@Entity("storage")
  export class Storage_post {
     
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column()
+    @Column("text",{nullable:false})
     name: string;
 }
