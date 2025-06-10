@@ -20,7 +20,7 @@ const axiosConfig = {
 
 export async function getData<T>(gateway:string) {
   //await axios.get<T[]>(`${API_HOST}:${API_PORT}/${gateway}`)
-  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;
+  const url = `${API_HOST}:${API_PORT}/${gateway}`;
 
   //axios.get<T[]>(url, axiosConfig)
 
