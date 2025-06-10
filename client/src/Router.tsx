@@ -5,7 +5,7 @@ import CategoryPage from './pages/CategoryPage';
 import ProductPage from './pages/ProductPage';
 import Error404Page from './pages/Error404Page';
 import LoginPage from './pages/LoginPage';
-import NewAccountPage from "./pages/newAccountPage";
+import NewAccountPage from "./pages/NewAccountPage";
 
   const router = createBrowserRouter(
     createRoutesFromElements(
