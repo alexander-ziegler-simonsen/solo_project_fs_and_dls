@@ -5,24 +5,19 @@ import { Item, Item_post } from "../entities/Item";
 
 import RabbitMQHelper from "../Helpers/RabbitMqHelper";
 
-const CLIENT_HOST = process.env.CLIENT_HOST || "http://localhost:5173";
-
 const ItemRouter = Router();
 const itemRespository = MongodbDataSource.getMongoRepository(Item);
 
 // mongo
 // TODO - change this to use search parms (get all item is insane)
 ItemRouter.get("/item", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", CLIENT_HOST);
-    res.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type");
     let output = await itemRespository.find();
 
     res.send({ data: output })
 })
 
 ItemRouter.get("/item/:id", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", CLIENT_HOST);
-    res.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type");
+
     let itemId = req.params.id;
     let output = await itemRespository.findOneBy({id: itemId});
 
@@ -31,24 +26,21 @@ ItemRouter.get("/item/:id", async (req, res) => {
 
 // postgres
 ItemRouter.post("/item", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", CLIENT_HOST);
-    res.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type");
+
     const rabbitHelper = new RabbitMQHelper();
     let response = rabbitHelper.handlePostToChannel("posts", "post", "item", req.body );
     response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 ItemRouter.put("/item", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", CLIENT_HOST);
-    res.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type");
+
     const rabbitHelper = new RabbitMQHelper();
     let response = rabbitHelper.handlePostToChannel("updates", "put", "item", req.body );
     response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 ItemRouter.delete("/item", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", CLIENT_HOST);
-    res.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type");
+
     const rabbitHelper = new RabbitMQHelper();
     let response = rabbitHelper.handlePostToChannel("deletes", "delete", "item", req.body );
     response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
