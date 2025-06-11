@@ -1,5 +1,5 @@
 import { PostgresDataSource } from "../DataSource";
-import { Storage_post } from "../Entites_OLD/Storage_post";
+import { Storage_post } from "../entities/Storage";
 
 async function StorageDelete(data) {
 

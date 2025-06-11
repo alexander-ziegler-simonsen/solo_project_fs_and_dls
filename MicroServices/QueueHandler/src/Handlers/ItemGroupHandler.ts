@@ -1,5 +1,5 @@
 import { PostgresDataSource } from "../DataSource";
-import { ItemGroup_post } from "../Entites_OLD/ItemGroup_post";
+import { ItemGroup_post } from "../entities/ItemGroup";
 
 interface ItemGroupData {
     id: string,
