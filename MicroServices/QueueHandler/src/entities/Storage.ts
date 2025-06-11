@@ -19,4 +19,13 @@ import "reflect-metadata";
 
     @Column("text",{nullable:false})
     name: string;
+
+    static fromData(data:any) {
+        let res = new Storage_post();
+
+        res._id = data._id;
+        res.name = data.name;
+
+        return res;
+    }
 }

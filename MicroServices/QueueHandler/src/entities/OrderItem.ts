@@ -41,4 +41,16 @@ export class OrderItem_post {
 
     @Column('numeric', { precision: 10, scale: 2 })
     price: number;
+
+    static fromData(data:any) {
+        let res = new OrderItem_post();
+
+        res._id = data._id;
+        res.item = data.item;
+        res.order = data.order;
+        res.count = data.count;
+        res.price = +data.price;
+
+        return res;
+    }
 }

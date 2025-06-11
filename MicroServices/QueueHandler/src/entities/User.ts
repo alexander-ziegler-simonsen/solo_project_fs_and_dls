@@ -47,4 +47,18 @@ import { Order_post } from "./Order";
 
     @OneToMany(() => Order_post, (order) => order.user)
     orders: Order_post[];
+
+    static fromData(data:any) {
+        let res = new User_post();
+
+        res._id = data._id;
+        res.username = data.username;
+        res.password = data.password;
+        res.email = data.email;
+        res.phone = data.phone;
+        res.address = data.address;
+        res.orders = data.orders;
+
+        return res;
+    }
 }

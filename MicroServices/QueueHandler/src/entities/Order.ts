@@ -24,4 +24,14 @@ export class Order_post {
 
     @OneToMany(() => OrderItem_post, (orderItem) => orderItem.order)
     orderItems: OrderItem_post[];
+
+    static fromData(data:any){
+        let res = new Order_post();
+
+        res._id = data._id;
+        res.user = data.user;
+        res.orderItems = data.orderItems;
+
+        return res;
+    }
 }
