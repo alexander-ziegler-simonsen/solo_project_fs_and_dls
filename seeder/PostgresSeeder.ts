@@ -132,8 +132,8 @@ export async function AddPostgresData<T>(tableName: string, keys: string[], inse
     try {
 
         // empty the whole table first
-        await poolClient.query(`DELETE FROM ${tableName}`);
-        await poolClient.query("COMMIT");
+        //await poolClient.query(`DELETE FROM ${tableName}`);
+        //await poolClient.query("COMMIT");
 
         const values: string[] = [];
         const params: any[] = [];
@@ -153,16 +153,7 @@ export async function AddPostgresData<T>(tableName: string, keys: string[], inse
 
         const query = { text: `INSERT INTO ${tableName} (${keys.join(', ')}) VALUES ${values.join(', ')} RETURNING *` };
 
-        insertData.forEach(async element => {
-            let values = Object.values(element);
-            // TODO - remove this line, when you remove index form "data"
-            values.shift();
-
-            let res = await poolClient.query(query, params);
-
-
-
-        });
+        let res = await poolClient.query(query, params);
 
         // await poolClient.query("COMMIT");
     } catch (err) {
