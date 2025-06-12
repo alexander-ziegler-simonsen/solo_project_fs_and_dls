@@ -6,7 +6,7 @@ import { OrderItem_post } from "./OrderItem";
 @Entity()
 export class Item {
 
-@PrimaryColumn()
+    @PrimaryColumn()
     _id: number;
 
     @Column()
@@ -34,19 +34,19 @@ export class Item_post {
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column({ nullable: false })
+    @Column("text",{ nullable: false })
     name: string;
 
     @Column('numeric', { precision: 10, scale: 2 })
     price: number;
 
-    @Column()
+    @Column("text")
     info: string;
 
-    @Column()
+    @Column("text")
     description: string;
 
-    @Column()
+    @Column("text")
     image: string;
 
     @ManyToOne(() => ItemGroup_post, (group) => group.items, { nullable: true })
@@ -58,18 +58,4 @@ export class Item_post {
 
     @Column()
     fk_group_id: number;
-
-    static fromData(data:any) {
-        let res = new Item_post();
-
-        res._id = data._id ? +data._id : undefined;
-        res.name = data.name;
-        res.price = +data.price;
-        res.info = data.info;
-        res.image = data.image;
-        res.description = data.description;
-        res.fk_group_id = data.fk_group_id;
-
-        return res;
-    }
 }

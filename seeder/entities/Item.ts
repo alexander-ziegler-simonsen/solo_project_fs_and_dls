@@ -34,19 +34,19 @@ export class Item_post {
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column({ nullable: false })
+    @Column("text",{ nullable: false })
     name: string;
 
     @Column('numeric', { precision: 10, scale: 2 })
     price: number;
 
-    @Column()
+    @Column("text")
     info: string;
 
-    @Column()
+    @Column("text")
     description: string;
 
-    @Column()
+    @Column("text")
     image: string;
 
     @ManyToOne(() => ItemGroup_post, (group) => group.items, { nullable: true })
