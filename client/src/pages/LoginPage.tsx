@@ -11,9 +11,9 @@ function LoginPage() {
       <Box w={500}>
         <Field.Root>
           <Field.Label>Username</Field.Label>
-          <Input placeholder="username" variant="outline" />
+          <Input bg="white" placeholder="username" variant="outline" />
           <Field.Label>password</Field.Label>
-          <Input placeholder="password" variant="outline" />
+          <Input bg="white" placeholder="password" variant="outline" />
         </Field.Root>
         <Center>
           <HStack margin={3}>
