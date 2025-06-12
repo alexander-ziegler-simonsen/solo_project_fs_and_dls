@@ -58,4 +58,18 @@ export class Item_post {
 
     @Column()
     fk_group_id: number;
+
+    static fromData(data:any) {
+        let res = new Item_post();
+
+        res._id = data._id ? +data._id : undefined;
+        res.name = data.name;
+        res.price = +data.price;
+        res.info = data.info;
+        res.image = data.image;
+        res.description = data.description;
+        res.fk_group_id = data.fk_group_id;
+
+        return res;
+    }
 }
