@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { Button, Avatar, Card, Center, HStack, Box, Text, Spacer } from "@chakra-ui/react";
-import { Item } from "../entities/Item";
+import { Item } from "../domain/Item";
 
 interface ProductElementProps {
   ItemValue: Item;

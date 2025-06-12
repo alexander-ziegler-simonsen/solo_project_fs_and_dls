@@ -3,7 +3,7 @@ import { PasswordInput } from "../components/ui/password-input";
 import { useState } from "react";
 import { toaster, Toaster } from "../components/ui/toaster";
 import { PostOneData } from "../helpers/HandleApiCalls";
-import { User } from "../entities/User";
+import { User } from "../domain/User";
 
 function NewAccountPage() {
   const [formData, setFormData] = useState({
