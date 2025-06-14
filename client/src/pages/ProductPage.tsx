@@ -1,7 +1,7 @@
 import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 // import React from 'react'
-import orsLogo from '../assets/ors-192x192.png'
-import { Product } from '../domain/Product';
+import orsLogo from '../assets/ors-192.png'
+import { Item } from '../domain/Item';
 
 function ProductPage() {
 
@@ -16,13 +16,14 @@ function ProductPage() {
 
   // TODO - remove this data, when we read all data from props 
 
-  const x : Product = {
-    id: 1,
+  const x : Item = {
+    _id: 1,
     name: "banana",
     price: 1234,
     info: "we got info here",
     "description": "we even got description here",
-    image: orsLogo
+    image: orsLogo,
+    fk_group_id: 1
   }
 
   //product = x;
