@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import orsLogo from './assets/ors-192x192.png';
+import orsLogo from './assets/ors-192.png';
 import { getData } from './helpers/HandleApiCalls';
 
 function App() {

@@ -1,4 +1,4 @@
-import orsLogo from '../assets/ors-192x192.png'
+import orsLogo from '../assets/ors-192.png'
 import { Container, Flex, Text } from '@chakra-ui/react'
 import Navbar from './Navbar'
 

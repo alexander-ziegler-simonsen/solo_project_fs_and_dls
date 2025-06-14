@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router'
-import orsLogo from './assets/ors-192x192.png'
+import orsLogo from './assets/ors-192.png'
 import { Center, Container, Flex, Text } from '@chakra-ui/react'
 import App from './App'
 import Header from './components/Header';
