@@ -6,6 +6,8 @@ import ProductPage from './pages/ProductPage';
 import Error404Page from './pages/Error404Page';
 import LoginPage from './pages/LoginPage';
 import NewAccountPage from "./pages/NewAccountPage";
+import AccountOrdersPage from './pages/account/AccountOrdersPage';
+import AccountInfoPage from './pages/account/AccountInfoPage';
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,6 +17,8 @@ import NewAccountPage from "./pages/NewAccountPage";
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/new_account' element={<NewAccountPage />} />
+        <Route path='/a_orders' element={<AccountOrdersPage />} />
+        <Route path='/a_info' element={<AccountInfoPage />} />
         <Route path='*' element={<Error404Page />} />
 
       </Route>
