@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import { Button, Avatar, Card, Center, HStack, Box, Text, Spacer } from "@chakra-ui/react";
+import { Button, Image, Card, Center, Text } from "@chakra-ui/react";
 import { Item } from "../domain/Item";
 
 interface ProductElementProps {
@@ -9,34 +9,24 @@ interface ProductElementProps {
 
 function ProductElement({ ItemValue }: ProductElementProps) {
   return (
-    <Card.Root width="320px">
+    <Card.Root padding={1} maxW="sm" overflow="hidden" float={"left"}>
+      <Center>
+        {/* <Image maxWidth={200} src={ItemValue.image}/> */}
+        <Text>{ItemValue.image}</Text>
+      </Center>
       <Card.Body gap="2">
-        <Center>
-          <Avatar.Root size="lg" shape="rounded">
-            <Avatar.Image src={ItemValue.image} />
-            {/* TODO - add placeholder image here */}
-            <Avatar.Fallback name="Nue Camp" />
-          </Avatar.Root>
-        </Center>
-        <Card.Title mt="2">{ItemValue.name}</Card.Title>
+        <Card.Title>{ItemValue.name}</Card.Title>
         <Card.Description>
-          <HStack>
-            <Box>
-              <Text>{ItemValue.info}</Text>       
-            </Box>
-            <Spacer />
-            <Box>
-              <Text float={"right"}>{ItemValue.description}</Text>
-            </Box>
-          </HStack>
-          <Center>
-            <Text>{ItemValue.price} kr</Text>
-          </Center>
-        </Card.Description>
+          {ItemValue.description}
+          <br/>
+          .....
+          <br/>
+        {ItemValue.info}</Card.Description>
+        <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">{ItemValue.price} kr</Text>
       </Card.Body>
-      <Card.Footer justifyContent="flex-end">
-        <Button variant="outline">show more info</Button>
-        <Button>add to cart</Button>
+      <Card.Footer gap="2">
+        <Button variant="solid">Buy now</Button>
+        <Button variant="ghost">Add to cart</Button>
       </Card.Footer>
     </Card.Root>
   )
