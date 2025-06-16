@@ -6,7 +6,8 @@ const links = [
   { name: "About", to: "/about" },
   { name: "Category", to: "/category" },
   { name: "Product", to: "/product" },
-  { name: "Login", to: "/login" }
+  { name: "Login", to: "/login" },
+  { name: "Cart", to: "/cart" }
 ];
 
 function Navbar() {
