@@ -57,6 +57,9 @@ async function main() {
         res.send({ data: "this is data" })
     })
 
+    // for "health" check in my docker compose file
+    app.get('/health', (req, res) => {res.send('OK')});
+
     // the last part of the server -----------------------------
 
     app.listen(PORT, () => console.log("server is running on port", PORT));

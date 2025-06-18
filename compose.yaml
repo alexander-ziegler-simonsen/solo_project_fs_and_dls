@@ -42,6 +42,11 @@ services:
       context: ./docker/rabbitmq
     image: my-rabbitmq
     pull_policy: never
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     labels:
       kompose.node-selector: ors-data
       kompose.service.type: nodeport
@@ -87,6 +92,15 @@ services:
         condition: service_started
         restart: true
     pull_policy: never
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 3003"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      # test: ["CMD", "curl", "-f", "0.0.0.0:3003/health"]
+      # interval: 10s
+      # timeout: 5s
+      # retries: 10
     ports:
       - "3003:3003"
     networks:
@@ -119,11 +133,16 @@ services:
     image: my-queuehandler
     depends_on:
       service-rabbitmq:
-        condition: service_started
+        condition: service_healthy
         restart: true
       service-api:
-        condition: service_started
+        condition: service_healthy
         restart: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     pull_policy: never
     networks:
       - backend
