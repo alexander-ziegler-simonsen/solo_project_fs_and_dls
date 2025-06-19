@@ -35,6 +35,10 @@ const userDescription = {
     keys: ["username","password","email","phone","address"]
 };
 
+async function endAll() {
+    process.exit(0);
+}
+
 async function main() {
     // mongo
     await setDbAndFirstUser();
@@ -64,6 +68,21 @@ async function main() {
     await AddPostgresData<Order>(OrderDescription.name, OrderDescription.keys,  OrderData);
     await AddPostgresData<OrderItem>(OrderItemDescription.name, OrderItemDescription.keys, OrderItemData);
     
+    await endAll();
+
+    return "done";
 }
 
-main();
+main().then(message => {
+    console.log("message:", message);
+    if(message == "done")
+    {
+        console.log("plz stop this program");
+        endAll();
+        
+    }
+}).catch(err => {
+    console.log("seeder - error", err);
+    //process.exit(0);
+    //process.exit(1);
+});
