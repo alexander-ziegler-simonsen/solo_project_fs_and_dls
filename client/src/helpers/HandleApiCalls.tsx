@@ -5,8 +5,11 @@ const API_PORT = import.meta.env.VITE_API_PORT;
 
 export async function getData<T>(gateway:string) {
   // this is for host on VPS
-  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
 
+  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
+
+  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
+  //const url = `${API_HOST}:${API_PORT}/${gateway}`;
   try {
     const response = await axios.get(url, {
       withCredentials: true,
@@ -28,7 +31,10 @@ export async function getData<T>(gateway:string) {
 }
 
 export async function PostOneData<T>(gateway:string, insertData:T) {
-  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
+  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
+  //const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
+
 
   await axios({
     method: 'post',
@@ -55,7 +61,9 @@ export async function PostOneData<T>(gateway:string, insertData:T) {
 }
 
 export async function PostManyData<T>(gateway:string, insertData:T[]) {
-  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
+  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
+  // const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
 
   await axios({
     method: 'post',
@@ -81,7 +89,10 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
 }
 
 export async function Login<T>(loginInfo:T) {
-  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/login` : `${API_HOST}/login`;
+  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/login` : `${API_HOST}/login`;
+  //const url = `${API_HOST}:${API_PORT}/login`;
+  const url = API_PORT == 0 ? `${API_HOST}/login` : `${API_HOST}:${API_PORT}/login`; 
+
 
   await axios({
     method: 'post',
