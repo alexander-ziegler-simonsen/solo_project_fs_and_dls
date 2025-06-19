@@ -4,36 +4,31 @@ const API_HOST = import.meta.env.VITE_API_HOST;
 const API_PORT = import.meta.env.VITE_API_PORT;
 
 export async function getData<T>(gateway:string) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  // this is for host on VPS
+  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
 
-  await axios({
-    method: 'get',
-    url: url,
-    withCredentials: true,
-    headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+  try {
+    const response = await axios.get(url, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      },
+    });
+
+    // console.log("debug - getData", response);
+    // console.log("debug - getData", response.data);
+
+    return response.data.data as T[];
+  } catch (error) {
+    console.error("getData error:", error);
+    throw error; // optional: rethrow for error handling in caller
   }
-  })
-  .then(function (response) {
-    console.log("debug", response);
-    console.log("debug", response.data);
-
-    // TODO - check if the data is the same as T
-    return response.data;
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .finally(function () {
-    // always executed
-  });
 }
 
 export async function PostOneData<T>(gateway:string, insertData:T) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
 
   await axios({
     method: 'post',
@@ -45,8 +40,8 @@ export async function PostOneData<T>(gateway:string, insertData:T) {
   }
   })
   .then(function (response) {
-    console.log("debug", response);
-    console.log("debug", response.data);
+    // console.log("debug - PostOneData", response);
+    // console.log("debug - PostOneData", response.data);
 
     return response.data;
   })
@@ -60,7 +55,7 @@ export async function PostOneData<T>(gateway:string, insertData:T) {
 }
 
 export async function PostManyData<T>(gateway:string, insertData:T[]) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
 
   await axios({
     method: 'post',
@@ -72,8 +67,8 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
   }
   })
   .then(function (response) {
-    console.log("debug", response);
-    console.log("debug", response.data);
+    // console.log("debug", response);
+    // console.log("debug", response.data);
 
     return response.data;
   })
@@ -82,5 +77,35 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
   })
   .finally(function () {
 
+  });
+}
+
+export async function Login<T>(loginInfo:T) {
+  const url = API_HOST=="localhost" ? `${API_HOST}:${API_PORT}/login` : `${API_HOST}/login`;
+
+  await axios({
+    method: 'post',
+    url: url,
+    withCredentials: true,
+    data: loginInfo,
+    headers: {
+    'Content-Type': 'application/json',
+  }
+  })
+  .then(function (response) {
+    // console.log("debug - Login", response);
+    // console.log("debug - Login", response.data);
+
+    // TODO - add a lot of logic here
+
+    console.log("DEBUG - login endpoint - client api handler", response.data);
+    return response.data ;
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
   });
 }
