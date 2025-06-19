@@ -29,7 +29,7 @@ export const MongodbDataSource = new
 DataSource({
     type: "mongodb",
     host: mon_host,
-    port: 27018,
+    port: 27017,
     synchronize: true,
     entities: [Item, User, ItemGroup, OrderItem, Order, Storage],
     username: mon_use,
@@ -40,7 +40,7 @@ DataSource({
 export const PostgresDataSource = new DataSource({
     type: "postgres",
     host: post_host,
-    port: 5433,
+    port: 5432,
     synchronize: true,
     entities: [Item_post, User_post,ItemGroup_post, OrderItem_post, Order_post, Storage_post],
     username: post_use,
