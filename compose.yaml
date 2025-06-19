@@ -3,9 +3,13 @@ services:
   service-mongo:
     build: 
       context: ./docker/mongodb
-    image: my-mongo
-    pull_policy: never
-    
+    image: ghcr.io/alexander-ziegler-simonsen/my-mongo:latest
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     ports:
       - "27018:27017"
     networks:
@@ -22,8 +26,12 @@ services:
   service-postgres:
     build: 
       context: ./docker/postgres
-    image: my-postgres
-    pull_policy: never
+    image: ghcr.io/alexander-ziegler-simonsen/my-postgres:latest
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - "5433:5432"
     networks:
@@ -37,11 +45,36 @@ services:
     volumes:
       - postgresdata:/var/lib/postgresql/data
   
+  service-seeder:
+    build:
+      context: ./seeder/
+    image: ghcr.io/alexander-ziegler-simonsen/my-seeder:latest
+    depends_on:
+      service-mongo:
+        condition: service_healthy
+      service-postgres:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: "no"
+    environment:
+      MONGO_NEW_USERNAME: ${MONGO_NEW_USERNAME}
+      MONGO_NEW_PASSWORD: ${MONGO_NEW_PASSWORD}
+      MONGO_NEW_DB: ${MONGO_NEW_DB}
+      MONGO_HOST: ${DOCKER_MONGO_HOST}
+      MONGO_PORT: ${DOCKER_MONGO_PORT}
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      POSTGRES_HOST: ${DOCKER_POSTGRES_HOST}
+      POSTGRES_PORT: ${DOCKER_POSTGRES_PORT}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
   service-rabbitmq:
     build: 
       context: ./docker/rabbitmq
-    image: my-rabbitmq
-    pull_policy: never
+    image: ghcr.io/alexander-ziegler-simonsen/my-rabbitmq:latest
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "check_running"]
       interval: 10s
@@ -64,12 +97,11 @@ services:
   service-client:
     build: 
       context: ./client/
-    image: my-client
+    image: ghcr.io/alexander-ziegler-simonsen/my-client:latest
     depends_on:
       service-ms-queuehandler:
         condition: service_started
         restart: true
-    pull_policy: never
     ports:
       - "8083:80"
     networks:
@@ -83,44 +115,42 @@ services:
   service-api:
     build: 
       context: ./server/
-    image: my-api
+    image: ghcr.io/alexander-ziegler-simonsen/my-api:latest
     depends_on:
       service-mongo:
         condition: service_started
         restart: true
       service-postgres:
         condition: service_started
+      service-seeder:
+        condition: service_completed_successfully
         restart: true
-    pull_policy: never
     healthcheck:
-      test: ["CMD-SHELL", "nc -z localhost 3003"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-      # test: ["CMD", "curl", "-f", "0.0.0.0:3003/health"]
-      # interval: 10s
-      # timeout: 5s
-      # retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     ports:
       - "3003:3003"
     networks:
       - backend
     environment:
         API_PORT: ${API_PORT}
-        MONGO_HOST: ${MONGO_HOST}
-        MONGO_PORT: ${MONGO_PORT}
+        MONGO_HOST: ${DOCKER_MONGO_HOST}
+        MONGO_PORT: ${DOCKER_MONGO_PORT}
         MONGO_USERNAME: ${MONGO_USERNAME}
         MONGO_PASSWORD: ${MONGO_PASSWORD}
         MONGO_NEW_USERNAME: ${MONGO_NEW_USERNAME}
         MONGO_NEW_PASSWORD: ${MONGO_NEW_PASSWORD}
         MONGO_NEW_DB: ${MONGO_NEW_DB}
-        POSTGRES_HOST: ${POSTGRES_HOST}
-        POSTGRES_PORT: ${POSTGRES_PORT}
+        POSTGRES_HOST: ${DOCKER_POSTGRES_HOST}
+        POSTGRES_PORT: ${DOCKER_POSTGRES_PORT}
         POSTGRES_USERNAME: ${POSTGRES_USERNAME}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: ${POSTGRES_DB}
-        RABBITMQ_HOST: ${RABBITMQ_HOST}
-        RABBITMQ_PORT: ${RABBITMQ_PORT}
+        RABBITMQ_HOST: ${DOCKER_RABBIT_HOST}
+        RABBITMQ_PORT: ${DOCKER_RABBIT_PORT}
         RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
         RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
         CLIENT_HOST: ${CLIENT_HOST}
@@ -130,7 +160,7 @@ services:
   service-ms-queuehandler:
     build: 
       context: ./MicroServices/QueueHandler/
-    image: my-queuehandler
+    image: ghcr.io/alexander-ziegler-simonsen/my-queuehandler:latest
     depends_on:
       service-rabbitmq:
         condition: service_healthy
@@ -143,19 +173,18 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    pull_policy: never
     networks:
       - backend
     environment:
-      RABBITMQ_HOST: ${RABBITMQ_HOST}
-      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_HOST: ${DOCKER_RABBIT_HOST}
+      RABBITMQ_PORT: ${DOCKER_RABBIT_PORT}
       RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
-      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_PORT: ${DOCKER_POSTGRES_PORT}
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_HOST: ${DOCKER_POSTGRES_HOST}
     volumes:
       - queuehandler:/data/  
 
