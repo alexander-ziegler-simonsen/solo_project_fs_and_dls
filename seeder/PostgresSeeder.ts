@@ -13,14 +13,6 @@ const URL = `posgres://${postgres_user}:${postgres_pass}@${postgres_host}:${post
 
 const client = new Client({ connectionString: URL });
 
-const pool = new Pool({
-    user: postgres_user,
-    host: postgres_host,
-    database: postgres_db,
-    password: postgres_pass,
-    port: postgres_port
-})
-
 // pool.ON('error', (err, client) => {
 //     console.error('Unexpected error on idle client', err);
 //     process.exit(-1);
@@ -46,6 +38,14 @@ export async function setPostgresDb() {
 }
 
 export async function setAllTables() {
+
+    const pool = new Pool({
+        user: postgres_user,
+        host: postgres_host,
+        database: postgres_db,
+        password: postgres_pass,
+        port: postgres_port
+    })
 
     const poolClient = await pool.connect();
 
@@ -103,10 +103,19 @@ export async function setAllTables() {
         console.error("Error creating db:", err);
     } finally {
         await poolClient.release();
+        await poolClient.end();
     }
 }
 
 export async function DropTable(tableToDrop) {
+    const pool = new Pool({
+        user: postgres_user,
+        host: postgres_host,
+        database: postgres_db,
+        password: postgres_pass,
+        port: postgres_port
+    })
+
     const poolClient = await pool.connect();
     try {
 
@@ -120,11 +129,19 @@ export async function DropTable(tableToDrop) {
         console.error("Error adding Items:", err);
     } finally {
         await poolClient.release();
+        await poolClient.end();
     }
 }
 
 export async function AddPostgresData<T>(tableName: string, keys: string[], insertData: T[]) {
     //await client.connect();
+    const pool = new Pool({
+        user: postgres_user,
+        host: postgres_host,
+        database: postgres_db,
+        password: postgres_pass,
+        port: postgres_port
+    })
 
     const poolClient = await pool.connect();
 
@@ -160,6 +177,7 @@ export async function AddPostgresData<T>(tableName: string, keys: string[], inse
         console.error("Error adding Items:", err);
     } finally {
         await poolClient.release();
+        await poolClient.end();
     }
 }
 
