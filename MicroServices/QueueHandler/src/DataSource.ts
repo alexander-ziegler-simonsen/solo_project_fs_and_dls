@@ -20,7 +20,7 @@ const post_host = process.env.POSTGRES_HOST || "localhost";
 export const PostgresDataSource = new DataSource({
     type: "postgres",
     host: post_host,
-    port: 5433,
+    port: 5432,
     synchronize: true,
     entities: [Item_post, User_post, OrderItem_post, Order_post, Storage_post, ItemGroup_post],
     username: post_use,
