@@ -58,7 +58,7 @@ async function main() {
     })
 
     // for "health" check in my docker compose file
-    app.get('/health', (req, res) => {res.send('OK')});
+    app.get('/health', (req, res) => {res.sendStatus(200)});
 
     // the last part of the server -----------------------------
 
