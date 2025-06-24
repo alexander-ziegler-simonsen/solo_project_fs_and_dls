@@ -15,8 +15,8 @@ function ProductElement({ ItemValue }: ProductElementProps) {
   return (
     <Card.Root padding={1} maxW="sm" overflow="hidden" float={"left"}>
       <Center>
-        {/* <Image maxWidth={200} src={ItemValue.image}/> */}
-        <Text>{ItemValue.image}</Text>
+        {/* <Image rounded="lg" border="2px solid grey" maxWidth={200} maxH={150} margin={2} src={ItemValue.image}/> */}
+        <Image rounded="lg" maxWidth={200} maxH={150} margin={2} src={ItemValue.image}/>
       </Center>
       <Card.Body gap="2">
         <Card.Title>{ItemValue.name}</Card.Title>
