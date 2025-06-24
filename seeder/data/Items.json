@@ -1,182 +1,182 @@
 [
-    {
-      "_id": 1,
-      "name": "Wireless Mouse",
-      "price": 25.99,
-      "info": "2.4GHz wireless connectivity",
-      "description": "A sleek, ergonomic mouse with adjustable DPI settings and long battery life.",
-      "image": "https://example.com/images/mouse1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 2,
-      "name": "Mechanical Keyboard",
-      "price": 89.5,
-      "info": "RGB backlit with blue switches",
-      "description": "High-quality mechanical keyboard with durable keys and customizable lighting.",
-      "image": "https://example.com/images/keyboard1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 3,
-      "name": "Gaming Monitor",
-      "price": 199.99,
-      "info": "144Hz refresh rate, 1ms response time",
-      "description": "27-inch Full HD monitor designed for smooth gaming performance.",
-      "image": "https://example.com/images/monitor1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 4,
-      "name": "USB-C Hub",
-      "price": 39.99,
-      "info": "7-in-1 expansion with HDMI and SD card reader",
-      "description": "Compact hub for expanding laptop connectivity with multiple ports.",
-      "image": "https://example.com/images/hub1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 5,
-      "name": "Noise Cancelling Headphones",
-      "price": 129.95,
-      "info": "Active noise cancellation, Bluetooth 5.0",
-      "description": "Comfortable over-ear headphones with immersive sound and long battery life.",
-      "image": "https://example.com/images/headphones1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 6,
-      "name": "Smartwatch Pro",
-      "price": 199.0,
-      "info": "Fitness tracking, heart rate monitor",
-      "description": "Track your health and stay connected on the go with this versatile smartwatch.",
-      "image": "https://example.com/images/smartwatch1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 7,
-      "name": "Portable SSD 1TB",
-      "price": 89.99,
-      "info": "High-speed USB 3.2 interface",
-      "description": "Fast, compact and reliable external storage for your important files.",
-      "image": "https://example.com/images/ssd1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 8,
-      "name": "4K Action Camera",
-      "price": 149.95,
-      "info": "Waterproof up to 30m, 60fps recording",
-      "description": "Capture your adventures in stunning detail with this rugged action cam.",
-      "image": "https://example.com/images/camera1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 9,
-      "name": "Bluetooth Speaker",
-      "price": 45.0,
-      "info": "12-hour battery, waterproof design",
-      "description": "Portable speaker with powerful bass and crystal-clear sound.",
-      "image": "https://example.com/images/speaker1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 10,
-      "name": "Ergonomic Office Chair",
-      "price": 249.99,
-      "info": "Adjustable lumbar support and headrest",
-      "description": "Comfortable and supportive chair designed for long hours at a desk.",
-      "image": "https://example.com/images/chair1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 11,
-      "name": "Smart Home Camera",
-      "price": 59.99,
-      "info": "1080p HD, night vision, motion detection",
-      "description": "Keep an eye on your home remotely with this easy-to-install camera.",
-      "image": "https://example.com/images/homecamera1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 12,
-      "name": "Laptop Stand",
-      "price": 34.95,
-      "info": "Adjustable aluminum stand",
-      "description": "Improve posture and cooling with this sleek laptop riser.",
-      "image": "https://example.com/images/laptopstand1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 13,
-      "name": "LED Desk Lamp",
-      "price": 29.95,
-      "info": "Touch control, 3 brightness levels",
-      "description": "Modern desk lamp perfect for reading, working, or studying.",
-      "image": "https://example.com/images/desklamp1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 14,
-      "name": "Graphics Tablet",
-      "price": 89.0,
-      "info": "8192 pressure levels, pen included",
-      "description": "Digital drawing tablet ideal for artists and designers.",
-      "image": "https://example.com/images/tablet1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 15,
-      "name": "Smart LED Bulb",
-      "price": 19.99,
-      "info": "Voice control, multicolor",
-      "description": "Control lighting with your voice or phone and create the perfect ambiance.",
-      "image": "https://example.com/images/bulb1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 16,
-      "name": "Streaming Webcam",
-      "price": 59.5,
-      "info": "1080p resolution with built-in mic",
-      "description": "Perfect for video calls, streaming, and online meetings.",
-      "image": "https://example.com/images/webcam1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 17,
-      "name": "Phone Tripod",
-      "price": 22.49,
-      "info": "Flexible legs, universal phone mount",
-      "description": "Capture stable photos and videos with this versatile tripod.",
-      "image": "https://example.com/images/tripod1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 18,
-      "name": "External DVD Drive",
-      "price": 35.99,
-      "info": "USB 3.0, plug and play",
-      "description": "Easily read or write CDs and DVDs with this portable drive.",
-      "image": "https://example.com/images/dvddrive1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 19,
-      "name": "Wireless Charger Pad",
-      "price": 27.0,
-      "info": "Fast charging, Qi compatible",
-      "description": "Charge your devices quickly and wirelessly with this sleek pad.",
-      "image": "https://example.com/images/charger1.jpg",
-      "fk_group_id": 1
-    },
-    {
-      "_id": 20,
-      "name": "Smart Thermostat",
-      "price": 159.99,
-      "info": "Wi-Fi enabled, energy-saving",
-      "description": "Control your home's temperature remotely and save on energy bills.",
-      "image": "https://example.com/images/thermostat1.jpg",
-      "fk_group_id": 1
-    }
-  ]
+  {
+    "_id": 1,
+    "name": "Wireless Mouse",
+    "price": 25.99,
+    "info": "2.4GHz wireless connectivity",
+    "description": "A sleek, ergonomic mouse with adjustable DPI settings and long battery life.",
+    "image": "https://m.media-amazon.com/images/I/51dsuumz6HL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 2,
+    "name": "Mechanical Keyboard",
+    "price": 89.5,
+    "info": "RGB backlit with blue switches",
+    "description": "High-quality mechanical keyboard with durable keys and customizable lighting.",
+    "image": "https://images-na.ssl-images-amazon.com/images/I/71kr3WAj1FL._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 3,
+    "name": "Gaming Monitor",
+    "price": 199.99,
+    "info": "144Hz refresh rate, 1ms response time",
+    "description": "27-inch Full HD monitor designed for smooth gaming performance.",
+    "image": "https://images-na.ssl-images-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 4,
+    "name": "USB-C Hub",
+    "price": 39.99,
+    "info": "7-in-1 expansion with HDMI and SD card reader",
+    "description": "Compact hub for expanding laptop connectivity with multiple ports.",
+    "image": "https://m.media-amazon.com/images/I/61oNsKVI9SL._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 5,
+    "name": "Noise Cancelling Headphones",
+    "price": 129.95,
+    "info": "Active noise cancellation, Bluetooth 5.0",
+    "description": "Comfortable over-ear headphones with immersive sound and long battery life.",
+    "image": "https://images-na.ssl-images-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 6,
+    "name": "Smartwatch Pro",
+    "price": 199.0,
+    "info": "Fitness tracking, heart rate monitor",
+    "description": "Track your health and stay connected on the go with this versatile smartwatch.",
+    "image": "https://m.media-amazon.com/images/I/710zYOldbiL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 7,
+    "name": "Portable SSD 1TB",
+    "price": 89.99,
+    "info": "High-speed USB 3.2 interface",
+    "description": "Fast, compact and reliable external storage for your important files.",
+    "image": "https://m.media-amazon.com/images/I/61AFHYB-N1L.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 8,
+    "name": "4K Action Camera",
+    "price": 149.95,
+    "info": "Waterproof up to 30m, 60fps recording",
+    "description": "Capture your adventures in stunning detail with this rugged action cam.",
+    "image": "https://m.media-amazon.com/images/I/61BTVtmb5IL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 9,
+    "name": "Bluetooth Speaker",
+    "price": 45.0,
+    "info": "12-hour battery, waterproof design",
+    "description": "Portable speaker with powerful bass and crystal-clear sound.",
+    "image": "https://m.media-amazon.com/images/I/81l7mB5LhsL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 10,
+    "name": "Ergonomic Office Chair",
+    "price": 249.99,
+    "info": "Adjustable lumbar support and headrest",
+    "description": "Comfortable and supportive chair designed for long hours at a desk.",
+    "image": "https://m.media-amazon.com/images/I/91TWt3heLrL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 11,
+    "name": "Smart Home Camera",
+    "price": 59.99,
+    "info": "1080p HD, night vision, motion detection",
+    "description": "Keep an eye on your home remotely with this easy-to-install camera.",
+    "image": "https://m.media-amazon.com/images/I/51oao7xTT8L.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 12,
+    "name": "Laptop Stand",
+    "price": 34.95,
+    "info": "Adjustable aluminum stand",
+    "description": "Improve posture and cooling with this sleek laptop riser.",
+    "image": "https://m.media-amazon.com/images/I/71G8rdQin3L.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 13,
+    "name": "LED Desk Lamp",
+    "price": 29.95,
+    "info": "Touch control, 3 brightness levels",
+    "description": "Modern desk lamp perfect for reading, working, or studying.",
+    "image": "https://m.media-amazon.com/images/I/31HBbxHGm8L.__AC_SY445_SX342_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 14,
+    "name": "Graphics Tablet",
+    "price": 89.0,
+    "info": "8192 pressure levels, pen included",
+    "description": "Digital drawing tablet ideal for artists and designers.",
+    "image": "https://m.media-amazon.com/images/I/51ErAZ+mtUL._AC_SY300_SX300_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 15,
+    "name": "Smart LED Bulb",
+    "price": 19.99,
+    "info": "Voice control, multicolor",
+    "description": "Control lighting with your voice or phone and create the perfect ambiance.",
+    "image": "https://m.media-amazon.com/images/I/61Vxc2c+m0L._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 16,
+    "name": "Streaming Webcam",
+    "price": 59.5,
+    "info": "1080p resolution with built-in mic",
+    "description": "Perfect for video calls, streaming, and online meetings.",
+    "image": "https://m.media-amazon.com/images/I/61DRyuOB3vL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 17,
+    "name": "Phone Tripod",
+    "price": 22.49,
+    "info": "Flexible legs, universal phone mount",
+    "description": "Capture stable photos and videos with this versatile tripod.",
+    "image": "https://m.media-amazon.com/images/I/51JMXGSMcTL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 18,
+    "name": "External DVD Drive",
+    "price": 35.99,
+    "info": "USB 3.0, plug and play",
+    "description": "Easily read or write CDs and DVDs with this portable drive.",
+    "image": "https://m.media-amazon.com/images/I/713k-Du1YfL._AC_SL1500_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 19,
+    "name": "Wireless Charger Pad",
+    "price": 27.0,
+    "info": "Fast charging, Qi compatible",
+    "description": "Charge your devices quickly and wirelessly with this sleek pad.",
+    "image": "https://m.media-amazon.com/images/I/614+4XNwpML._AC_SY300_SX300_.jpg",
+    "fk_group_id": 1
+  },
+  {
+    "_id": 20,
+    "name": "Smart Thermostat",
+    "price": 159.99,
+    "info": "Wi-Fi enabled, energy-saving",
+    "description": "Control your home's temperature remotely and save on energy bills.",
+    "image": "https://m.media-amazon.com/images/I/51yVvRtBLBL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+    "fk_group_id": 1
+  }
+]
