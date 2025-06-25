@@ -2,7 +2,7 @@ import { Entity, ObjectId, PrimaryGeneratedColumn, PrimaryColumn, ObjectIdColumn
 import "reflect-metadata";
 import { Item_post } from "./Item";
 
-@Entity()
+@Entity("itemgroup")
  export class ItemGroup {
 
     @PrimaryColumn()
