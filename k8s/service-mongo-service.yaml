@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.node-selector: ors-data
+    kompose.service.type: nodeport
+  labels:
+    io.kompose.service: service-mongo
+  name: service-mongo
+spec:
+  ports:
+    - name: "27018"
+      port: 27018
+      targetPort: 27017
+  selector:
+    io.kompose.service: service-mongo
+  type: NodePort
