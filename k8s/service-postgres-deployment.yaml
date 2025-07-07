@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.node-selector: ors-data
+    kompose.service.type: nodeport
+  labels:
+    io.kompose.service: service-postgres
+  name: service-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: service-postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.node-selector: ors-data
+        kompose.service.type: nodeport
+      labels:
+        io.kompose.service: service-postgres
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-env-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-env-secret
+                  key: POSTGRES_USER
+          image: ghcr.io/alexander-ziegler-simonsen/my-postgres:latest
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready -U admin
+            failureThreshold: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          name: service-postgres
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      restartPolicy: Always
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgresdata
