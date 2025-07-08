@@ -34,7 +34,8 @@ spec:
                 secretKeyRef:
                   name: app-env-secret
                   key: MONGO_INITDB_ROOT_USERNAME
-          image: ghcr.io/alexander-ziegler-simonsen/my-mongo:latest
+          image: my-mongo
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:

@@ -68,6 +68,7 @@ spec:
             secretKeyRef:
               name: app-env-secret
               key: POSTGRES_USERNAME
-      image: ghcr.io/alexander-ziegler-simonsen/my-seeder:latest
+      image: my-seeder
+      imagePullPolicy: IfNotPresent
       name: service-seeder
   restartPolicy: Never

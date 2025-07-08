@@ -34,7 +34,8 @@ spec:
                 secretKeyRef:
                   name: app-env-secret
                   key: POSTGRES_USER
-          image: ghcr.io/alexander-ziegler-simonsen/my-postgres:latest
+          image: my-postgres
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:

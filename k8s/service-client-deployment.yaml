@@ -28,7 +28,8 @@ spec:
                 secretKeyRef:
                   name: app-env-secret
                   key: VITE_API_PORT
-          image: ghcr.io/alexander-ziegler-simonsen/my-client:latest
+          image: my-client
+          imagePullPolicy: IfNotPresent
           name: service-client
           ports:
             - containerPort: 80
