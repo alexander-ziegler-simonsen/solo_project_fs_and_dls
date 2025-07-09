@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: postgres-pvc
+  namespace: ors
   labels:
-    io.kompose.service: rabbitmqdata
-  name: rabbitmqdata
+    app: postgres-pvc
 spec:
   accessModes:
     - ReadWriteOnce

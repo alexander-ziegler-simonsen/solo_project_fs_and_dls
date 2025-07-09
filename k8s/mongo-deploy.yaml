@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-svc
+  namespace: ors
+  labels:
+    app: mongo-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-svc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mongo-svc
+    spec:
+      containers:
+        - env:
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: MONGO_INITDB_ROOT_PASSWORD
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: MONGO_INITDB_ROOT_USERNAME
+          image: my-mongo
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - mongosh
+                - --eval
+                - db.adminCommand('ping')
+            failureThreshold: 5
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: mongo-svc
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-pvc
+      restartPolicy: Always
+      volumes:
+        - name: mongo-pvc
+          persistentVolumeClaim:
+            claimName: mongo-pvc

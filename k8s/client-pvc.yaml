@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: client-pvc
+  namespace: ors
   labels:
-    io.kompose.service: postgresdata
-  name: postgresdata
+    app: client-pvc
 spec:
   accessModes:
     - ReadWriteOnce

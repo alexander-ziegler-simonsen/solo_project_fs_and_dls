@@ -4,14 +4,15 @@ metadata:
   annotations:
     kompose.node-selector: ors-data
     kompose.service.type: nodeport
+  name: mongo-svc
+  namespace: ors
   labels:
-    io.kompose.service: service-postgres
-  name: service-postgres
+    app: mongo-svc
 spec:
   ports:
-    - name: "5433"
-      port: 5433
-      targetPort: 5432
+    - name: "27018"
+      port: 27018
+      targetPort: 27017
   selector:
-    io.kompose.service: service-postgres
+    app: mongo-svc
   type: NodePort

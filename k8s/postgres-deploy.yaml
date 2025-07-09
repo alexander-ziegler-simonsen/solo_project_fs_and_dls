@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-svc
+  namespace: ors
+  labels:
+    app: postgres-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-svc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres-svc
+    spec:
+      containers:
+        - env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: POSTGRES_USER
+          image: my-postgres
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready -U admin
+            failureThreshold: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          name: postgres-svc
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-pvc
+      restartPolicy: Always
+      volumes:
+        - name: postgres-pvc
+          persistentVolumeClaim:
+            claimName: postgres-pvc

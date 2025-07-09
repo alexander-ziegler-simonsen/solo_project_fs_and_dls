@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-svc
+  namespace: ors
+  labels:
+    app: client-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-svc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: client-svc
+    spec:
+      containers:
+        - env:
+          - name: VITE_API_HOST
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: VITE_API_HOST
+          - name: VITE_API_PORT
+            valueFrom:
+              secretKeyRef:
+                name: app-env-secret
+                key: VITE_API_PORT
+          image: my-client
+          imagePullPolicy: IfNotPresent
+          name: client-svc
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: client-pvc
+      restartPolicy: Always
+      volumes:
+        - name: client-pvc
+          persistentVolumeClaim:
+            claimName: client-pvc

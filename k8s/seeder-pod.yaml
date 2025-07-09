@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: seeder-svc
+  namespace: ors
+  labels:
+    app: seeder-svc
+    role: seeding
+    env: development
+spec:
+  containers:
+    - env:
+      - name: MONGO_HOST
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_HOST
+      - name: MONGO_NEW_DB
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_NEW_DB
+      - name: MONGO_NEW_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_NEW_PASSWORD
+      - name: MONGO_NEW_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_NEW_USERNAME
+      - name: MONGO_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_PASSWORD
+      - name: MONGO_PORT
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_PORT
+      - name: MONGO_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: MONGO_USERNAME
+      - name: POSTGRES_DB
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: POSTGRES_DB
+      - name: POSTGRES_HOST
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: POSTGRES_HOST
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: POSTGRES_PASSWORD
+      - name: POSTGRES_PORT
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: POSTGRES_PORT
+      - name: POSTGRES_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: app-env-secret
+            key: POSTGRES_USERNAME
+      image: my-seeder
+      imagePullPolicy: IfNotPresent
+      name: seeder-svc
+  restartPolicy: Never

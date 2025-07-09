@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: api-pvc
+  namespace: ors
   labels:
-    io.kompose.service: queuehandler
-  name: queuehandler
+    app: api-pvc
 spec:
   accessModes:
     - ReadWriteOnce

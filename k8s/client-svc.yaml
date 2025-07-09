@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: client-svc
+  namespace: ors
   labels:
-    io.kompose.service: service-client
-  name: service-client
+    app: client-svc
 spec:
   ports:
     - name: "8083"
       port: 8083
       targetPort: 80
   selector:
-    io.kompose.service: service-client
+    app: client-svc
