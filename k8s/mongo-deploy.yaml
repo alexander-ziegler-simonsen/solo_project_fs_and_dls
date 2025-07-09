@@ -18,17 +18,10 @@ spec:
         app: mongo-svc
     spec:
       containers:
-        - env:
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_INITDB_ROOT_PASSWORD
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_INITDB_ROOT_USERNAME
+        - name: mongo-svc
+          envFrom:
+          - secretRef:
+              name: test-secret
           image: my-mongo
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -41,7 +34,6 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 5
             timeoutSeconds: 5
-          name: mongo-svc
           ports:
             - containerPort: 27017
               protocol: TCP

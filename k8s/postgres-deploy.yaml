@@ -18,17 +18,10 @@ spec:
         app: postgres-svc
     spec:
       containers:
-        - env:
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_PASSWORD
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_USER
+        - name: postgres-svc
+          envFrom:
+          - secretRef:
+              name: test-secret
           image: my-postgres
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -38,7 +31,6 @@ spec:
             failureThreshold: 5
             periodSeconds: 10
             timeoutSeconds: 5
-          name: postgres-svc
           ports:
             - containerPort: 5432
               protocol: TCP

@@ -18,97 +18,10 @@ spec:
         app: api-svc
     spec:
       containers:
-        - env:
-          - name: API_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: API_PORT
-          - name: CLIENT_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: CLIENT_HOST
-          - name: MONGO_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_HOST
-          - name: MONGO_NEW_DB
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_NEW_DB
-          - name: MONGO_NEW_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_NEW_PASSWORD
-          - name: MONGO_NEW_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_NEW_USERNAME
-          - name: MONGO_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_PASSWORD
-          - name: MONGO_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_PORT
-          - name: MONGO_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: MONGO_USERNAME
-          - name: POSTGRES_DB
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_DB
-          - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_HOST
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_PASSWORD
-          - name: POSTGRES_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_PORT
-          - name: POSTGRES_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_USERNAME
-          - name: RABBITMQ_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_HOST
-          - name: RABBITMQ_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_PASSWORD
-          - name: RABBITMQ_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_PORT
-          - name: RABBITMQ_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_USERNAME
+        - name: api-svc
+          envFrom:
+          - secretRef:
+              name: test-secret
           image: my-api
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -121,7 +34,6 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 30
             timeoutSeconds: 10
-          name: api-svc
           ports:
             - containerPort: 3003
               protocol: TCP

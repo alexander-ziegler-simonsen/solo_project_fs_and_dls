@@ -18,20 +18,12 @@ spec:
         app: client-svc
     spec:
       containers:
-        - env:
-          - name: VITE_API_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: VITE_API_HOST
-          - name: VITE_API_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: VITE_API_PORT
+        - name: client-svc
+          envFrom:
+          - secretRef:
+              name: test-secret
           image: my-client
           imagePullPolicy: IfNotPresent
-          name: client-svc
           ports:
             - containerPort: 80
               protocol: TCP
