@@ -9,10 +9,11 @@ metadata:
   labels:
     app: mongo-svc
 spec:
-  ports:
-    - name: "27018"
-      port: 27018
-      targetPort: 27017
+  type: NodePort
   selector:
     app: mongo-svc
-  type: NodePort
+  ports:
+    - port: 27018 # service port
+      targetPort: 27017 # container port
+      nodePort: 30019 # static port on host
+

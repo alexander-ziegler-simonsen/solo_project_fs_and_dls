@@ -10,8 +10,7 @@ metadata:
     app: postgres-svc
 spec:
   ports:
-    - name: "5433"
-      port: 5433
+    - port: 5433
       targetPort: 5432
   selector:
     app: postgres-svc

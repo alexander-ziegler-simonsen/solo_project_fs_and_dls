@@ -7,8 +7,7 @@ metadata:
     app: client-svc
 spec:
   ports:
-    - name: "8083"
-      port: 8083
+    - port: 8083
       targetPort: 80
   selector:
     app: client-svc
