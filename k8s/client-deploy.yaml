@@ -17,16 +17,39 @@ spec:
       labels:
         app: client-svc
     spec:
+      initContainers:
+        - name: wait-for-queuehandler
+          image: busybox:1.28
+          command:
+            [
+              "sh",
+              "-c",
+              "until nslookup queuehandler-svc.ors.svc.cluster.local; do echo waiting for queuehandler; sleep 2; done;",
+            ]
       containers:
         - name: client-svc
           envFrom:
-          - secretRef:
-              name: test-secret
+            - secretRef:
+                name: app-env-secret
           image: my-client
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            failureThreshold: 5
           volumeMounts:
             - mountPath: /data
               name: client-pvc

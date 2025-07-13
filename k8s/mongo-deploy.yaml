@@ -20,8 +20,8 @@ spec:
       containers:
         - name: mongo-svc
           envFrom:
-          - secretRef:
-              name: test-secret
+            - secretRef:
+                name: app-env-secret
           image: my-mongo
           imagePullPolicy: IfNotPresent
           livenessProbe:

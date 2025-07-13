@@ -17,65 +17,44 @@ spec:
       labels:
         app: queueHandler-svc
     spec:
+      initContainers:
+        - name: wait-for-api
+          image: busybox:1.28
+          command:
+            [
+              "sh",
+              "-c",
+              "until nslookup api-svc.ors.svc.cluster.local; do echo waiting for api; sleep 2; done;",
+            ]
+        - name: wait-for-rabbitmq
+          image: busybox:1.28
+          command:
+            [
+              "sh",
+              "-c",
+              "until nslookup rabbitmq-svc.ors.svc.cluster.local; do echo waiting for rabbitmq; sleep 2; done;",
+            ]
       containers:
-        - env:
-          - name: POSTGRES_DB
-            valueFrom:
-              secretKeyRef:
+        - name: queueHandler-svc
+          envFrom:
+            - secretRef:
                 name: app-env-secret
-                key: POSTGRES_DB
-          - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_HOST
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_PASSWORD
-          - name: POSTGRES_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_PORT
-          - name: POSTGRES_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: POSTGRES_USERNAME
-          - name: RABBITMQ_HOST
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_HOST
-          - name: RABBITMQ_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_PASSWORD
-          - name: RABBITMQ_PORT
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_PORT
-          - name: RABBITMQ_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: app-env-secret
-                key: RABBITMQ_USERNAME
           image: my-queuehandler
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:3003/health
-            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 10
             periodSeconds: 10
-            timeoutSeconds: 5
-          name: queueHandler-svc
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            failureThreshold: 5
           volumeMounts:
             - mountPath: /data
               name: queueHandler-pvc
