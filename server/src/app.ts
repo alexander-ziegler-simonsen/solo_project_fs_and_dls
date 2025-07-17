@@ -17,7 +17,9 @@ import { MongodbDataSource, PostgresDataSource } from "./DataSources";
 const app = express();
 const PORT = Number(process.env.API_PORT) || 3003;
 
-const CLIENT_HOST = process.env.CLIENT_HOST || "http://localhost:8083";
+const CLIENT_HOST = process.env.CLIENT_HOST || "http://localhost";
+const CLIENT_PORT = process.env.CLIENT_PORT || 8083;
+
 
 async function main() {
     // connect to mongodb
@@ -31,7 +33,7 @@ async function main() {
     app.use(bodyParser.json());
 
     app.use(cors({
-        origin: CLIENT_HOST,
+        origin: `${CLIENT_HOST}:${CLIENT_PORT}`,
         credentials: true
     }));
 
