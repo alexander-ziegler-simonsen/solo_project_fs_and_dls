@@ -1,9 +1,7 @@
 name: online-rizz-shop
 services:
   service-mongo:
-    build: 
-      context: ./docker/mongodb
-    image: ghcr.io/alexander-ziegler-simonsen/my-mongo:latest
+    image: mongo:8.0.12-rc0-noble
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 5s
@@ -24,9 +22,7 @@ services:
       - mongodata:/data/db
   
   service-postgres:
-    build: 
-      context: ./docker/postgres
-    image: ghcr.io/alexander-ziegler-simonsen/my-postgres:latest
+    image: postgres:14.18-bookworm
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME}"]
       interval: 10s
@@ -48,7 +44,7 @@ services:
   service-seeder:
     build:
       context: ./seeder/
-    image: ghcr.io/alexander-ziegler-simonsen/my-seeder:latest
+    image: my-seeder
     depends_on:
       service-mongo:
         condition: service_healthy
@@ -72,9 +68,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
 
   service-rabbitmq:
-    build: 
-      context: ./docker/rabbitmq
-    image: ghcr.io/alexander-ziegler-simonsen/my-rabbitmq:latest
+    image: rabbitmq:4.1.2-management
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "check_running"]
       interval: 10s
@@ -97,7 +91,7 @@ services:
   service-client:
     build: 
       context: ./client/
-    image: ghcr.io/alexander-ziegler-simonsen/my-client:latest
+    image: my-client
     depends_on:
       service-ms-queuehandler:
         condition: service_started
@@ -109,13 +103,14 @@ services:
     environment:
       VITE_API_HOST: ${VITE_API_HOST}
       VITE_API_PORT: ${VITE_API_PORT}
+      VITE_CLIENT_PORT: ${VITE_CLIENT_PORT}
     volumes:
       - client-data:/data/
   
   service-api:
     build: 
       context: ./server/
-    image: ghcr.io/alexander-ziegler-simonsen/my-api:latest
+    image: my-api
     depends_on:
       service-mongo:
         condition: service_started
@@ -154,13 +149,14 @@ services:
         RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
         RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
         CLIENT_HOST: ${CLIENT_HOST}
+        CLIENT_PORT: ${VITE_CLIENT_PORT}
     volumes:
       - client-api:/data/
   
   service-ms-queuehandler:
     build: 
       context: ./MicroServices/QueueHandler/
-    image: ghcr.io/alexander-ziegler-simonsen/my-queuehandler:latest
+    image: my-queuehandler
     depends_on:
       service-rabbitmq:
         condition: service_healthy
