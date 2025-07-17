@@ -18,18 +18,21 @@ const client = new Client({ connectionString: URL });
 //     process.exit(-1);
 // })
 
+//posgres
+
 export async function setPostgresDb() {
     const firstClient = new Client({ connectionString: FIRST_URL });
 
     try {
+        console.log("posgres-setPostgresDb was called");
         // TODO - check if this is the first time this code is running, if no, then don't run it
         await firstClient.connect();
         const res1 = await firstClient.query(`CREATE DATABASE ${postgres_db};`);
-        //console.log(res1.rows[0].message);
+        console.log(`CREATE DATABASE ${postgres_db};`, res1.rows[0].message);
 
         // give the 'user privilege to this new db
         const res2 = await firstClient.query(`GRANT ALL PRIVILEGES ON DATABASE ${postgres_db} TO ${postgres_user};`);
-        //console.log(res2.rows[0].message);
+        console.log(`GRANT ALL PRIVILEGES ON DATABASE ${postgres_db} TO ${postgres_user};`, res2.rows[0].message);
     } catch (err) {
         console.error("Error creating db:", err);
     } finally {
@@ -38,7 +41,7 @@ export async function setPostgresDb() {
 }
 
 export async function setAllTables() {
-
+    console.log("posgres-setAllTables was called");
     const pool = new Pool({
         user: postgres_user,
         host: postgres_host,
@@ -100,7 +103,7 @@ export async function setAllTables() {
         await poolClient.query("COMMIT");
 
     } catch (err) {
-        console.error("Error creating db:", err);
+        console.error("posgres-Error creating db:", err);
     } finally {
         await poolClient.release();
         await poolClient.end();
@@ -108,6 +111,7 @@ export async function setAllTables() {
 }
 
 export async function DropTable(tableToDrop) {
+    console.log("posgres-DropTable was called");
     const pool = new Pool({
         user: postgres_user,
         host: postgres_host,
@@ -126,7 +130,7 @@ export async function DropTable(tableToDrop) {
 
         // await poolClient.query("COMMIT");
     } catch (err) {
-        console.error("Error adding Items:", err);
+        console.error("posgres-Error adding Items:", err);
     } finally {
         await poolClient.release();
         await poolClient.end();
@@ -134,6 +138,7 @@ export async function DropTable(tableToDrop) {
 }
 
 export async function AddPostgresData<T>(tableName: string, keys: string[], insertData: T[]) {
+    console.log("posgres-AddPostgresData was called");
     //await client.connect();
     const pool = new Pool({
         user: postgres_user,
@@ -174,7 +179,7 @@ export async function AddPostgresData<T>(tableName: string, keys: string[], inse
 
         // await poolClient.query("COMMIT");
     } catch (err) {
-        console.error("Error adding Items:", err);
+        console.error("posgres-Error adding Items:", err);
     } finally {
         await poolClient.release();
         await poolClient.end();
