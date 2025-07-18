@@ -32,6 +32,10 @@ function CategoryPage() {
         const catData: Category[] = await getData<Category>("item_group");
         setItems(products);
 
+        console.log("dev - all the cats ", catData);
+        console.log("dev - all the products ", products);
+
+
         const mappedOptions = catData.map((cat) => ({
           value: String(cat._id),
           label: cat.name,
