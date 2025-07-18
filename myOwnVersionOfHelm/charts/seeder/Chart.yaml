@@ -1,0 +1,4 @@
+apiVersion: v2
+name: seeder
+version: 0.1.0
+description: Job that seeds MongoDB and PostgreSQL with initial data
