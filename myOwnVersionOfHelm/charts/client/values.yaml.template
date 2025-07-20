@@ -1,0 +1,9 @@
+client:
+  image: 
+  apiHost: 
+  apiPort: 
+  clientPort: 
+  buildArgs:
+    VITE_API_HOST: 
+    VITE_API_PORT: 
+    VITE_CLIENT_PORT: 

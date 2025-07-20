@@ -1,0 +1,54 @@
+seeder:
+  image: 
+  mongoNewUser: 
+  mongoNewPassword: 
+
+rabbitmq:
+  amqpPort: 
+  uiPort: 
+  nodePortAMQP: 
+  nodePortUI: 
+  image: 
+  start_username: 
+  start_password: 
+  host: 
+  port: 
+
+mongo:
+  db: 
+  host: 
+  port: 
+  start_username: 
+  start_password: 
+  username: 
+  password: 
+  nodePort: 
+  image: 
+
+postgres:
+  host: 
+  port: 
+  start_username: 
+  start_password: 
+  db: 
+  nodePort: 
+  image: 
+
+api:
+  image: 
+  port: 
+
+client:
+  host: 
+  apiHost: 
+  apiPort: 
+  image: 
+  clientPort: 
+  buildArgs:
+    VITE_API_HOST: 
+    VITE_API_PORT: 
+    VITE_CLIENT_PORT: 
+
+queuehandler:
+  image: 
+

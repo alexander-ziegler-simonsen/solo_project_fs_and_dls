@@ -1,0 +1,7 @@
+mongo:
+  port: 
+  nodePort: 
+  db: 
+  image: 
+  start_username: 
+  start_password: 

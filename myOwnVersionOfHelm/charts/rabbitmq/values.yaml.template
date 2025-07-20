@@ -1,0 +1,8 @@
+rabbitmq:
+  amqpPort: 
+  uiPort: 
+  nodePortAMQP: 
+  nodePortUI: 
+  image: 
+  start_username: 
+  start_password: 
