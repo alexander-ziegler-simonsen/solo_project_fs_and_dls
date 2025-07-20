@@ -10,6 +10,7 @@ import UserRouter from "./Routes/UserRouter";
 import StorageRouter from "./Routes/StorageRouter";
 import OrderItemRouter from "./Routes/OrderItemRouter";
 import OrderRouter from "./Routes/OrderRouter";
+import LoginRouter from "./Routes/LoginRouter";
 
 // dataSources
 import { MongodbDataSource, PostgresDataSource } from "./DataSources";
@@ -22,6 +23,11 @@ const CLIENT_PORT = process.env.CLIENT_PORT || 8083;
 
 
 async function main() {
+    console.log("start of main");
+    console.log("env - api port:", PORT);
+    console.log("env - CLIENT_HOST:", CLIENT_HOST);
+    console.log("env - CLIENT_PORT:", CLIENT_PORT);
+
     // connect to mongodb
     await MongodbDataSource.initialize();
     console.log("mongodb DataSource has been initialized!");
@@ -53,11 +59,7 @@ async function main() {
     app.use(OrderRouter);
     app.use(ItemGroupRouter);
 
-    // login  -----------------------------------
-
-    app.post("/login", (req, res) => {
-        res.send({ data: "this is data" })
-    })
+    app.use('/login', LoginRouter);
 
     // for "health" check in my docker compose file
     app.get('/health', (req, res) => {res.sendStatus(200)});
