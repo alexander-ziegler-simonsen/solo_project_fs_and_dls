@@ -4,6 +4,7 @@ import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 import { Item, Item_post } from "../entities/Item";
 
 import RabbitMQHelper from "../Helpers/RabbitMqHelper";
+import { searchHandler } from "../services/Item.service";
 
 const ItemRouter = Router();
 const itemRespository = MongodbDataSource.getMongoRepository(Item);
@@ -19,7 +20,7 @@ ItemRouter.get("/item", async (req, res) => {
 ItemRouter.get("/item/:id", async (req, res) => {
 
     let itemId = req.params.id;
-    let output = await itemRespository.findOneBy({id: itemId});
+    let output = await itemRespository.findOneBy({ id: itemId });
 
     res.send({ data: output });
 })
@@ -28,22 +29,23 @@ ItemRouter.get("/item/:id", async (req, res) => {
 ItemRouter.post("/item", async (req, res) => {
 
     const rabbitHelper = new RabbitMQHelper();
-    let response = await rabbitHelper.handlePostToChannel("posts", "post", "item", req.body );
+    let response = await rabbitHelper.handlePostToChannel("posts", "post", "item", req.body);
     response ? res.status(200).send("data queued for creation") : res.status(500).send("something went wrong");
 })
 
 ItemRouter.put("/item", async (req, res) => {
 
     const rabbitHelper = new RabbitMQHelper();
-    let response = await rabbitHelper.handlePostToChannel("updates", "put", "item", req.body );
+    let response = await rabbitHelper.handlePostToChannel("updates", "put", "item", req.body);
     response ? res.status(200).send("data queued for update") : res.status(500).send("something went wrong");
 })
 
 ItemRouter.delete("/item", async (req, res) => {
 
     const rabbitHelper = new RabbitMQHelper();
-    let response = await rabbitHelper.handlePostToChannel("deletes", "delete", "item", req.body );
+    let response = await rabbitHelper.handlePostToChannel("deletes", "delete", "item", req.body);
     response ? res.status(200).send("data queued for deletion") : res.status(500).send("something went wrong");
 })
 
+ItemRouter.post("/item_search/", searchHandler);
 export default ItemRouter;
