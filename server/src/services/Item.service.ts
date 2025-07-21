@@ -3,7 +3,7 @@ import { Item } from '../entities/Item';
 import { MongodbDataSource } from '../DataSources';
 import { RequestHandler } from 'express';
 
-interface Body {
+interface SearchQuery {
     name?: string;
     minPrice: string;
     maxPrice: string;
@@ -16,7 +16,7 @@ export const searchHandler: RequestHandler<
     {},                 // no URL params
     searchResponse,    // response body
     {},                // no req.body
-    Body               // req.query
+    SearchQuery        // req.query
 > = async (req, res, next) => {
     try {
         const { name, minPrice, maxPrice } = req.query;
@@ -52,10 +52,12 @@ export async function searchItemsByNameAndPrice(
     minPrice: number,
     maxPrice: number
 ): Promise<Item[]> {
+    // a case‑insensitive regex that matches your substring
+    const nameRegex = new RegExp(name, 'i');
     const repo = MongodbDataSource.getMongoRepository(Item);
     return repo.find({
         where: {
-            name,
+            name: { $regex: nameRegex },
             price: { $gte: minPrice, $lte: maxPrice },
         },
     });
