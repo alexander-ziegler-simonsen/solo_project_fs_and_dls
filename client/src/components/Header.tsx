@@ -1,5 +1,5 @@
 import orsLogo from '../assets/ors-192.png'
-import { Container, Flex, Text } from '@chakra-ui/react'
+import { Container, Flex } from '@chakra-ui/react'
 import Navbar from './Navbar'
 
 function Header() {
