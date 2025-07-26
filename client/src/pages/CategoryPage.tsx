@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react"
 import { getData } from "../helpers/HandleApiCalls";
 import ProductElement from "../components/ProductElement";
-import { Container, Grid, GridItem, HStack, Spacer, Stack, Text } from "@chakra-ui/react";
+import { Container, Spacer, Spinner, Stack, VStack, Text} from "@chakra-ui/react";
 import Select from "react-select";
 import { SingleValue } from "react-select";
 import { Item } from "../domain/Item";
 import { Category } from "../domain/Category";
-import { wrap } from "module";
 
 // TODO - check if our page being async, gives problem in the rest of the app
 function CategoryPage() {
@@ -62,7 +61,12 @@ function CategoryPage() {
 
       <Spacer h={2} />
 
-      {loading && <p>Loading...</p>}
+      {loading && 
+      <VStack>
+        <Spinner m={"2rem"} p={"2rem"} size={"xl"}  color="red.500"  borderWidth="6px" css={{ "--spinner-track-color": "colors.gray.200" }} />
+        <Text fontWeight={"bold"} textStyle={"xl"} color={"#8c278b"}>Loading...</Text>
+      </VStack>
+      }
 
       <Stack direction={ { base: "column", sm: "row" } } wrap={"wrap"} gap={3}>
         {
