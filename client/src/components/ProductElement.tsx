@@ -13,10 +13,10 @@ function ProductElement({ ItemValue }: ProductElementProps) {
   const addToCart = useCartStore((state) => state.addToCart);
 
   return (
-    <Card.Root padding={1} maxW="sm" overflow="hidden" float={"left"}>
+    <Card.Root padding={1} maxWidth={250}>
       <Center>
         {/* <Image rounded="lg" border="2px solid grey" maxWidth={200} maxH={150} margin={2} src={ItemValue.image}/> */}
-        <Image rounded="lg" maxWidth={200} maxH={150} margin={2} src={ItemValue.image}/>
+        <Image rounded="lg" maxWidth={150} maxH={75} margin={2} src={ItemValue.image}/>
       </Center>
       <Card.Body gap="2">
         <Card.Title>{ItemValue.name}</Card.Title>
@@ -29,7 +29,7 @@ function ProductElement({ ItemValue }: ProductElementProps) {
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">{ItemValue.price} kr</Text>
       </Card.Body>
       <Card.Footer gap="2">
-        <Button variant="solid">Buy now</Button>
+        <Button variant="solid" onClick={() => {console.log("read more was clicked, item name: ", ItemValue.name )}}>read more</Button>
         <Button variant="ghost" onClick={() => { addToCart(ItemValue, 1); } }>Add to cart</Button>
       </Card.Footer>
     </Card.Root>

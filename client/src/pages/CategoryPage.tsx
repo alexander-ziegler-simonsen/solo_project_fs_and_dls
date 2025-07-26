@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react"
 import { getData } from "../helpers/HandleApiCalls";
 import ProductElement from "../components/ProductElement";
-import { Container, Grid, GridItem, Spacer, Text } from "@chakra-ui/react";
+import { Container, Grid, GridItem, HStack, Spacer, Stack, Text } from "@chakra-ui/react";
 import Select from "react-select";
 import { SingleValue } from "react-select";
 import { Item } from "../domain/Item";
 import { Category } from "../domain/Category";
+import { wrap } from "module";
 
 // TODO - check if our page being async, gives problem in the rest of the app
 function CategoryPage() {
@@ -54,8 +55,8 @@ function CategoryPage() {
 
   return (
     <Container>
-      <Text>CategoryPage</Text>
-      <Text>Here you will be able to see all the products, sorted or filtered by category.</Text>
+      {/* <Text>CategoryPage</Text> */}
+      {/* <Text>Here you will be able to see all the products, sorted or filtered by category.</Text> */}
 
       <Select value={selectedOption} onChange={setSelectedOption} options={selectOptions} />
 
@@ -63,14 +64,13 @@ function CategoryPage() {
 
       {loading && <p>Loading...</p>}
 
-      <Grid templateColumns={"repeat(4, 1fr)"} gap={3}>
+      <Stack direction={ { base: "column", sm: "row" } } wrap={"wrap"} gap={3}>
         {
           items.map((item) => (
-            <GridItem colSpan={1}><ProductElement key={item._id} ItemValue={item} /></GridItem>
+              <ProductElement key={item._id} ItemValue={item} />
           ))
         }
-      </Grid>
-
+      </Stack>
     </Container>
   )
 }
