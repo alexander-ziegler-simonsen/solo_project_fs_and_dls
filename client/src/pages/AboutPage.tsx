@@ -1,7 +1,5 @@
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 // import React from 'react'
-//import { useAppDispatch, useAppSelector } from "../hooks/ReduxHook"
-import { increment, decrement } from '../redux/counter/counterSlice'
 function AboutPage() {
   // const count = useAppSelector((state) => state.counter.value)
   // const dispatch = useAppDispatch()
