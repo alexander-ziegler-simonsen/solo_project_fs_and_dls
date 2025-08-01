@@ -1,4 +1,4 @@
-import { Button, Container, Image, Table } from "@chakra-ui/react"
+import { Box, Button, Container, Flex, HStack, Image, Separator, Table, Tooltip, VStack } from "@chakra-ui/react"
 import { useCartStore } from "../useCartStore";
 
 function Cart() {
@@ -7,10 +7,59 @@ function Cart() {
 
     return (
         <Container>
+
+
+
+
             <div className="cart">
                 <h2>Cart</h2>
 
-                <Table.Root>
+                <HStack>
+                    <Flex direction={{ sm: "column", md: "row" }} gap={4}> 
+                        <Box flex={{base: "full", md: "10vw"}} bg={"purple.100"} p={4}>
+                            {cartItems.map(({ product, amount }) => (
+
+                                <HStack backgroundColor={"blue.200"} gap={"5rem"} border={"solid 1px black"} p={"5px"} m={"2px"}>
+                                    {/* button */}
+                                    <Button onClick={() => removeFromCart(product._id)}>X</Button>
+
+                                    {/* image */}
+                                    <Image maxH={100} maxW={100} src={product.image} />
+
+                                    {/* info */}
+                                    <VStack>
+                                        <div>{product.name}</div>
+                                        <div>id: {product._id}</div>
+                                    </VStack>
+
+                                    {/* options */}
+                                    <HStack>
+                                        <Button>-</Button>
+                                        <Box>{amount}x</Box>
+                                        <Button>+</Button>
+                                    </HStack>
+
+                                    {/* price */}
+                                    <VStack>
+                                        <div>price pr unit: {product.price}</div>
+                                        <div>full price: {Math.round(product.price * amount)}</div>
+                                    </VStack>
+
+                                </HStack>
+
+                            ))}
+                        </Box>
+                        <Box flex={{ base: "1 0 100%" , md: "30vw"}} bg={"orange.100"} p={4} marginEnd={"auto"}>
+                            <VStack backgroundColor={"blue.200"} border={"solid 1px black"} p={"5px"} m={"2px"}>
+                                <div>amount of items: x</div>
+
+                                <div>price in total: x</div>
+                            </VStack>
+                        </Box>
+                    </Flex>
+                </HStack>
+
+                {/* <Table.Root>
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeader>name</Table.ColumnHeader>
@@ -43,7 +92,7 @@ function Cart() {
                             <Table.Cell></Table.Cell>
                         </Table.Row>
                     </Table.Footer>
-                </Table.Root>
+                </Table.Root> */}
 
 
             </div>
