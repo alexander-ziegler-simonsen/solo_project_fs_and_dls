@@ -1,36 +1,59 @@
-import { Box, Flex, HStack, Link } from "@chakra-ui/react";
+import { Box, Button, HStack, Link, Menu, Portal } from "@chakra-ui/react";
 import { NavLink } from "react-router";
 
 const links = [
-  { name: "Home", to: "/" },
-  { name: "About", to: "/about" },
-  { name: "Category", to: "/category" },
-  { name: "Product", to: "/product" },
-  { name: "Login", to: "/login" },
-  { name: "Cart", to: "/cart" }
+    { name: "Home", to: "/" },
+    { name: "About", to: "/about" },
+    { name: "Category", to: "/category" },
+    { name: "Product", to: "/product" },
+    { name: "Login", to: "/login" },
+    { name: "Cart", to: "/cart" }
 ];
 
 function Navbar() {
     return (
-        <Box px={4}>
-            <Flex h={16} alignItems="center" justifyContent="space-between">
-                <HStack spaceX={6} spaceY={6} alignItems="center">
-                    {links.map((link) => (
+        <>
 
-                        <Link bg={"gray.400"}
-                            as={NavLink} 
-                            key={link.to} 
-                            to={link.to} 
-                            px={2} 
-                            py={1} rounded="md"
-                            _hover={{ textDecoration: "none", bg: "gray.200" }} 
-                            _activeLink={{ color: "gray.300", fontWeight: "bold" }} >
-                            {link.name}
-                        </Link>
-                    ))}
-                </HStack>
-            </Flex>
-        </Box>
+            <Box display={{ base: 'flex', md: 'none' }}>
+                <Menu.Root>
+                <Menu.Trigger asChild>
+                    <Button variant="outline" size="sm">
+                        Menu
+                    </Button>
+                </Menu.Trigger>
+                <Portal>
+                    <Menu.Positioner>
+                        <Menu.Content>
+                            {links.map((link) => (
+                                <Menu.Item value={link.to} as={NavLink} key={link.to} to={link.to}>
+
+                                    {link.name}
+                                </Menu.Item>
+                            ))}
+                        </Menu.Content>
+                    </Menu.Positioner>
+                </Portal>
+            </Menu.Root>
+            </Box>
+
+            <HStack spaceY={4} spaceX={4} display={{ base: 'none', md: 'flex' }}>
+                {links.map((link) => (
+
+                    <Link bg={"gray.400"}
+                        as={NavLink}
+                        key={link.to}
+                        to={link.to}
+                        px={2}
+                        py={1} rounded="md"
+                        _hover={{ textDecoration: "none", bg: "gray.200" }}
+                        _activeLink={{ color: "gray.300", fontWeight: "bold" }} >
+                        {link.name}
+                    </Link>
+                ))}
+            </HStack>
+        </>
+
+
     )
 }
 
