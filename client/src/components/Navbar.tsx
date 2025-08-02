@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Link, Menu, Portal } from "@chakra-ui/react";
+import { Box, Button, Center, HStack, Link, Menu, Portal } from "@chakra-ui/react";
 import { NavLink } from "react-router";
 
 const links = [
@@ -12,7 +12,7 @@ const links = [
 
 function Navbar() {
     return (
-        <>
+        <Center>
 
             <Box display={{ base: 'flex', md: 'none' }}>
                 <Menu.Root>
@@ -26,7 +26,6 @@ function Navbar() {
                         <Menu.Content>
                             {links.map((link) => (
                                 <Menu.Item value={link.to} as={NavLink} key={link.to} to={link.to}>
-
                                     {link.name}
                                 </Menu.Item>
                             ))}
@@ -36,22 +35,18 @@ function Navbar() {
             </Menu.Root>
             </Box>
 
-            <HStack spaceY={4} spaceX={4} display={{ base: 'none', md: 'flex' }}>
+            <HStack gap={3} display={{ base: 'none', md: 'flex' }}>
                 {links.map((link) => (
 
                     <Link bg={"gray.400"}
-                        as={NavLink}
-                        key={link.to}
-                        to={link.to}
-                        px={2}
-                        py={1} rounded="md"
-                        _hover={{ textDecoration: "none", bg: "gray.200" }}
-                        _activeLink={{ color: "gray.300", fontWeight: "bold" }} >
+                        as={NavLink} key={link.to} to={link.to} px={2} py={1} rounded="md" 
+                        _hover={{ textDecoration: "none", bg: "gray.200" }} 
+                        _activeLink={{ color: "gray.300", fontWeight: "bold" }}>
                         {link.name}
                     </Link>
                 ))}
             </HStack>
-        </>
+        </Center>
 
 
     )
