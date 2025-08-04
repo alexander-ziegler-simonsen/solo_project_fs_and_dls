@@ -17,9 +17,9 @@ function ProductElement({ ItemValue }: ProductElementProps) {
       base: "full",
       sm: "full",
       md: "49%",
-      lg: "32.2%",
-      xl: "19.2%",
-      "2xl": "19.2%",
+      lg: "32.1%",
+      xl: "18.9%",
+      "2xl": "18.9%",
     }}>
       <Center>
         {/* <Image rounded="lg" border="2px solid grey" maxWidth={200} maxH={150} margin={2} src={ItemValue.image}/> */}
@@ -27,12 +27,7 @@ function ProductElement({ ItemValue }: ProductElementProps) {
       </Center>
       <Card.Body gap="2">
         <Card.Title>{ItemValue.name}</Card.Title>
-        <Card.Description>
-          {ItemValue.description}
-          <br />
-          .....
-          <br />
-          {ItemValue.info}</Card.Description>
+        <Card.Description>{ItemValue.info}</Card.Description>
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">{ItemValue.price} kr</Text>
       </Card.Body>
       <Card.Footer gap="2">
