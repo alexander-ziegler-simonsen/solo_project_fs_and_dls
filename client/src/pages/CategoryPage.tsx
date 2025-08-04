@@ -29,7 +29,7 @@ function CategoryPage() {
   const [maxPriceInput, setMaxinPriceInput] = useState("");
 
   const [searchInput, setSearchInput] = useState("");
-  const [sortOrder, setSortOrder] = useState();
+  const [sortOrder, setSortOrder] = useState<SingleValue<OptionType>>(null);
   const [sortOrderOptions, setSortOrderOptions] = useState<OptionType[]>([]);
 
   const [page, setPage] = useState(1);
@@ -126,6 +126,54 @@ function CategoryPage() {
     console.log("max test:", e.target.value);
   };
 
+  const onOrderChange = (opt: SingleValue<OptionType>) => {
+    setSortOrder(opt);
+    console.log("order test:", opt);
+  };
+
+  const startSearch = () => {
+    const fetchItems = async () => {
+      setLoading(true)
+      try {
+        const params = new URLSearchParams()
+        params.append('page', String(page))
+        params.append('limit', String(PAGE_SIZE))
+        if (selectedOption) {
+          params.append('fk_group_id', selectedOption.value)
+        }
+
+        if(searchInput != "") {
+          params.append('search', searchInput);
+        }
+
+        if(sortOrder) {
+          params.append("order", sortOrder.value);
+        }
+
+        if(minPriceInput != "" && minPriceInput != null) {
+          params.append("minPrice", minPriceInput);
+        }
+
+        if(maxPriceInput != "" && maxPriceInput != null) {
+          params.append("maxPrice", maxPriceInput);
+        }
+
+        const resp = await newGetData<PaginatedResponse<Item>>(
+          `item?${params.toString()}`
+        )
+        setItems(resp.data)
+        setTotalPages(resp.pages)
+      } catch (err) {
+        console.error("Error fetching items:", err)
+        setItems([])
+        setTotalPages(1)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchItems()
+  }
+
   return (
     <Container maxW="container.lg" py={4}>
 
@@ -135,10 +183,12 @@ function CategoryPage() {
         <Input id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
         {/* <Spacer w={{base: "100%", md: "30vw"}} /> */}
         <Box flex={{ base: "100%", md: "10vw" }}>
-          <Select value={sortOrder} options={sortOrderOptions} placeholder="set sort order..." />
+          <Select value={sortOrder} options={sortOrderOptions} onChange={onOrderChange} placeholder="set sort order..." />
         </Box>
-      </Stack>
 
+      </Stack>
+      <Spacer p={1} />
+      <Button w={{ base: "100%" }} onClick={startSearch}>start search</Button>
       <Spacer p={1} />
       <Select
         value={selectedOption}
