@@ -4,18 +4,26 @@ import { PostgresDataSource, MongodbDataSource } from "../DataSources";
 import { Item, Item_post } from "../entities/Item";
 
 import RabbitMQHelper from "../Helpers/RabbitMqHelper";
-import { searchHandler } from "../services/Item.service";
+import { getResultsHandler, searchHandler } from "../services/Item.service";
 
 const ItemRouter = Router();
 const itemRespository = MongodbDataSource.getMongoRepository(Item);
 
 // mongo
 // TODO - change this to use search parms (get all item is insane)
-ItemRouter.get("/item", async (req, res) => {
-    let output = await itemRespository.find();
+// ItemRouter.get("/item", async (req, res, next) => {
+//     try {
+//         let output = await itemRespository.find();
 
-    res.send({ data: output })
-})
+//         res.send({ data: output })
+//     }
+//     catch (err) {
+//         next(err);
+//     }
+// })
+
+
+ItemRouter.get("/item", getResultsHandler);
 
 ItemRouter.get("/item/:id", async (req, res) => {
 
