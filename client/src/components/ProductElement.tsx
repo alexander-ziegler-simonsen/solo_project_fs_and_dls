@@ -16,7 +16,7 @@ function ProductElement({ ItemValue }: ProductElementProps) {
     <Card.Root padding={1} w={{
       base: "full",
       sm: "full",
-      md: "49%",
+      md: "48.8%",
       lg: "32.1%",
       xl: "18.9%",
       "2xl": "18.9%",
