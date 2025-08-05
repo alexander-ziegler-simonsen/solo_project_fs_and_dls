@@ -9,6 +9,9 @@ import NewAccountPage from "./pages/NewAccountPage";
 import AccountOrdersPage from './pages/account/AccountOrdersPage';
 import AccountInfoPage from './pages/account/AccountInfoPage';
 import Cart from './pages/Cart';
+import AdminProductPage from './pages/admin/adminProductPage';
+import AdminCategoryPage from './pages/admin/AdminCategoryPage';
+import AdminOrderPage from './pages/admin/AdminOrderPage';
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,6 +24,9 @@ import Cart from './pages/Cart';
         <Route path='/new_account' element={<NewAccountPage />} />
         <Route path='/a_orders' element={<AccountOrdersPage />} />
         <Route path='/a_info' element={<AccountInfoPage />} />
+        <Route path="/admin_product" element={<AdminProductPage />} />
+        <Route path="/admin_category" element={<AdminCategoryPage />} />
+        <Route path="/admin_order" element={<AdminOrderPage />} />
         <Route path='*' element={<Error404Page />} />
 
       </Route>
