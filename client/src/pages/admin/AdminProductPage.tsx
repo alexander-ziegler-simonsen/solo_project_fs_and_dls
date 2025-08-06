@@ -6,6 +6,8 @@ import Select from "react-select";
 import { SingleValue } from "react-select";
 import { Item } from "../../domain/Item";
 import { Category } from "../../domain/Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
 type OptionType = { value: string; label: string; }
@@ -187,7 +189,9 @@ function AdminProductPage() {
 
       </Stack>
       <Spacer p={1} />
-      <Button w={{ base: "100%" }} onClick={startSearch}>start search</Button>
+      <Button w={{ base: "100%" }} onClick={startSearch}>
+      <FontAwesomeIcon icon={faSearch} size="xl" />
+      </Button>
       <Spacer p={1} />
       <Select
         value={selectedOption}
@@ -207,8 +211,8 @@ function AdminProductPage() {
       ) : (
         <>
 
-          <Stack direction={{ base: "column", md: "row" }} wrap="wrap" gap={4}>
-            <Table.Root gap="10">
+          
+            <Table.Root gap="10" size={{ base: "sm", md: "md", lg: "lg" }}>
               <Table.Header>
                 <Table.Row>
                   <Table.ColumnHeader>id</Table.ColumnHeader>
@@ -253,15 +257,15 @@ function AdminProductPage() {
                 )}
               </Table.Body>
             </Table.Root>
-          </Stack>
+          
 
           <Center mt={6}>
             <Button onClick={() => setPage(prev => Math.max(1, prev - 1))} disabled={page === 1} mr={4}>
-              Previous
+              <FontAwesomeIcon icon={faArrowLeft} size="xl" />
             </Button>
             <Text>Page {page} of {totalPages}</Text>
             <Button onClick={() => setPage(prev => Math.min(totalPages, prev + 1))} disabled={page === totalPages} ml={4}>
-              Next
+              <FontAwesomeIcon icon={faArrowRight} size="xl" />
             </Button>
           </Center>
         </>

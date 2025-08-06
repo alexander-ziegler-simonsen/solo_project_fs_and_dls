@@ -3,6 +3,8 @@
 import { Button, Image, Card, Center, Text } from "@chakra-ui/react";
 import { Item } from "../domain/Item";
 import { useCartStore } from "../useCartStore";
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ProductElementProps {
   ItemValue: Item;
@@ -31,8 +33,10 @@ function ProductElement({ ItemValue }: ProductElementProps) {
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">{ItemValue.price} kr</Text>
       </Card.Body>
       <Card.Footer gap="2">
-        <Button variant="solid" onClick={() => { console.log("read more was clicked, item name: ", ItemValue.name) }}>read more</Button>
-        <Button variant="ghost" onClick={() => { addToCart(ItemValue, 1); }}>Add to cart</Button>
+        <Button variant="solid" onClick={() => { console.log("read more was clicked, item name: ", ItemValue.name) }}>view</Button>
+        <Button variant="solid" backgroundColor={"green.600"} onClick={() => { addToCart(ItemValue, 1); }}>
+          <FontAwesomeIcon icon={faCartPlus} size="xl" />
+        </Button>
       </Card.Footer>
     </Card.Root>
   )

@@ -1,5 +1,7 @@
 import { Box, Button, Container, Flex, HStack, Image, Separator, Table, Tooltip, VStack } from "@chakra-ui/react"
 import { useCartStore } from "../useCartStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd, faRemove, faSubtract } from "@fortawesome/free-solid-svg-icons";
 
 function Cart() {
     const cartItems = useCartStore((state) => state.items);
@@ -7,9 +9,6 @@ function Cart() {
 
     return (
         <Container>
-
-
-
 
             <div className="cart">
                 <h2>Cart</h2>
@@ -21,7 +20,9 @@ function Cart() {
 
                                 <HStack backgroundColor={"blue.200"} gap={"5rem"} border={"solid 1px black"} p={"5px"} m={"2px"}>
                                     {/* button */}
-                                    <Button onClick={() => removeFromCart(product._id)}>X</Button>
+                                    <Button onClick={() => removeFromCart(product._id)}>
+                                        <FontAwesomeIcon icon={faRemove} size="xl" />
+                                    </Button>
 
                                     {/* image */}
                                     <Image maxH={100} maxW={100} src={product.image} />
@@ -34,9 +35,13 @@ function Cart() {
 
                                     {/* options */}
                                     <HStack>
-                                        <Button>-</Button>
+                                        <Button>
+                                            <FontAwesomeIcon icon={faSubtract} />
+                                        </Button>
                                         <Box>{amount}x</Box>
-                                        <Button>+</Button>
+                                        <Button>
+                                            <FontAwesomeIcon icon={faAdd} />
+                                        </Button>
                                     </HStack>
 
                                     {/* price */}

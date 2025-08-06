@@ -9,6 +9,8 @@ import Select from "react-select";
 import { SingleValue } from "react-select";
 import { Item } from "../domain/Item";
 import { Category } from "../domain/Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 type OptionType = { value: string; label: string; }
 
@@ -177,18 +179,23 @@ function CategoryPage() {
   return (
     <Container maxW="container.lg" py={4}>
 
-      <Stack direction={{ sm: "column", md: "row" }}>
-        <Input id="inputSearch" flex={{ base: "100%", md: "10vw" }} type="text" placeholder="search" value={searchInput} onChange={onSreachChange} />
-        <Input id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
-        <Input id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
+      <Stack direction={{ base: "column", sm: "column", md: "row" }}>
+        <Input id="inputSearch" flex={{ base: "100%", md: "10vw" }} 
+        type="text" placeholder="search" value={searchInput} onChange={onSreachChange} />
+        <Input id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} 
+        type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
+        <Input id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} 
+        type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
         {/* <Spacer w={{base: "100%", md: "30vw"}} /> */}
         <Box flex={{ base: "100%", md: "10vw" }}>
-          <Select value={sortOrder} options={sortOrderOptions} onChange={onOrderChange} placeholder="set sort order..." />
+          <Select value={sortOrder} options={sortOrderOptions} onChange={onOrderChange} placeholder="sort" />
         </Box>
 
       </Stack>
       <Spacer p={1} />
-      <Button w={{ base: "100%" }} onClick={startSearch}>start search</Button>
+      <Button w={{ base: "100%" }} onClick={startSearch}>
+        <FontAwesomeIcon icon={faSearch} size="xl" />
+      </Button>
       <Spacer p={1} />
       <Select
         value={selectedOption}
@@ -218,12 +225,16 @@ function CategoryPage() {
           </Stack>
 
           <Center mt={6}>
-            <Button onClick={() => setPage(prev => Math.max(1, prev - 1))} disabled={page === 1} mr={4}>
-              Previous
+            <Button 
+            onClick={() => setPage(prev => Math.max(1, prev - 1))} 
+            disabled={page === 1} mr={4}>
+              <FontAwesomeIcon icon={faArrowLeft} size="xl" />
             </Button>
             <Text>Page {page} of {totalPages}</Text>
-            <Button onClick={() => setPage(prev => Math.min(totalPages, prev + 1))} disabled={page === totalPages} ml={4}>
-              Next
+            <Button 
+            onClick={() => setPage(prev => Math.min(totalPages, prev + 1))} 
+            disabled={page === totalPages} ml={4}>
+              <FontAwesomeIcon icon={faArrowRight} size="xl" />
             </Button>
           </Center>
         </>
