@@ -9,7 +9,7 @@ import NewAccountPage from "./pages/NewAccountPage";
 import AccountOrdersPage from './pages/account/AccountOrdersPage';
 import AccountInfoPage from './pages/account/AccountInfoPage';
 import Cart from './pages/Cart';
-import AdminProductPage from './pages/admin/adminProductPage';
+import AdminProductPage from './pages/admin/AdminProductPage';
 import AdminCategoryPage from './pages/admin/AdminCategoryPage';
 import AdminOrderPage from './pages/admin/AdminOrderPage';
 
