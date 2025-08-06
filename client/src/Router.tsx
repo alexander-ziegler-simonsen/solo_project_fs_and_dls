@@ -17,7 +17,7 @@ import AdminOrderPage from './pages/admin/AdminOrderPage';
     createRoutesFromElements(
       <Route path='/' element={<Layout />}>
         <Route path='/about' element={<AboutPage />} />
-        <Route path='/product' element={<ProductPage />} />
+        <Route path='/product/:id' element={<ProductPage />} />
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/cart' element={<Cart />} />
