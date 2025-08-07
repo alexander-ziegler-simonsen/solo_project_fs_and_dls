@@ -8,8 +8,8 @@ import { Item } from "../../domain/Item";
 import { Category } from "../../domain/Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
-import useModal from "../../hooks/useModal";
 import DeleteDialog from "../../components/admin/DeleteDialog";
+import EditDialog from "../../components/admin/EditDialog";
 
 
 type OptionType = { value: string; label: string; }
@@ -45,7 +45,17 @@ function AdminProductPage() {
   // selectOptions: an array of selectable items
   const [selectOptions, setSelectOptions] = useState<OptionType[]>([]);
 
-  const { showModal } = useModal();
+
+  const [formState, setFormState] = useState<Item>(
+    {
+      _id: 0,
+      fk_group_id: 0,
+      description: "",
+      info: "",
+      name: "",
+      image: "",
+      price: 0,
+    });
 
   // Fetch categories once
   useEffect(() => {
@@ -113,45 +123,20 @@ function AdminProductPage() {
 
   const onSreachChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
-    console.log("test", e.target.value);
-
     // debounce
 
   };
 
   const onMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMinPriceInput(e.target.value);
-    console.log("min test:", e.target.value);
   };
 
   const onMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMaxinPriceInput(e.target.value);
-    console.log("max test:", e.target.value);
   };
 
   const onOrderChange = (opt: SingleValue<OptionType>) => {
     setSortOrder(opt);
-    console.log("order test:", opt);
-  };
-
-  const openFormEditModal = (currentItem: Item) => {
-    showModal({
-      type: 'form-input',
-      title: 'edit product',
-      fields: [
-        { name: 'Name', type: 'text', label: 'name', placeholder: 'name', initValue: currentItem.name },
-        { name: 'Price', type: 'number', label: 'price', placeholder: '123', initValue: currentItem.price.toString() },
-        { name: 'info', type: 'text', label: 'info', placeholder: 'short info about product', initValue: currentItem.info },
-        { name: 'Description', type: 'text', label: 'description', placeholder: 'description', initValue: currentItem.description },
-        { name: 'Image', type: 'text', label: 'image', placeholder: 'full link to image', initValue: currentItem.image },
-        { name: 'fk_group_id', type: 'number', label: 'fk_group_id', placeholder: '1', initValue: currentItem.fk_group_id.toString() }
-
-      ],
-      onConfirm: (data) => {
-        // the values given
-        console.log(`Modtog: ${JSON.stringify(data)}`);
-      },
-    });
   };
 
   const startSearch = () => {
@@ -265,21 +250,68 @@ function AdminProductPage() {
                     <Table.Cell><Center>{item.fk_group_id}</Center></Table.Cell>
                     <Table.Cell p={2}>
                       <Stack>
-                        <Button bg={"orange.400"} onClick={() => openFormEditModal(item)}
-                        >edit</Button>
+                        {/* <Button bg={"orange.400"} onClick={() => openFormEditModal(item)}
+                        >edit</Button> */}
+
+                        <EditDialog SetValuesFunc={() => setFormState(item)}
+                          titleValue="Edit this item"
+                          bodyData={
+                            <>
+                              Name
+                              <Input bg={"bg"}
+                                value={formState?.name}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, name: e.target.value } as Item))
+                                }}
+                                placeholder="name" type="text" /><br />
+                              Price
+                              <Input bg={"bg"}
+                                value={formState?.price}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, price: parseInt(e.target.value) } as Item))
+                                }}
+                                placeholder="price" type="number" /><br />
+                              info
+                              <Input bg={"bg"} value={formState?.info}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, info: e.target.value } as Item))
+                                }}
+                                placeholder="price" type="text" /><br />
+                              description
+                              <Input bg={"bg"} value={formState?.description}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, description: e.target.value } as Item))
+                                }}
+                                placeholder="description" type="text" /><br />
+                              image link
+                              <Input bg={"bg"} value={formState?.image}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, image: e.target.value } as Item))
+                                }}
+                                placeholder="image" type="text" /><br />
+                              fk_group_id
+                              <Input bg={"bg"} value={formState?.fk_group_id}
+                                onChange={(e) => {
+                                  setFormState((prev) => ({ ...prev, fk_group_id: parseInt(e.target.value) } as Item))
+                                }}
+                                placeholder="fk_group_id" type="number" /><br />
+                            </>
+                          }
+                          OnEditFunc={() => { console.log("onDeleteFunc item", item._id) }} />
+
                         {/* <Button bg={"danger"}>delete</Button> */}
 
                         <DeleteDialog titleValue="delete item" bodyData={
                           <Text>
-                            id: {item._id}<br/><br/>
-                            price: {item.price}<br/><br/>
-                            info: {item.info}<br/><br/>
-                            description: {item.description}<br/><br/>
-                            image: {item.image}<br/><br/>
-                            fk_group_id: {item.fk_group_id}<br/><br/>
+                            id: {item._id}<br /><br />
+                            price: {item.price}<br /><br />
+                            info: {item.info}<br /><br />
+                            description: {item.description}<br /><br />
+                            image: {item.image}<br /><br />
+                            fk_group_id: {item.fk_group_id}<br /><br />
                           </Text>
                         }
-                        OnDeleteFunc={() => {console.log("onDeleteFunc item", item._id)} } />
+                          OnDeleteFunc={() => { console.log("onDeleteFunc item", item._id) }} />
                       </Stack>
                     </Table.Cell>
                   </Table.Row>
