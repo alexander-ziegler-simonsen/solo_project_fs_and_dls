@@ -1,0 +1,145 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.modal-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.modal-body {
+  margin-bottom: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal-footer button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.modal-footer .btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.modal-footer .btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.modal-footer .btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.modal-loading {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.875rem;
+  color: #1f2937;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px); 
+  z-index: 10;
+}
+
+.modal-body form input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  background-color: white;
+}
+
+.modal-body form input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.modal-form-field select,
+.modal-form-field input[type="text"],
+.modal-form-field input[type="email"],
+.modal-form-field input[type="number"] {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  width: 100%;
+}
+
+.modal-closing {
+  animation: fadeOutDown 0.2s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}

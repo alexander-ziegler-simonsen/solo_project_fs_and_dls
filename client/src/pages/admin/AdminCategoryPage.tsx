@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { getDataList } from "../../helpers/HandleApiCalls";
-import { Button, CloseButton, Dialog, Input, Popover, Portal, Spacer, Table } from "@chakra-ui/react";
+import { Button, CloseButton, Dialog, Portal, Spacer, Table } from "@chakra-ui/react";
 import { Container, Spinner, Stack, VStack, Text } from "@chakra-ui/react";
 import { Category } from "../../domain/Category";
-
+import useModal from "../../hooks/useModal";
+import { faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AdminCategoryPage() {
 
@@ -12,6 +14,8 @@ function AdminCategoryPage() {
   const [loading, setLoading] = useState(false);
 
   const [inputName, setInputName] = useState("");
+
+  const { showModal } = useModal();
 
   // Fetch categories once
   useEffect(() => {
@@ -42,6 +46,20 @@ function AdminCategoryPage() {
     console.log("we are deleting this cat", catToBeDeleted);
   }
 
+    const openFormEditModal = (currentName: string) => {
+    showModal({
+      type: 'form-input',
+      title: 'edit category',
+      fields: [
+        { name: 'Name', type: 'text', label: 'name', placeholder: 'name', initValue: currentName }
+      ],
+      onConfirm: (data) => {
+        // the values given
+        console.log(`Modtog: ${JSON.stringify(data)}`);
+      },
+    });
+  };
+
   return (
     <Container maxW="container.lg" py={4}>
 
@@ -51,9 +69,9 @@ function AdminCategoryPage() {
           <Text fontWeight="bold">Loading…</Text>
         </VStack>
       ) : (
-        <>
-          <Stack direction={{ base: "column", md: "row" }} wrap="wrap" gap={4}>
-            <Table.Root>
+        
+          
+            <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
               <Table.Header>
                 <Table.Row>
                   <Table.ColumnHeader>group_id</Table.ColumnHeader>
@@ -68,48 +86,17 @@ function AdminCategoryPage() {
                       <Table.Cell p={2}>{cat._id}</Table.Cell>
                       <Table.Cell p={2}>{cat.name}</Table.Cell>
                       <Table.Cell p={2}>
+                        
+                        <Stack direction={{ sm: "column", md: "row" }}>
+                          <Button onClick={() => openFormEditModal(cat.name)} backgroundColor={"orange.300"}>
+                            <FontAwesomeIcon icon={faEdit} size="xl" />
+                          </Button>
 
                         <Dialog.Root motionPreset="slide-in-bottom">
                           <Dialog.Trigger asChild>
-                            <Button variant="outline" size="sm">Edit</Button>
-                          </Dialog.Trigger>
-                          <Portal>
-                            <Dialog.Backdrop />
-                            <Dialog.Positioner>
-                              <Dialog.Content>
-                                <Dialog.Header>
-                                  <Dialog.Title>Edit category</Dialog.Title>
-                                </Dialog.Header>
-                                <Dialog.Body>
-                                  <p>You can't change the id, also it is never showed to the user.</p>
-                                  <Spacer p={1} />
-                                  <p>id: {cat._id}</p>
-                                  <p>name: {cat.name}</p>
-                                  <Spacer p={2} />
-
-                                  <Input placeholder="new name" onChange={onInputNameChange} />
-                                </Dialog.Body>
-                                <Dialog.Footer>
-                                  <Dialog.ActionTrigger asChild>
-                                    <Button variant="outline">Cancel</Button>
-                                  </Dialog.ActionTrigger>
-                                  <Button onClick={() => deleteThisCategory({
-                                    _id: cat._id,
-                                    name: inputName,
-                                  } as Category)}
-                                  backgroundColor={"orange.600"}>Save</Button>
-                                </Dialog.Footer>
-                                <Dialog.CloseTrigger asChild>
-                                  <CloseButton size="sm" />
-                                </Dialog.CloseTrigger>
-                              </Dialog.Content>
-                            </Dialog.Positioner>
-                          </Portal>
-                        </Dialog.Root>
-
-                        <Dialog.Root motionPreset="slide-in-bottom">
-                          <Dialog.Trigger asChild>
-                            <Button>delete</Button>
+                            <Button backgroundColor={"red.500"}>
+                              <FontAwesomeIcon icon={faRemove} size="xl" />
+                            </Button>
                           </Dialog.Trigger>
                           <Portal>
                             <Dialog.Backdrop />
@@ -140,6 +127,7 @@ function AdminCategoryPage() {
                             </Dialog.Positioner>
                           </Portal>
                         </Dialog.Root>
+                        </Stack>
 
                         
                       </Table.Cell>
@@ -157,8 +145,7 @@ function AdminCategoryPage() {
                 )}
               </Table.Body>
             </Table.Root>
-          </Stack>
-        </>
+          
       )}
     </Container>
   )
