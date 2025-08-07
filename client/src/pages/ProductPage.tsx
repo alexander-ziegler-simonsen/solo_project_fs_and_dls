@@ -1,10 +1,11 @@
-import { Box, Button, Center, Container, Flex, Grid, GridItem, Image, Spacer, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Container, Image, Spacer, Stack, Text } from '@chakra-ui/react'
 // import React from 'react'
 import { Item } from '../domain/Item';
 import { newGetData } from '../helpers/HandleApiCalls';
 
 import { useParams } from "react-router";
 import { useEffect, useState } from 'react';
+import { useCartStore } from '../useCartStore';
 
 function ProductPage() {
 
@@ -12,7 +13,10 @@ function ProductPage() {
 
   const [itemData, setItemData] = useState<Item | null>(null);
   const [loading, setLoading] = useState(true);
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams<{ id: string }>();
+
+  // zustand hook
+  const addToCart = useCartStore((state) => state.addToCart);
 
   // get product info based on it's id.
   useEffect(() => {
@@ -53,22 +57,22 @@ function ProductPage() {
           <Container>
             <Stack direction={{ base: "column", sm: "column", md: "row" }}>
 
-              <Box w={{ base: "full", sm: "full", md: "48.8%", }} textAlign={'center'} bg={'white'}>
+              <Box p={3} w={{ base: "full", sm: "full", md: "48.8%", }} textAlign={'center'} bg={'white'}>
                 <Center>
-                  <Image src={itemData.image} backgroundColor="blue.100" />
+                  <Image maxH={"300px"} src={itemData.image} backgroundColor="blue.100" />
                 </Center>
               </Box>
 
 
               <Box p={4} w={{ base: "full", sm: "full", md: "48.8%", }} bg={"border"}>
-                <Text>name: {itemData.name}</Text>
-                <Text>price: {itemData.price} kr</Text>
-
+                <Text fontSize={"25px"} fontWeight={"700"} textStyle={"lg"}>{itemData.name}</Text>
+                
                 <Spacer p={2} />
-                <Text>Product description: <br/> {itemData.description}</Text>
-
+                <Text>{itemData.description}</Text>
                 <Spacer p={2} />
-                <Center><Button bg={"primary"}>add to cart</Button></Center>
+                <Text fontSize={"20px"} fontWeight={"700"}>{itemData.price} kr</Text>
+                <Spacer p={2} />
+                <Center><Button bg={"primary"} onClick={() => { addToCart(itemData, 1); }}>add to cart</Button></Center>
               </Box>
 
 
