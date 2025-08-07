@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Item } from '../domain/Item';
 
 const API_HOST = import.meta.env.VITE_API_HOST;
 const API_PORT = import.meta.env.VITE_API_PORT;
@@ -136,6 +135,36 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
   })
   .finally(function () {
 
+  });
+}
+
+export async function UpdateOneData<T>(gateway:string, insertData:T) {
+  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  console.log("dev - update - url to api", url);
+  console.log("dev - update - data ", insertData);
+
+
+  await axios({
+    method: 'update',
+    url: url,
+    withCredentials: true,
+    data: insertData,
+    headers: {
+    'Content-Type': 'application/json',
+  }
+  })
+  .then(function (response) {
+    // console.log("debug - PostOneData", response);
+    // console.log("debug - PostOneData", response.data);
+
+    return response.data;
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
   });
 }
 
