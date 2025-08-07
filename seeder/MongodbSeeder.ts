@@ -15,6 +15,9 @@ const client = new MongoClient(uri);
 
 export async function setDbAndFirstUser() {
     try {
+
+        console.log("mongo-the setDbAndFirstUser function was called");
+
         // TODO - check if this is the first time this code is running, if no, then don't run it
         await client.connect();
         const db = client.db(mon_new_db);
@@ -26,9 +29,9 @@ export async function setDbAndFirstUser() {
             roles: [{ role: "readWrite", db: mon_new_db }]
         });
 
-        console.log("User created:", commandResult);
+        console.log("mongo-User created:", commandResult);
     } catch (err) {
-        console.error("Error creating user:", err);
+        console.error("mongo-Error creating user:", err);
     } finally {
         await client.close();
     }
@@ -36,6 +39,12 @@ export async function setDbAndFirstUser() {
 
 export async function AddData<T>( insertData: OptionalUnlessRequiredId<T>[], tablename: string) {
     try {
+
+        console.log("mongo-the AddData<T> function was called");
+        console.log("mongo-table name", tablename);
+        console.log("mongo-data adding", JSON.stringify(insertData));
+
+
         await client.connect();
 
         // data
@@ -49,9 +58,9 @@ export async function AddData<T>( insertData: OptionalUnlessRequiredId<T>[], tab
 
         const result = await item.insertMany(insertData);
         
-        console.log(`${result.insertedCount} documents were inserted`);
+        console.log(`mongo-${result.insertedCount} documents were inserted`);
     } catch (err) {
-        console.error("Error adding Items:", err);
+        console.error("mongo-Error adding Items:", err);
     } finally {
         await client.close();
     }

@@ -1,50 +1,94 @@
-import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Container, Image, Spacer, Stack, Text } from '@chakra-ui/react'
 // import React from 'react'
-import orsLogo from '../assets/ors-192.png'
 import { Item } from '../domain/Item';
+import { newGetData } from '../helpers/HandleApiCalls';
+
+import { useParams } from "react-router";
+import { useEffect, useState } from 'react';
+import { useCartStore } from '../useCartStore';
 
 function ProductPage() {
 
-  // TODO - change layout based on pc or phone
-
-  // <Grid
-  //   templateAreas={{
-  //     base: "main",
-  //     lg: `"aside main"`,
-  //   }}
-  //   templateColumns={{ base: "1fr", lg: "200px 1fr" }}gap="6"></Grid>
-
   // TODO - remove this data, when we read all data from props 
 
-  const x : Item = {
-    _id: 1,
-    name: "banana",
-    price: 1234,
-    info: "we got info here",
-    "description": "we even got description here",
-    image: orsLogo,
-    fk_group_id: 1
-  }
+  const [itemData, setItemData] = useState<Item | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams<{ id: string }>();
 
-  //product = x;
+  // zustand hook
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  // get product info based on it's id.
+  useEffect(() => {
+    const readProduct = async () => {
+      console.log("readProduct was called");
+      try {
+        const response = await newGetData<Item>(`item/${id}`)
+        console.log('🔍 raw response:', response);
+        const actualItem = (response as any).data ?? response;
+
+        console.log("test z", actualItem);
+        setItemData(actualItem); // check shape here
+      } catch (err) {
+        console.error("Error fetching product", err);
+        setItemData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (id) {
+      readProduct();
+    } else {
+      console.warn('No `id` in URL!')
+      setLoading(false);
+      setItemData(null);
+    }
+  }, [id]);
 
   return (
-    <Grid templateColumns="repeat(4, 1fr)" gap="6">
-      
-      <GridItem colSpan={2} backgroundColor={"blue.100"}>
-        <Image src={x.image} backgroundColor={"blue.100"} />
-      </GridItem>
-      <GridItem colSpan={2} backgroundColor={"blue.100"}>
-        <Text>{x.name}</Text>
-        <Text>{x.price}</Text>
-        <Button>add to cart</Button> 
-        <Text>{x.info}</Text>
-      </GridItem>
-      <GridItem colSpan={4} backgroundColor={"blue.100"}> 
-        <Text>{x.description}</Text>
-      </GridItem>
-    </Grid>
-  )
+    <div>
+      {loading ? (
+        <p>loading...</p>
+      ) : itemData ? (
+
+        <>
+
+
+          <Container>
+            <Stack direction={{ base: "column", sm: "column", md: "row" }}>
+
+              <Box p={3} w={{ base: "full", sm: "full", md: "48.8%", }} textAlign={'center'} bg={'white'}>
+                <Center>
+                  <Image maxH={"300px"} src={itemData.image} backgroundColor="blue.100" />
+                </Center>
+              </Box>
+
+
+              <Box p={4} w={{ base: "full", sm: "full", md: "48.8%", }} bg={"border"}>
+                <Text fontSize={"25px"} fontWeight={"700"} textStyle={"lg"}>{itemData.name}</Text>
+                
+                <Spacer p={2} />
+                <Text>{itemData.description}</Text>
+                <Spacer p={2} />
+                <Text fontSize={"20px"} fontWeight={"700"}>{itemData.price} kr</Text>
+                <Spacer p={2} />
+                <Center><Button bg={"primary"} onClick={() => { addToCart(itemData, 1); }}>add to cart</Button></Center>
+              </Box>
+
+
+
+            </Stack>
+          </Container>
+
+
+        </>
+
+
+      ) : (
+        <p>product not found.</p>
+      )}
+    </div>
+  );
 }
 
 export default ProductPage

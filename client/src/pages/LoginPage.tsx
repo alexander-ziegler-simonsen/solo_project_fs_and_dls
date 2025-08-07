@@ -32,16 +32,16 @@ function LoginPage() {
       <Box w={500}>
         <Field.Root>
           <Field.Label>Username</Field.Label>
-          <Input id="input_username" bg="white" name="username" value={formData.username} onChange={handleChange}
+          <Input id="input_username" bg={"bg"} name="username" value={formData.username} onChange={handleChange}
           placeholder="username" variant="outline" />
           <Field.Label>password</Field.Label>
-          <Input id="input_password" bg="white" name="password" value={formData.password} onChange={handleChange}
+          <Input type="password" id="input_password" bg={"bg"} name="password" value={formData.password} onChange={handleChange}
            placeholder="password" variant="outline" />
         </Field.Root>
         <Center>
           <HStack margin={3}>
-            <Button onClick={() => { checkLogin(formData.username, formData.password); } }>Login</Button>
-            <Button onClick={() => { navigate("/new_account");} }>make new account</Button> 
+            <Button bg={"primary"} onClick={() => { checkLogin(formData.username, formData.password); } }>Login</Button>
+            <Button bg={"success"} onClick={() => { navigate("/new_account");} }>make new account</Button> 
           </HStack>
         </Center>
       </Box>

@@ -1,4 +1,4 @@
-import { Button, Container, Field, Input, Text } from "@chakra-ui/react"
+import { Button, Container, Field, Input, Spacer, Text } from "@chakra-ui/react"
 import { PasswordInput } from "../../components/ui/password-input"
 import { useState } from "react";
 
@@ -23,27 +23,28 @@ function AccountInfoPage() {
 
                 <Field.Root>
                     <Field.Label id="fname">firstname</Field.Label>
-                    <Input bg="white" id="in_fname" placeholder="firstname" variant="outline" value={formData.fname} />
+                    <Input bg={"bg"} id="in_fname" placeholder="firstname" variant="outline" value={formData.fname} />
 
                     <Field.Label id="lname">lastname</Field.Label>
-                    <Input bg="white" id="in_lname" placeholder="lastname" variant="outline" value={formData.lname} />
+                    <Input bg={"bg"} id="in_lname" placeholder="lastname" variant="outline" value={formData.lname} />
 
                     <Field.Label id="email">email</Field.Label>
-                    <Input bg="white" id="in_email" placeholder="email" variant="outline" value={formData.email} />
+                    <Input bg={"bg"} id="in_email" placeholder="email" variant="outline" value={formData.email} />
 
                     <Field.Label id="phone">phone number</Field.Label>
-                    <Input bg="white" id="in_phone" placeholder="phone number" variant="outline" value={formData.phone} />
+                    <Input bg={"bg"} id="in_phone" placeholder="phone number" variant="outline" value={formData.phone} />
 
                     <Field.Label id="address">address</Field.Label>
-                    <Input bg="white" id="in_address" placeholder="address" variant="outline" value={formData.address} />
+                    <Input bg={"bg"} id="in_address" placeholder="address" variant="outline" value={formData.address} />
 
                     <Field.Label id="username">Username</Field.Label>
-                    <Input bg="white" id="in_username" placeholder="username" variant="outline" value={formData.username} />
+                    <Input bg={"bg"} id="in_username" placeholder="username" variant="outline" value={formData.username} />
 
                     <Field.Label id="password">password</Field.Label>
-                    <PasswordInput bg="white" id="in_password" placeholder="password" variant="outline" value={formData.password} />
+                    <PasswordInput bg={"bg"} id="in_password" placeholder="password" variant="outline" value={formData.password} />
                 </Field.Root>
-                <Button onClick={() => {console.log("button clicked - account info")} }>save all changes</Button>
+                <Spacer p={2} />
+                <Button bg={"success"} onClick={() => {console.log("button clicked - account info")} }>save all changes</Button>
             </Container>
         </>
     )

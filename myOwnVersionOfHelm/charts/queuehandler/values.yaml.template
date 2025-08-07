@@ -1,0 +1,15 @@
+queuehandler:
+  image: 
+
+rabbitmq:
+  host: 
+  port: 
+  start_username: 
+  start_password: 
+
+postgres:
+  host: 
+  port: 
+  start_username: 
+  start_password: 
+  db: 

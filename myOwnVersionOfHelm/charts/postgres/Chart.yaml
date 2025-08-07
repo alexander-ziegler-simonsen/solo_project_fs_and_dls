@@ -1,0 +1,5 @@
+# charts/postgres/Chart.yaml
+apiVersion: v2
+name: postgres
+version: 0.1.0
+description: A simple PostgreSQL subchart

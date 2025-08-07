@@ -3,13 +3,60 @@ import axios from 'axios';
 const API_HOST = import.meta.env.VITE_API_HOST;
 const API_PORT = import.meta.env.VITE_API_PORT;
 
+
+export async function newGetData<T>(gateway: string): Promise<T> {
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;
+  console.log('dev - url to api', url);
+
+  try {
+    // Expect the server to return the JSON body matching T directly
+    const response = await axios.get<T>(url, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // console.log('newGetData response', response);
+    // console.log('newGetData data', response.data);
+
+    // Return the parsed response body
+    return response.data;
+  } catch (error) {
+    console.error('newGetData error:', error);
+    throw error;
+  }
+}
+
+// Simple list fetcher: returns the 'data' array from server response
+export async function getDataList<T>(gateway: string): Promise<T[]> {
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;
+  console.log('dev - url to api', url);
+
+  try {
+    const response = await axios.get<{ data: T[] }>(url, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // console.log('getDataList response', response);
+    // console.log('getDataList data', response.data.data);
+
+    return response.data.data;
+  } catch (error) {
+    console.error('getDataList error:', error);
+    throw error;
+  }
+}
+
+
 export async function getData<T>(gateway:string) {
   // this is for host on VPS
-
-  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
-
-  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
-  //const url = `${API_HOST}:${API_PORT}/${gateway}`;
+  
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`; 
+  console.log("dev - url to api", url);
   try {
     const response = await axios.get(url, {
       withCredentials: true,
@@ -23,6 +70,11 @@ export async function getData<T>(gateway:string) {
     // console.log("debug - getData", response);
     // console.log("debug - getData", response.data);
 
+    // console.log("getData",response);
+    // console.log("getData",response.data);
+    // console.log("getData",response.data.data);
+
+
     return response.data.data as T[];
   } catch (error) {
     console.error("getData error:", error);
@@ -31,9 +83,8 @@ export async function getData<T>(gateway:string) {
 }
 
 export async function PostOneData<T>(gateway:string, insertData:T) {
-  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
-  //const url = `${API_HOST}:${API_PORT}/${gateway}`;
-  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
+  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  console.log("dev - url to api", url);
 
 
   await axios({
@@ -61,9 +112,8 @@ export async function PostOneData<T>(gateway:string, insertData:T) {
 }
 
 export async function PostManyData<T>(gateway:string, insertData:T[]) {
-  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/${gateway}` : `${API_HOST}/${gateway}`;
-  // const url = `${API_HOST}:${API_PORT}/${gateway}`;
-  const url = API_PORT == 0 ? `${API_HOST}/${gateway}` : `${API_HOST}:${API_PORT}/${gateway}`; 
+  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  console.log("dev - url to api", url);
 
   await axios({
     method: 'post',
@@ -88,11 +138,39 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
   });
 }
 
-export async function Login<T>(loginInfo:T) {
-  //const url = API_HOST=="host.docker.internal" ? `${API_HOST}:${API_PORT}/login` : `${API_HOST}/login`;
-  //const url = `${API_HOST}:${API_PORT}/login`;
-  const url = API_PORT == 0 ? `${API_HOST}/login` : `${API_HOST}:${API_PORT}/login`; 
+export async function UpdateOneData<T>(gateway:string, insertData:T) {
+  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  console.log("dev - update - url to api", url);
+  console.log("dev - update - data ", insertData);
 
+
+  await axios({
+    method: 'update',
+    url: url,
+    withCredentials: true,
+    data: insertData,
+    headers: {
+    'Content-Type': 'application/json',
+  }
+  })
+  .then(function (response) {
+    // console.log("debug - PostOneData", response);
+    // console.log("debug - PostOneData", response.data);
+
+    return response.data;
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+}
+
+export async function Login<T>(loginInfo:T) {
+  const url = `${API_HOST}:${API_PORT}/login`; 
+  console.log("dev - url to api", url);
 
   await axios({
     method: 'post',

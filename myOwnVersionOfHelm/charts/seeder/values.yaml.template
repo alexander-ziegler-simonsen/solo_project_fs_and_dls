@@ -1,0 +1,18 @@
+testseeder:
+  image: 
+  mongoNewUser: 
+  mongoNewPassword: 
+
+mongo:
+  db: 
+  host: 
+  port: 
+  start_username: 
+  start_password: 
+
+postgres:
+  host:
+  port: 
+  start_username: 
+  start_password: 
+  db: 

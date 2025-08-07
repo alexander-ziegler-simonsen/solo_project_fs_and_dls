@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queuehandler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queuehandler
+  template:
+    metadata:
+      labels:
+        app: queuehandler
+    spec:
+      containers:
+        - name: queuehandler
+          image: {{ .Values.queuehandler.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RABBITMQ_HOST
+              value: {{ .Values.rabbitmq.host | quote }}
+            - name: RABBITMQ_PORT
+              value: {{ .Values.rabbitmq.port | quote }}
+            - name: RABBITMQ_USERNAME
+              value: {{ .Values.rabbitmq.start_username | quote }}
+            - name: RABBITMQ_PASSWORD
+              value: {{ .Values.rabbitmq.start_password | quote }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}
+            - name: POSTGRES_USERNAME
+              value: {{ .Values.postgres.start_username | quote }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.start_password | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.db | quote }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5

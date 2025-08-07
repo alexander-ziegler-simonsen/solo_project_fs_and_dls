@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: my-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.api.port }}
+          env:
+            - name: API_PORT
+              value: {{ .Values.api.port | quote }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongo.host | quote }}
+            - name: MONGO_PORT
+              value: {{ .Values.mongo.port | quote }}
+            - name: MONGO_NEW_USERNAME
+              value: {{ .Values.seeder.mongoNewUser | quote }}
+            - name: MONGO_NEW_PASSWORD
+              value: {{ .Values.seeder.mongoNewPassword | quote }}
+            - name: MONGO_NEW_DB
+              value: {{ .Values.mongo.db | quote }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}
+            - name: POSTGRES_USERNAME
+              value: {{ .Values.postgres.start_username | quote }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.start_password | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.db | quote }}
+            - name: RABBITMQ_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: RABBITMQ_PORT
+              value: {{ .Values.rabbitmq.amqpPort | quote }}
+            - name: RABBITMQ_USERNAME
+              value: {{ .Values.rabbitmq.start_username | quote }}
+            - name: RABBITMQ_PASSWORD
+              value: {{ .Values.rabbitmq.start_password | quote }}
+            - name: CLIENT_HOST
+              value: {{ .Values.client.host | quote }}
+            - name: CLIENT_PORT
+              value: {{ .Values.client.clientPort | quote }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.api.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3

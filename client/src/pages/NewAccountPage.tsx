@@ -71,30 +71,30 @@ function NewAccountPage() {
         <Box w={500}>
           <Field.Root>
             <Field.Label id="fname">firstname</Field.Label>
-            <Input bg="white" id="in_fname" placeholder="firstname" variant="outline" value={formData.fname} onChange={handleChange} />
+            <Input bg={"bg"} id="in_fname" placeholder="firstname" variant="outline" value={formData.fname} onChange={handleChange} />
 
             <Field.Label id="lname">lastname</Field.Label>
-            <Input bg="white" id="in_lname" placeholder="lastname" variant="outline" value={formData.lname} onChange={handleChange} />
+            <Input bg={"bg"} id="in_lname" placeholder="lastname" variant="outline" value={formData.lname} onChange={handleChange} />
 
             <Field.Label id="email">email</Field.Label>
-            <Input bg="white" id="in_email" placeholder="email" variant="outline" value={formData.email} onChange={handleChange} />
+            <Input bg={"bg"} id="in_email" placeholder="email" variant="outline" value={formData.email} onChange={handleChange} />
 
             <Field.Label id="phone">phone number</Field.Label>
-            <Input bg="white" id="in_phone" placeholder="phone number" variant="outline" value={formData.phone} onChange={handleChange} />
+            <Input bg={"bg"} id="in_phone" placeholder="phone number" variant="outline" value={formData.phone} onChange={handleChange} />
 
             <Field.Label id="address">address</Field.Label>
-            <Input bg="white" id="in_address" placeholder="address" variant="outline" value={formData.address} onChange={handleChange} />
+            <Input bg={"bg"} id="in_address" placeholder="address" variant="outline" value={formData.address} onChange={handleChange} />
 
             <Field.Label id="username">Username</Field.Label>
-            <Input bg="white" id="in_username" placeholder="username" variant="outline" value={formData.username} onChange={handleChange} />
+            <Input bg={"bg"} id="in_username" placeholder="username" variant="outline" value={formData.username} onChange={handleChange} />
 
             <Field.Label id="password">password</Field.Label>
-            <PasswordInput bg="white" id="in_password" placeholder="password" variant="outline" value={formData.password} onChange={handleChange} />
+            <PasswordInput bg={"bg"} id="in_password" placeholder="password" variant="outline" value={formData.password} onChange={handleChange} />
           </Field.Root>
 
           <Center>
             <HStack margin={3}>
-              <Button colorScheme="teal" onClick={handleSubmit}>Make New Account</Button>
+              <Button bg={"success"} onClick={handleSubmit}>Make New Account</Button>
             </HStack>
           </Center>
         </Box>

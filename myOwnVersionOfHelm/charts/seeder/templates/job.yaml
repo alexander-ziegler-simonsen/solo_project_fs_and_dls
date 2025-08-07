@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seeder
+spec:
+  template:
+    metadata:
+      labels:
+        job: seeder
+    spec:
+      containers:
+        - name: seeder
+          image: {{ .Values.seeder.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO_NEW_USERNAME
+              value: {{ .Values.seeder.mongoNewUser | quote }}
+            - name: MONGO_NEW_PASSWORD
+              value: {{ .Values.seeder.mongoNewPassword | quote }}
+            - name: MONGO_NEW_DB
+              value: {{ .Values.mongo.db | quote }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongo.host | quote }}
+            - name: MONGO_PORT
+              value: {{ .Values.mongo.port | quote }}
+            - name: MONGO_USERNAME
+              value: {{ .Values.mongo.start_username | quote }}
+            - name: MONGO_PASSWORD
+              value: {{ .Values.mongo.start_password | quote }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}
+            - name: POSTGRES_USERNAME
+              value: {{ .Values.postgres.start_username | quote }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.start_password | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.db | quote }}
+      restartPolicy: Never
+  backoffLimit: 2

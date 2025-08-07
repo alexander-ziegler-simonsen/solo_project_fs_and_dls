@@ -11,15 +11,15 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
 
     return (
         <>
-            <Container>
+
                 {/* TODO - add all the elements here */}
 
                 <Text>headline</Text>
                 <Text>{OrderValue.ShippingPrice}</Text>
 
-                <Table.Root>
-                    <Table.Header>
-                        <Table.Row>
+                <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
+                    <Table.Header >
+                        <Table.Row bg={"accent"}> 
                             <Table.ColumnHeader>product name</Table.ColumnHeader>
                             <Table.ColumnHeader>product price</Table.ColumnHeader>
                             <Table.ColumnHeader>amount</Table.ColumnHeader>
@@ -27,9 +27,9 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                             <Table.ColumnHeader>options</Table.ColumnHeader>
                         </Table.Row>
                     </Table.Header>
-                    <Table.Body>
+                    <Table.Body >
                         {OrderValue.Items.map((orderItem, index) => (
-                            <Table.Row key={index}>
+                            <Table.Row key={index} bg={"accent"}>
                                 <Table.Cell>
                                     {/* TODO - loop all items here */}
                                     {orderItem.Item.image}<br />
@@ -39,26 +39,26 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                                 <Table.Cell>{orderItem.Amount}</Table.Cell>
                                 <Table.Cell>a lot of money, trust me</Table.Cell>
                                 <Table.Cell>
-                                    <Button>do stuff 1</Button>
-                                    <Button>do stuff 2</Button>
+                                    <Button>do</Button>
+                                    <Button>do</Button>
                                 </Table.Cell>
                             </Table.Row>
                         ))}
                     </Table.Body>
                     <Table.Footer>
-                        <Table.Row>
-                            <Table.Cell>the total of all the above</Table.Cell>
-                            <Table.Cell>shipping price {OrderValue.ShippingPrice}...</Table.Cell>
-                            <Table.Cell>x (the count of total items)</Table.Cell>
-                            <Table.Cell>y (conbind all the other totals)</Table.Cell>
+                        <Table.Row bg={"accent"}>
+                            <Table.Cell>the total</Table.Cell>
+                            <Table.Cell>ship: {OrderValue.ShippingPrice}</Table.Cell>
+                            <Table.Cell>x (total items)</Table.Cell>
+                            <Table.Cell>y (conbind totals)</Table.Cell>
                             <Table.Cell>
-                                <Button>do main stuff 1</Button>
-                                <Button>do main stuff 2</Button>
+                                <Button>do</Button>
+                                <Button>do</Button>
                             </Table.Cell>
                         </Table.Row>
                     </Table.Footer>
                 </Table.Root>
-            </Container>
+
         </>
     )
 }

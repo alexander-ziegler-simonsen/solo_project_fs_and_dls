@@ -1,48 +1,247 @@
 // import React from 'react'
 
 import { useEffect, useState } from "react"
-import { getData } from "../helpers/HandleApiCalls";
+import { getDataList, newGetData } from "../helpers/HandleApiCalls";
+import { Box, Button, Input } from "@chakra-ui/react";
 import ProductElement from "../components/ProductElement";
+import { Container, Spacer, Spinner, Stack, VStack, Text, Center } from "@chakra-ui/react";
+import Select from "react-select";
+import { SingleValue } from "react-select";
 import { Item } from "../domain/Item";
-import { Container, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Category } from "../domain/Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
+
+type OptionType = { value: string; label: string; }
+
+const PAGE_SIZE = 8;
+
+interface PaginatedResponse<Item> {
+  data: Item[]
+  page: number
+  limit: number
+  total: number
+  pages: number
+}
 
 // TODO - check if our page being async, gives problem in the rest of the app
 function CategoryPage() {
 
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [minPriceInput, setMinPriceInput] = useState("");
+  const [maxPriceInput, setMaxinPriceInput] = useState("");
 
+  const [searchInput, setSearchInput] = useState("");
+  const [sortOrder, setSortOrder] = useState<SingleValue<OptionType>>(null);
+  const [sortOrderOptions, setSortOrderOptions] = useState<OptionType[]>([]);
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(false);
+  // selectedOption: just one selected item or null
+  const [selectedOption, setSelectedOption] = useState<SingleValue<OptionType>>(null);
+
+  // selectOptions: an array of selectable items
+  const [selectOptions, setSelectOptions] = useState<OptionType[]>([]);
+
+
+  // Fetch categories once
   useEffect(() => {
-    async function fetchItems() {
+    const fetchCategories = async () => {
       try {
-        const data: Item[] = await getData<Item>("item");
-        setItems(data);
+        const cats = await getDataList<Category>("item_group")
+        setSelectOptions(
+          cats.map(c => ({ value: String(c._id), label: c.name }))
+        )
       } catch (err) {
-        console.error("Failed to fetch items", err);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching categories:", err)
+        setSelectOptions([])
       }
     }
-
-    fetchItems();
+    fetchCategories()
   }, []);
 
-  return (
-    <Container>
-      <Text>CategoryPage</Text>
-      <Text>Here you will be able to see all the products, sorted or filtered by category.</Text>
-      {loading && <p>Loading...</p>}
+  useEffect(() => {
+    try {
+      const values = [
+        { value: "price_asc", label: "sort by price (low to high)" },
+        { value: "price_desc", label: "sort by price (high to low)" }
+      ];
 
-      <Grid templateColumns={"repeat(4, 1fr)"} gap={3}>
-        {
-          items.map((item) => (
-            <GridItem colSpan={1}><ProductElement key={item._id} ItemValue={item} /></GridItem>
-          ))
+      setSortOrderOptions(values);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  // Fetch paginated items on mount and whenever page or selectedOption changes
+  useEffect(() => {
+    const fetchItems = async () => {
+      setLoading(true)
+      try {
+        const params = new URLSearchParams()
+        params.append('page', String(page))
+        params.append('limit', String(PAGE_SIZE))
+        if (selectedOption) {
+          params.append('fk_group_id', selectedOption.value)
         }
-      </Grid>
 
+        const resp = await newGetData<PaginatedResponse<Item>>(
+          `item?${params.toString()}`
+        )
+        setItems(resp.data)
+        setTotalPages(resp.pages)
+      } catch (err) {
+        console.error("Error fetching items:", err)
+        setItems([])
+        setTotalPages(1)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchItems()
+  }, [page, selectedOption])
+
+
+  // Handle category change
+  const onCategoryChange = (opt: SingleValue<OptionType>) => {
+    setSelectedOption(opt);
+    setPage(1);
+  }
+
+  const onSreachChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    console.log("test", e.target.value);
+
+    // debounce
+
+  };
+
+  const onMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMinPriceInput(e.target.value);
+    console.log("min test:", e.target.value);
+  };
+
+  const onMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxinPriceInput(e.target.value);
+    console.log("max test:", e.target.value);
+  };
+
+  const onOrderChange = (opt: SingleValue<OptionType>) => {
+    setSortOrder(opt);
+    console.log("order test:", opt);
+  };
+
+  const startSearch = () => {
+    const fetchItems = async () => {
+      setLoading(true)
+      try {
+        const params = new URLSearchParams()
+        params.append('page', String(page))
+        params.append('limit', String(PAGE_SIZE))
+        if (selectedOption) {
+          params.append('fk_group_id', selectedOption.value)
+        }
+
+        if(searchInput != "") {
+          params.append('search', searchInput);
+        }
+
+        if(sortOrder) {
+          params.append("order", sortOrder.value);
+        }
+
+        if(minPriceInput != "" && minPriceInput != null) {
+          params.append("minPrice", minPriceInput);
+        }
+
+        if(maxPriceInput != "" && maxPriceInput != null) {
+          params.append("maxPrice", maxPriceInput);
+        }
+
+        const resp = await newGetData<PaginatedResponse<Item>>(
+          `item?${params.toString()}`
+        )
+        setItems(resp.data)
+        setTotalPages(resp.pages)
+      } catch (err) {
+        console.error("Error fetching items:", err)
+        setItems([])
+        setTotalPages(1)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchItems()
+  }
+
+  return (
+    <Container maxW="container.lg" py={4}>
+
+      <Stack direction={{ base: "column", sm: "column", md: "row" }}>
+        <Input id="inputSearch" flex={{ base: "100%", md: "10vw" }} 
+        type="text" bg={"bg"} placeholder="search" value={searchInput} onChange={onSreachChange} />
+        <Input bg={"bg"} id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} 
+        type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
+        <Input bg={"bg"} id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} 
+        type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
+        {/* <Spacer w={{base: "100%", md: "30vw"}} /> */}
+        <Box flex={{ base: "100%", md: "10vw" }}>
+          <Select value={sortOrder} options={sortOrderOptions} onChange={onOrderChange} placeholder="sort" />
+        </Box>
+
+      </Stack>
+      <Spacer p={1} />
+      <Button w={{ base: "100%" }} bg={"primary"} onClick={startSearch}>
+        <FontAwesomeIcon icon={faSearch} size="xl" />
+      </Button>
+      <Spacer p={1} />
+      <Select
+        value={selectedOption}
+        onChange={onCategoryChange}
+        options={selectOptions}
+        placeholder="Filter by category…"
+        isClearable
+      />
+
+      <Spacer h={4} />
+
+      {loading ? (
+        <VStack>
+          <Spinner size="xl" />
+          <Text fontWeight="bold">Loading…</Text>
+        </VStack>
+      ) : (
+        <>
+          <Stack direction={{ base: "column", md: "row" }} wrap="wrap" gap={4}>
+            {items.length ? (
+              items.map(item => (
+                <ProductElement key={item._id} ItemValue={item} />
+              ))
+            ) : (
+              <Text>No items found.</Text>
+            )}
+          </Stack>
+
+          <Center mt={6}>
+            <Button 
+            onClick={() => setPage(prev => Math.max(1, prev - 1))} 
+            disabled={page === 1} mr={4}>
+              <FontAwesomeIcon icon={faArrowLeft} size="xl" />
+            </Button>
+            <Text>Page {page} of {totalPages}</Text>
+            <Button 
+            onClick={() => setPage(prev => Math.min(totalPages, prev + 1))} 
+            disabled={page === totalPages} ml={4}>
+              <FontAwesomeIcon icon={faArrowRight} size="xl" />
+            </Button>
+          </Center>
+        </>
+      )}
     </Container>
   )
 }
+
 
 export default CategoryPage
