@@ -1,6 +1,7 @@
 import orsLogo from '../assets/ors-192.png'
-import { Container, Flex, Image } from '@chakra-ui/react'
+import { Box, Container, Flex, Image } from '@chakra-ui/react'
 import Navbar from './Navbar'
+import { ColorModeButton } from './ui/color-mode'
 
 function Header() {
     return (
@@ -8,6 +9,10 @@ function Header() {
             <Flex gap={5}>
                 <Image float={'left'} src={orsLogo} width={50} className="logo" alt="Online Rizz Shop logo" />
                 <Navbar />
+
+                <Box>
+                    <ColorModeButton />
+                </Box>
             </Flex>
         </Container>
     )
