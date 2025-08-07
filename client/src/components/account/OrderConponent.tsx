@@ -17,8 +17,7 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                 <Text>headline</Text>
                 <Text>{OrderValue.ShippingPrice}</Text>
 
-                <Table.Root 
-                size={{ base: "sm", md: "md", lg: "lg" }}>
+                <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
                     <Table.Header >
                         <Table.Row bg={"accent"}> 
                             <Table.ColumnHeader>product name</Table.ColumnHeader>

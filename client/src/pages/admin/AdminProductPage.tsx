@@ -9,7 +9,7 @@ import { Category } from "../../domain/Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
-import DeleteDialog from "../../components/DeleteDialog";
+import DeleteDialog from "../../components/admin/DeleteDialog";
 
 
 type OptionType = { value: string; label: string; }

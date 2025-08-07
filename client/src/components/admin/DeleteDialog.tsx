@@ -1,32 +1,49 @@
-import { Button, CloseButton, Dialog, Portal, Spacer } from "@chakra-ui/react";
+import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react"
+import { faRemove } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { ReactNode, useState } from "react";
 
-function DeleteDialog(titleValue: string, message: string, displayData: any, onDelete: Function) {
+type DeleteDialogProps<T> = {
+    titleValue: string; 
+    bodyData: T;
+    OnDeleteFunc: Function;
+}
+
+function DeleteDialog<T extends ReactNode>({ titleValue, bodyData, OnDeleteFunc }: DeleteDialogProps<T>) {
+
+    //console.log("EditDialog have been called");
+
+    const [open, setOpen] = useState(false);
+
+    let newLogic = () => {
+        //console.log("newLogic was called");
+        setOpen(false);
+        OnDeleteFunc();
+    }
+
     return (
-        <Dialog.Root>
+        <Dialog.Root open={open} onOpenChange={(details) => setOpen(details.open)}>
             <Dialog.Trigger asChild>
-                <Button>delete</Button>
+                <Button bg={"danger"}>
+                    <FontAwesomeIcon icon={faRemove} />
+                </Button>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop />
                 <Dialog.Positioner>
-                    <Dialog.Content>
+                    <Dialog.Content bg={"bg"}>
                         <Dialog.Header>
                             <Dialog.Title>{titleValue}</Dialog.Title>
                         </Dialog.Header>
                         <Dialog.Body>
-                            <p>{message}</p>
-                            <Spacer p={1} />
-                            {displayData}
-                            <Spacer p={2} />
+                            {bodyData}
                         </Dialog.Body>
                         <Dialog.Footer>
                             <Dialog.ActionTrigger asChild>
-                                <Button variant="outline">Cancel</Button>
+                                <Button bg={"bg"} variant="outline">Cancel</Button>
                             </Dialog.ActionTrigger>
-                            <Button
-                                onClick={() => onDelete}
-                                backgroundColor={"red.700"}>delete</Button>
+                            <Button onClick={() => newLogic()} bg={"danger"}>delete</Button>
                         </Dialog.Footer>
                         <Dialog.CloseTrigger asChild>
                             <CloseButton size="sm" />

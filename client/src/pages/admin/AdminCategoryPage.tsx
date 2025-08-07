@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { getDataList } from "../../helpers/HandleApiCalls";
-import { Button, CloseButton, Dialog, Portal, Spacer, Table } from "@chakra-ui/react";
+import { Button, Table } from "@chakra-ui/react";
 import { Container, Spinner, Stack, VStack, Text } from "@chakra-ui/react";
 import { Category } from "../../domain/Category";
 import useModal from "../../hooks/useModal";
-import { faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DeleteDialog from "../../components/DeleteDialog";
+import DeleteDialog from "../../components/admin/DeleteDialog";
 
 function AdminCategoryPage() {
 
@@ -93,8 +93,11 @@ function AdminCategoryPage() {
                             <FontAwesomeIcon icon={faEdit} size="xl" />
                           </Button>
 
-                        <DeleteDialog titleValue="test" 
-                        bodyData={<div> ID: {cat._id}, Name: {cat.name} </div>}  OnDeleteFunc={() => {
+                        <DeleteDialog titleValue="Delete this category" 
+                        bodyData={
+                        <Text> ID: {cat._id} <br/><br/>
+                        Name: {cat.name} <br/><br/>
+                        </Text>}  OnDeleteFunc={() => {
                           console.log("test delete pass func", cat._id);
                         } } />
 
