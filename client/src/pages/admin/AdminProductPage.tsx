@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getDataList, newGetData } from "../../helpers/HandleApiCalls";
+import { getDataList, newGetData, UpdateOneData } from "../../helpers/HandleApiCalls";
 import { Box, Button, Image, Input, Table } from "@chakra-ui/react";
 import { Container, Spacer, Spinner, Stack, VStack, Text, Center } from "@chakra-ui/react";
 import Select from "react-select";
@@ -297,7 +297,7 @@ function AdminProductPage() {
                                 placeholder="fk_group_id" type="number" /><br />
                             </>
                           }
-                          OnEditFunc={() => { console.log("onDeleteFunc item", item._id) }} />
+                          OnEditFunc={() => {  UpdateOneData("item", formState ) }} />
 
                         {/* <Button bg={"danger"}>delete</Button> */}
 

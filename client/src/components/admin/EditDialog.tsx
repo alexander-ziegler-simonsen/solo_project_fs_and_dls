@@ -18,9 +18,9 @@ function EditDialog<T extends ReactNode>({ titleValue, bodyData, OnEditFunc, Set
     const [open, setOpen] = useState(false);
 
     let newLogic = () => {
-        //console.log("newLogic was called");
-        setOpen(false);
+        console.log("newLogic was called");
         OnEditFunc();
+        setOpen(false);
     }
 
     return (
