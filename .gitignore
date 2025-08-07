@@ -1,7 +1,7 @@
 
 # self added
 forVps.sh
-
+package-lock.json
 values.yaml
 
 create_secrets.sh
