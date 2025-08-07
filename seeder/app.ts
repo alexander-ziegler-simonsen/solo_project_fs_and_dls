@@ -51,11 +51,11 @@ async function main() {
     await setPostgresDb();
 
     // drop tables
-    await DropTable("orderitem");
-    await DropTable(`"order"`);
-    await DropTable("item");
-    await DropTable(`"user"`);
-    await DropTable("itemgroup");
+    // await DropTable("orderitem");
+    // await DropTable(`"order"`);
+    // await DropTable("item");
+    // await DropTable(`"user"`);
+    // await DropTable("itemgroup");
 
     await setAllTables();
 
