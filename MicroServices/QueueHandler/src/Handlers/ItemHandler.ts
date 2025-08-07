@@ -2,11 +2,32 @@ import { PostgresDataSource } from "../DataSource";
 import { Item_post } from "../entities/Item";
 
 async function ItemDelete(data:any) {
-    console.log(data);
+    //console.log(data);
 }
 
-async function ItemUpdate(data:any) {
-    console.log(data);
+async function ItemUpdate(data:Item_post) {
+    //console.log(data);
+    try {
+        const itemRepository = PostgresDataSource.getRepository(Item_post);
+        console.log("ItemUpdate was called");
+        
+
+
+        const itemToUpdateRef: Item_post = await itemRepository.findOneBy({_id: data._id});
+        console.log("itemToUpdateRef value:", itemToUpdateRef);
+
+        itemToUpdateRef.name = data.name;
+        itemToUpdateRef.info = data.info;
+        itemToUpdateRef.description = data.description;
+        itemToUpdateRef.image = data.image;
+        itemToUpdateRef.fk_group_id = data.fk_group_id;
+        itemToUpdateRef.price = data.price;
+
+        await itemRepository.save(itemToUpdateRef);
+    }
+    catch (error) {
+        console.error("queueHandler - Item update error:", error);
+    }
 }
 
 async function ItemPost(data:any) {
