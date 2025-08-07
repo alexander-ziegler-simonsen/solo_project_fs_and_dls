@@ -6,6 +6,7 @@ import { Category } from "../../domain/Category";
 import useModal from "../../hooks/useModal";
 import { faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DeleteDialog from "../../components/DeleteDialog";
 
 function AdminCategoryPage() {
 
@@ -74,7 +75,7 @@ function AdminCategoryPage() {
             <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
               <Table.Header>
                 <Table.Row bg={"accent"}>
-                  <Table.ColumnHeader>group_id</Table.ColumnHeader>
+                  <Table.ColumnHeader>group id</Table.ColumnHeader>
                   <Table.ColumnHeader>name</Table.ColumnHeader>
                   <Table.ColumnHeader>options</Table.ColumnHeader>
                 </Table.Row>
@@ -92,41 +93,11 @@ function AdminCategoryPage() {
                             <FontAwesomeIcon icon={faEdit} size="xl" />
                           </Button>
 
-                        <Dialog.Root motionPreset="slide-in-bottom">
-                          <Dialog.Trigger asChild>
-                            <Button backgroundColor={"red.500"}>
-                              <FontAwesomeIcon icon={faRemove} size="xl" />
-                            </Button>
-                          </Dialog.Trigger>
-                          <Portal>
-                            <Dialog.Backdrop />
-                            <Dialog.Positioner>
-                              <Dialog.Content>
-                                <Dialog.Header>
-                                  <Dialog.Title>Delete category</Dialog.Title>
-                                </Dialog.Header>
-                                <Dialog.Body>
-                                  <p>are you sure you want to delete this category?</p>
-                                  <Spacer p={1} />
-                                  <p>id: {cat._id}</p>
-                                  <p>name: {cat.name}</p>
-                                  <Spacer p={2} />
-                                </Dialog.Body>
-                                <Dialog.Footer>
-                                  <Dialog.ActionTrigger asChild>
-                                    <Button variant="outline">Cancel</Button>
-                                  </Dialog.ActionTrigger>
-                                  <Button 
-                                  onClick={() => deleteThisCategory({ _id: cat._id, name: cat.name, } as Category)}
-                                  backgroundColor={"red.700"}>delete</Button>
-                                </Dialog.Footer>
-                                <Dialog.CloseTrigger asChild>
-                                  <CloseButton size="sm" />
-                                </Dialog.CloseTrigger>
-                              </Dialog.Content>
-                            </Dialog.Positioner>
-                          </Portal>
-                        </Dialog.Root>
+                        <DeleteDialog titleValue="test" 
+                        bodyData={<div> ID: {cat._id}, Name: {cat.name} </div>}  OnDeleteFunc={() => {
+                          console.log("test delete pass func", cat._id);
+                        } } />
+
                         </Stack>
 
                         

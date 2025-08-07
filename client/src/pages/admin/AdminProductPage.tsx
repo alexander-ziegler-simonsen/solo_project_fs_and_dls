@@ -8,6 +8,8 @@ import { Item } from "../../domain/Item";
 import { Category } from "../../domain/Category";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
+import useModal from "../../hooks/useModal";
+import DeleteDialog from "../../components/DeleteDialog";
 
 
 type OptionType = { value: string; label: string; }
@@ -43,6 +45,7 @@ function AdminProductPage() {
   // selectOptions: an array of selectable items
   const [selectOptions, setSelectOptions] = useState<OptionType[]>([]);
 
+  const { showModal } = useModal();
 
   // Fetch categories once
   useEffect(() => {
@@ -131,6 +134,26 @@ function AdminProductPage() {
     console.log("order test:", opt);
   };
 
+  const openFormEditModal = (currentItem: Item) => {
+    showModal({
+      type: 'form-input',
+      title: 'edit product',
+      fields: [
+        { name: 'Name', type: 'text', label: 'name', placeholder: 'name', initValue: currentItem.name },
+        { name: 'Price', type: 'number', label: 'price', placeholder: '123', initValue: currentItem.price.toString() },
+        { name: 'info', type: 'text', label: 'info', placeholder: 'short info about product', initValue: currentItem.info },
+        { name: 'Description', type: 'text', label: 'description', placeholder: 'description', initValue: currentItem.description },
+        { name: 'Image', type: 'text', label: 'image', placeholder: 'full link to image', initValue: currentItem.image },
+        { name: 'fk_group_id', type: 'number', label: 'fk_group_id', placeholder: '1', initValue: currentItem.fk_group_id.toString() }
+
+      ],
+      onConfirm: (data) => {
+        // the values given
+        console.log(`Modtog: ${JSON.stringify(data)}`);
+      },
+    });
+  };
+
   const startSearch = () => {
     const fetchItems = async () => {
       setLoading(true)
@@ -179,9 +202,9 @@ function AdminProductPage() {
     <Container maxW="container.lg" py={4}>
 
       <Stack direction={{ sm: "column", md: "row" }}>
-        <Input id="inputSearch" flex={{ base: "100%", md: "10vw" }} type="text" placeholder="search" value={searchInput} onChange={onSreachChange} />
-        <Input id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
-        <Input id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
+        <Input bg={"bg"} id="inputSearch" flex={{ base: "100%", md: "10vw" }} type="text" placeholder="search" value={searchInput} onChange={onSreachChange} />
+        <Input bg={"bg"} id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
+        <Input bg={"bg"} id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
         {/* <Spacer w={{base: "100%", md: "30vw"}} /> */}
         <Box flex={{ base: "100%", md: "10vw" }}>
           <Select value={sortOrder} options={sortOrderOptions} onChange={onOrderChange} placeholder="set sort order..." />
@@ -189,8 +212,8 @@ function AdminProductPage() {
 
       </Stack>
       <Spacer p={1} />
-      <Button w={{ base: "100%" }} onClick={startSearch}>
-      <FontAwesomeIcon icon={faSearch} size="xl" />
+      <Button bg={"primary"} w={{ base: "100%" }} onClick={startSearch}>
+        <FontAwesomeIcon icon={faSearch} size="xl" />
       </Button>
       <Spacer p={1} />
       <Select
@@ -211,53 +234,74 @@ function AdminProductPage() {
       ) : (
         <>
 
-          
-            <Table.Root gap="10" size={{ base: "sm", md: "md", lg: "lg" }}>
-              <Table.Header>
-                <Table.Row bg={"accent"}>
-                  <Table.ColumnHeader>id</Table.ColumnHeader>
-                  <Table.ColumnHeader>name</Table.ColumnHeader>
-                  <Table.ColumnHeader>price</Table.ColumnHeader>
-                  <Table.ColumnHeader>info</Table.ColumnHeader>
-                  <Table.ColumnHeader>description</Table.ColumnHeader>
-                  <Table.ColumnHeader>image</Table.ColumnHeader>
-                  <Table.ColumnHeader>fk_group_id</Table.ColumnHeader>
+
+          <Table.Root gap="10" size={{ base: "sm", md: "md", lg: "lg" }}>
+            <Table.Header>
+              <Table.Row bg={"accent"}>
+                <Table.ColumnHeader>id</Table.ColumnHeader>
+                <Table.ColumnHeader>name</Table.ColumnHeader>
+                <Table.ColumnHeader>price</Table.ColumnHeader>
+                <Table.ColumnHeader>info</Table.ColumnHeader>
+                <Table.ColumnHeader>description</Table.ColumnHeader>
+                <Table.ColumnHeader>image</Table.ColumnHeader>
+                <Table.ColumnHeader>fk_group_id</Table.ColumnHeader>
+                <Table.ColumnHeader>options</Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body >
+              {items.length ? (
+                items.map(item => (
+                  <Table.Row key={item._id} textAlign={"center"} bg={"accent"}>
+                    <Table.Cell p={2}>{item._id}</Table.Cell>
+                    <Table.Cell p={2}>{item.name}</Table.Cell>
+                    <Table.Cell p={2}>{item.price}</Table.Cell>
+                    <Table.Cell p={2}>{item.info}</Table.Cell>
+                    <Table.Cell p={2}>{item.description}</Table.Cell>
+                    <Table.Cell>
+                      <Center>
+                        <Image maxW={"80px"} maxH={"80px"} src={item.image} />
+                      </Center>
+                    </Table.Cell>
+                    <Table.Cell><Center>{item.fk_group_id}</Center></Table.Cell>
+                    <Table.Cell p={2}>
+                      <Stack>
+                        <Button bg={"orange.400"} onClick={() => openFormEditModal(item)}
+                        >edit</Button>
+                        {/* <Button bg={"danger"}>delete</Button> */}
+
+                        <DeleteDialog titleValue="delete item" bodyData={
+                          <Text>
+                            id: {item._id}<br/><br/>
+                            price: {item.price}<br/><br/>
+                            info: {item.info}<br/><br/>
+                            description: {item.description}<br/><br/>
+                            image: {item.image}<br/><br/>
+                            fk_group_id: {item.fk_group_id}<br/><br/>
+                          </Text>
+                        }
+                        OnDeleteFunc={() => {console.log("onDeleteFunc item", item._id)} } />
+                      </Stack>
+                    </Table.Cell>
+                  </Table.Row>
+
+
+                  // <ProductElement key={item._id} ItemValue={item} />
+                ))
+              ) : (
+                <Table.Row key="1" bg={"accent"}>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
+                  <Table.Cell>No items found.</Table.Cell>
                 </Table.Row>
-              </Table.Header>
-              <Table.Body >
-                {items.length ? (
-                  items.map(item => (
-                    <Table.Row key={item._id} textAlign={"center"} bg={"accent"}>
-                      <Table.Cell p={2}>{item._id}</Table.Cell>
-                      <Table.Cell p={2}>{item.name}</Table.Cell>
-                      <Table.Cell p={2}>{item.price}</Table.Cell>
-                      <Table.Cell p={2}>{item.info}</Table.Cell>
-                      <Table.Cell p={2}>{item.description}</Table.Cell>
-                      <Table.Cell>
-                        <Center>
-                          <Image maxW={"80px"} maxH={"80px"} src={item.image} />
-                        </Center>
-                      </Table.Cell>
-                      <Table.Cell><Center>{item.fk_group_id}</Center></Table.Cell>
-                    </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Root>
 
-
-                    // <ProductElement key={item._id} ItemValue={item} />
-                  ))
-                ) : (
-                  <Table.Row key="1" bg={"accent"}>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                      <Table.Cell>No items found.</Table.Cell>
-                    </Table.Row>
-                )}
-              </Table.Body>
-            </Table.Root>
-          
 
           <Center mt={6}>
             <Button onClick={() => setPage(prev => Math.max(1, prev - 1))} disabled={page === 1} mr={4}>
