@@ -1,0 +1,7 @@
+postgres:
+  port: 5432
+  nodePort: 30001
+  image: postgres:14.18-bookworm
+  db: rizz
+  start_username: admin
+  start_password: password

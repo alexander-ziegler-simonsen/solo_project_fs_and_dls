@@ -1,0 +1,35 @@
+api:
+  image: my-api
+  port: 3003
+
+mongo:
+  host: mongo
+  port: 27017
+  db: rizz
+  username: user1
+  password: password1
+
+seeder:
+  mongoNewUser: user1
+  mongoNewPassword: password1
+
+postgres:
+  host: postgres
+  port: 5432
+  start_username: admin
+  start_password: password
+  db: rizz
+
+rabbitmq:
+  amqpPort: 5672
+  host: rabbitmq
+  uiPort: 15672
+  nodePortAMQP: 30003
+  nodePortUI: 30004
+  port: 5672
+  start_username: admin
+  start_password: password
+
+client:
+  host: client
+  clientPort: 80

@@ -1,0 +1,7 @@
+mongo:
+  port: 27017
+  nodePort: 30002
+  db: rizz
+  image: mongo:8.0.12-rc0-noble
+  start_username: admin
+  start_password: password

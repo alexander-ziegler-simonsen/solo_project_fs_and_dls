@@ -1,0 +1,54 @@
+seeder:
+  image: my-seeder
+  mongoNewUser: user1
+  mongoNewPassword: password1
+
+rabbitmq:
+  amqpPort: 5672
+  uiPort: 15672
+  nodePortAMQP: 30003
+  nodePortUI: 30004
+  image: rabbitmq:4.1.2-management
+  start_username: admin
+  start_password: password
+  host: rabbitmq
+  port: 5672
+
+mongo:
+  db: rizz
+  host: mongo
+  port: 27017
+  start_username: admin
+  start_password: password
+  username: user1
+  password: password1
+  nodePort: 30002
+  image: mongo:8.0.12-rc0-noble
+
+postgres:
+  host: postgres
+  port: 5432
+  start_username: admin
+  start_password: password
+  db: rizz
+  nodePort: 30001
+  image: postgres:14.18-bookworm
+
+api:
+  image: my-api
+  port: 3003
+
+client:
+  host: client
+  apiHost: api
+  apiPort: 3003
+  image: my-client
+  clientPort: 80
+  buildArgs:
+    VITE_API_HOST: api
+    VITE_API_PORT: "3003"
+    VITE_CLIENT_PORT: "80"
+
+queuehandler:
+  image: my-queuehandler
+

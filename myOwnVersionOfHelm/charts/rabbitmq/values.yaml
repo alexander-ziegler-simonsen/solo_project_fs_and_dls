@@ -1,0 +1,8 @@
+rabbitmq:
+  amqpPort: 5672
+  uiPort: 15672
+  nodePortAMQP: 30003
+  nodePortUI: 30004
+  image: rabbitmq:4.1.2-management
+  start_username: admin
+  start_password: password
