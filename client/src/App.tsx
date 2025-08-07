@@ -1,12 +1,12 @@
 import { Button } from '@chakra-ui/react';
 import orsLogo from './assets/ors-192.png';
-import { getData } from './helpers/HandleApiCalls';
+// import { getData } from './helpers/HandleApiCalls';
 
 function App() {
 
-  const temp = () => { 
-    console.log(getData("item")); 
-  };
+  // const temp = () => { 
+  //   console.log(getData("item")); 
+  // };
   
   return (
     <>
@@ -17,8 +17,8 @@ function App() {
 
       <p>
         {/* {JSON.stringify(temp)} */}
-        <Button 
-        onClick={ () => temp() } >test</Button>
+        {/* <Button 
+        onClick={ () => temp() } >test</Button> */}
       </p>
     </>
   )

@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router'
-import orsLogo from './assets/ors-192.png'
-import { Center, Container, Flex, Text } from '@chakra-ui/react'
+// import orsLogo from './assets/ors-192.png'
+import { Container } from '@chakra-ui/react'
 import App from './App'
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -13,7 +13,7 @@ function Layout() {
         <>
             <Header />
 
-            <Container id="main" maxW={"1/1"} p={3} minH={300} backgroundColor={'green.500'}>
+            <Container id="main" p={3} backgroundColor={'green.500'}>
                 {location.pathname === "/" ? <App /> : <Outlet />}
             </Container>
 

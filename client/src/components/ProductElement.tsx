@@ -12,9 +12,11 @@ interface ProductElementProps {
 }
 
 function ProductElement({ ItemValue }: ProductElementProps) {
-
+  
+  // used to navigate to other pages - react Router
   const navigate = useNavigate();
 
+  // zustand hook
   const addToCart = useCartStore((state) => state.addToCart);
 
   return (
@@ -36,11 +38,7 @@ function ProductElement({ ItemValue }: ProductElementProps) {
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">{ItemValue.price} kr</Text>
       </Card.Body>
       <Card.Footer gap="2">
-        <Button variant="solid"
-
-        onClick={() => {
-          navigate(`/product/${ItemValue._id}`);
-        }}
+        <Button variant="solid" onClick={() => { navigate(`/product/${ItemValue._id}`); } }
           >view</Button>
         <Button variant="solid" backgroundColor={"green.600"} onClick={() => { addToCart(ItemValue, 1); }}>
           <FontAwesomeIcon icon={faCartPlus} size="xl" />
