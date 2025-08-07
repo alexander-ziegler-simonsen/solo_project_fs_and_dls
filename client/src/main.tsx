@@ -5,16 +5,19 @@ import Router from './Router.tsx'
 import { Provider as ChrakaProvider } from './components/ui/provider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ModalProvider } from './context/ModalContext.tsx'
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
         <ChrakaProvider>
           <RouterProvider router={Router} />
         </ChrakaProvider>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
+      </ModalProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </StrictMode>,
 )
