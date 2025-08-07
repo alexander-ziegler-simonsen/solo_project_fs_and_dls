@@ -65,8 +65,8 @@ function CategoryPage() {
   useEffect(() => {
     try {
       const values = [
-        { value: "price_asc", label: "sort by price (high to low)" },
-        { value: "price_desc", label: "sort by price (low to high)" }
+        { value: "price_asc", label: "sort by price (low to high)" },
+        { value: "price_desc", label: "sort by price (high to low)" }
       ];
 
       setSortOrderOptions(values);
