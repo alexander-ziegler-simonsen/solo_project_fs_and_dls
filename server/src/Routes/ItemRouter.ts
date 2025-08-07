@@ -27,8 +27,12 @@ ItemRouter.get("/item", getResultsHandler);
 
 ItemRouter.get("/item/:id", async (req, res) => {
 
-    let itemId = req.params.id;
-    let output = await itemRespository.findOneBy({ id: itemId });
+    let itemId = parseInt(req.params.id);
+    //console.log("itemID", itemId);
+    let output = await itemRespository.findOneBy({ _id: itemId });
+
+    //console.log("output", output);
+
 
     res.send({ data: output });
 })
