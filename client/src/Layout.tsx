@@ -13,7 +13,7 @@ function Layout() {
         <>
             <Header />
 
-            <Container id="main" p={3} backgroundColor={'green.500'}>
+            <Container id="main" p={3} backgroundColor={'surface'}>
                 {location.pathname === "/" ? <App /> : <Outlet />}
             </Container>
 

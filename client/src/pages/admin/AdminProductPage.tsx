@@ -214,7 +214,7 @@ function AdminProductPage() {
           
             <Table.Root gap="10" size={{ base: "sm", md: "md", lg: "lg" }}>
               <Table.Header>
-                <Table.Row>
+                <Table.Row bg={"accent"}>
                   <Table.ColumnHeader>id</Table.ColumnHeader>
                   <Table.ColumnHeader>name</Table.ColumnHeader>
                   <Table.ColumnHeader>price</Table.ColumnHeader>
@@ -224,10 +224,10 @@ function AdminProductPage() {
                   <Table.ColumnHeader>fk_group_id</Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
-              <Table.Body>
+              <Table.Body >
                 {items.length ? (
                   items.map(item => (
-                    <Table.Row key={item._id} textAlign={"center"}>
+                    <Table.Row key={item._id} textAlign={"center"} bg={"accent"}>
                       <Table.Cell p={2}>{item._id}</Table.Cell>
                       <Table.Cell p={2}>{item.name}</Table.Cell>
                       <Table.Cell p={2}>{item.price}</Table.Cell>
@@ -245,7 +245,7 @@ function AdminProductPage() {
                     // <ProductElement key={item._id} ItemValue={item} />
                   ))
                 ) : (
-                  <Table.Row key="1">
+                  <Table.Row key="1" bg={"accent"}>
                       <Table.Cell>No items found.</Table.Cell>
                       <Table.Cell>No items found.</Table.Cell>
                       <Table.Cell>No items found.</Table.Cell>

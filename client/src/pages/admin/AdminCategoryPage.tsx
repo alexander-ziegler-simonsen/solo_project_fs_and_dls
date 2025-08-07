@@ -73,7 +73,7 @@ function AdminCategoryPage() {
           
             <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
               <Table.Header>
-                <Table.Row>
+                <Table.Row bg={"accent"}>
                   <Table.ColumnHeader>group_id</Table.ColumnHeader>
                   <Table.ColumnHeader>name</Table.ColumnHeader>
                   <Table.ColumnHeader>options</Table.ColumnHeader>
@@ -82,7 +82,7 @@ function AdminCategoryPage() {
               <Table.Body>
                 {cats.length ? (
                   cats.map(cat => (
-                    <Table.Row key={cat._id} textAlign={"center"}>
+                    <Table.Row key={cat._id} textAlign={"center"} bg={"accent"}>
                       <Table.Cell p={2}>{cat._id}</Table.Cell>
                       <Table.Cell p={2}>{cat.name}</Table.Cell>
                       <Table.Cell p={2}>
@@ -137,7 +137,7 @@ function AdminCategoryPage() {
                     // <ProductElement key={item._id} ItemValue={item} />
                   ))
                 ) : (
-                  <Table.Row key="1">
+                  <Table.Row key="1" bg={"accent"}>
                     <Table.Cell>No items found.</Table.Cell>
                     <Table.Cell>No items found.</Table.Cell>
                     <Table.Cell>No items found.</Table.Cell>

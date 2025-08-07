@@ -1,6 +1,5 @@
-import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Container, Flex, Grid, GridItem, Image, Spacer, Stack, Text } from '@chakra-ui/react'
 // import React from 'react'
-import orsLogo from '../assets/ors-192.png'
 import { Item } from '../domain/Item';
 import { newGetData } from '../helpers/HandleApiCalls';
 
@@ -47,20 +46,40 @@ function ProductPage() {
       {loading ? (
         <p>loading...</p>
       ) : itemData ? (
-        <Grid templateColumns="repeat(4, 1fr)" gap="6">
-          <GridItem colSpan={2} backgroundColor="blue.100">
-            <Image src={itemData.image} backgroundColor="blue.100" />
-          </GridItem>
-          <GridItem colSpan={2} backgroundColor="blue.100">
-            <Text>{itemData.name}</Text>
-            <Text>{itemData.price}</Text>
-            <Button>add to cart</Button>
-            <Text>{itemData.info}</Text>
-          </GridItem>
-          <GridItem colSpan={4} backgroundColor="blue.100">
-            <Text>{itemData.description}</Text>
-          </GridItem>
-        </Grid>
+
+        <>
+
+
+          <Container>
+            <Stack direction={{ base: "column", sm: "column", md: "row" }}>
+
+              <Box w={{ base: "full", sm: "full", md: "48.8%", }} textAlign={'center'} bg={'white'}>
+                <Center>
+                  <Image src={itemData.image} backgroundColor="blue.100" />
+                </Center>
+              </Box>
+
+
+              <Box p={4} w={{ base: "full", sm: "full", md: "48.8%", }} bg={"border"}>
+                <Text>name: {itemData.name}</Text>
+                <Text>price: {itemData.price} kr</Text>
+
+                <Spacer p={2} />
+                <Text>Product description: <br/> {itemData.description}</Text>
+
+                <Spacer p={2} />
+                <Center><Button bg={"primary"}>add to cart</Button></Center>
+              </Box>
+
+
+
+            </Stack>
+          </Container>
+
+
+        </>
+
+
       ) : (
         <p>product not found.</p>
       )}

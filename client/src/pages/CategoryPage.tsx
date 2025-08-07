@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { getDataList, newGetData } from "../helpers/HandleApiCalls";
-import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import ProductElement from "../components/ProductElement";
 import { Container, Spacer, Spinner, Stack, VStack, Text, Center } from "@chakra-ui/react";
 import Select from "react-select";
@@ -181,10 +181,10 @@ function CategoryPage() {
 
       <Stack direction={{ base: "column", sm: "column", md: "row" }}>
         <Input id="inputSearch" flex={{ base: "100%", md: "10vw" }} 
-        type="text" placeholder="search" value={searchInput} onChange={onSreachChange} />
-        <Input id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} 
+        type="text" bg={"bg"} placeholder="search" value={searchInput} onChange={onSreachChange} />
+        <Input bg={"bg"} id="inputMinPrice" flex={{ base: "100%", md: "10vw" }} 
         type="number" placeholder="min price" value={minPriceInput} onChange={onMinPriceChange} />
-        <Input id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} 
+        <Input bg={"bg"} id="inputMaxPrice" flex={{ base: "100%", md: "10vw" }} 
         type="number" placeholder="max price" value={maxPriceInput} onChange={onMaxPriceChange} />
         {/* <Spacer w={{base: "100%", md: "30vw"}} /> */}
         <Box flex={{ base: "100%", md: "10vw" }}>
@@ -193,7 +193,7 @@ function CategoryPage() {
 
       </Stack>
       <Spacer p={1} />
-      <Button w={{ base: "100%" }} onClick={startSearch}>
+      <Button w={{ base: "100%" }} bg={"primary"} onClick={startSearch}>
         <FontAwesomeIcon icon={faSearch} size="xl" />
       </Button>
       <Spacer p={1} />

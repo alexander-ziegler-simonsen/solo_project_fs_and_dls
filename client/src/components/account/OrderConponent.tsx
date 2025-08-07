@@ -17,9 +17,10 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                 <Text>headline</Text>
                 <Text>{OrderValue.ShippingPrice}</Text>
 
-                <Table.Root size={{ base: "sm", md: "md", lg: "lg" }}>
-                    <Table.Header>
-                        <Table.Row>
+                <Table.Root 
+                size={{ base: "sm", md: "md", lg: "lg" }}>
+                    <Table.Header >
+                        <Table.Row bg={"accent"}> 
                             <Table.ColumnHeader>product name</Table.ColumnHeader>
                             <Table.ColumnHeader>product price</Table.ColumnHeader>
                             <Table.ColumnHeader>amount</Table.ColumnHeader>
@@ -27,9 +28,9 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                             <Table.ColumnHeader>options</Table.ColumnHeader>
                         </Table.Row>
                     </Table.Header>
-                    <Table.Body>
+                    <Table.Body >
                         {OrderValue.Items.map((orderItem, index) => (
-                            <Table.Row key={index}>
+                            <Table.Row key={index} bg={"accent"}>
                                 <Table.Cell>
                                     {/* TODO - loop all items here */}
                                     {orderItem.Item.image}<br />
@@ -46,7 +47,7 @@ function OrderConponent({ OrderValue }: OrderConponentProps) {
                         ))}
                     </Table.Body>
                     <Table.Footer>
-                        <Table.Row>
+                        <Table.Row bg={"accent"}>
                             <Table.Cell>the total</Table.Cell>
                             <Table.Cell>ship: {OrderValue.ShippingPrice}</Table.Cell>
                             <Table.Cell>x (total items)</Table.Cell>
