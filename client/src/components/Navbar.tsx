@@ -8,10 +8,10 @@ const links = [
     { name: "Login", to: "/login" },
     { name: "Cart", to: "/cart" },
     { name: "a_product", to: "/admin_product" },
-    { name: "a_category", to: "/admin_category" },
-    { name: "a_order", to: "/admin_order" },
-    { name: "u_orders", to: "/a_orders" },
-    { name: "u_orders", to: "/a_info" },
+    { name: "a_category", to: "/admin_category" }
+    // ,
+    // { name: "u_orders", to: "/a_orders" },
+    // { name: "u_orders", to: "/a_info" },
 ];
 
 function Navbar() {

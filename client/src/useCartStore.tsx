@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { Item } from "./domain/Item"; 
 import { CartItem } from "./domain/CartItem";
 
