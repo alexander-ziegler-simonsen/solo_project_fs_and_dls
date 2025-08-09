@@ -83,7 +83,7 @@ export async function getData<T>(gateway:string) {
 }
 
 export async function PostOneData<T>(gateway:string, insertData:T) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;  
   console.log("dev - url to api", url);
 
 
@@ -112,7 +112,7 @@ export async function PostOneData<T>(gateway:string, insertData:T) {
 }
 
 export async function PostManyData<T>(gateway:string, insertData:T[]) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;  
   console.log("dev - url to api", url);
 
   await axios({
@@ -139,13 +139,13 @@ export async function PostManyData<T>(gateway:string, insertData:T[]) {
 }
 
 export async function UpdateOneData<T>(gateway:string, insertData:T) {
-  const url = `${API_HOST}:${API_PORT}/${gateway}`;  
+  const url = `http://${API_HOST}:${API_PORT}/${gateway}`;  
   console.log("dev - update - url to api", url);
   console.log("dev - update - data ", insertData);
 
 
   await axios({
-    method: 'update',
+    method: 'put',
     url: url,
     withCredentials: true,
     data: insertData,
@@ -169,7 +169,7 @@ export async function UpdateOneData<T>(gateway:string, insertData:T) {
 }
 
 export async function Login<T>(loginInfo:T) {
-  const url = `${API_HOST}:${API_PORT}/login`; 
+  const url = `http://${API_HOST}:${API_PORT}/login`; 
   console.log("dev - url to api", url);
 
   await axios({
