@@ -1,8 +1,23 @@
-import { PostgresDataSource } from "../DataSource";
-import { Item_post } from "../entities/Item";
+import { PostgresDataSource } from "../../DataSource";
+import { Item_post } from "../../entities/Item";
 
 async function ItemDelete(data:any) {
     //console.log(data);
+    // TODO - test "Item delete" works
+    try {
+        const itemRepository = PostgresDataSource.getRepository(Item_post);
+        console.log("ItemUpdate was called");
+        
+
+
+        const itemToDeleteRef: Item_post = await itemRepository.findOneBy({_id: data._id});
+        console.log("itemToUpdateRef value:", itemToDeleteRef);
+
+        await itemRepository.delete(itemToDeleteRef);
+    }
+    catch (error) {
+        console.error("queueHandler - Item delete error:", error);
+    }
 }
 
 async function ItemUpdate(data:Item_post) {

@@ -1,5 +1,5 @@
-import { User_post } from "../entities/User";
-import { PostgresDataSource } from "../DataSource";
+import { User_post } from "../../entities/User";
+import { PostgresDataSource } from "../../DataSource";
 
 async function UserDelete(data) {
 
