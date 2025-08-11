@@ -8,7 +8,10 @@ import "reflect-metadata";
     _id: number;
 
     @Column()
-    name: string;
+    count: number;
+
+    @Column()
+    fk_item_id: number;
 }
 
 @Entity("storage")
@@ -17,6 +20,9 @@ import "reflect-metadata";
     @PrimaryGeneratedColumn()
     _id: number;
 
-    @Column("text",{nullable:false})
-    name: string;
+    @Column()
+    count: number;
+
+    @Column()
+    fk_item_id: number;
 }
