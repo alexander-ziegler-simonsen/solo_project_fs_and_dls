@@ -1,4 +1,4 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, PrimaryColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column } from "typeorm";
 import "reflect-metadata";
 
 @Entity()

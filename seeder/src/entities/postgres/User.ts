@@ -1,4 +1,4 @@
-import { Entity, ObjectId, PrimaryGeneratedColumn, ObjectIdColumn, Column, PrimaryColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import "reflect-metadata";
 import { Order_post } from "./Order";
 
