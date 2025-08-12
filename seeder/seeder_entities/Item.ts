@@ -24,8 +24,8 @@ export class Item {
     @Column()
     image: string;
 
-    @Column()
-    fk_group_id: number;
+    @Column("simple-json")
+    group: {_id: number , name: string,};
 }
 
 @Entity("item")
