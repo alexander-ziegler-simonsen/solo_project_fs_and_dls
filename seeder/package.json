@@ -6,7 +6,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node app.ts",
-    "start": "nodemon --ext ts --exec ts-node app.ts"
+    "start": "nodemon --ext ts --exec ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +20,10 @@
     "tsx": "^4.19.4"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.9.0",
     "mongodb": "^6.16.0",
     "pg": "^8.16.0",
-    "typeorm": "^0.3.24"
+    "typeorm": "^0.3.24",
+    "typeorm-extension": "^3.7.1"
   }
 }
