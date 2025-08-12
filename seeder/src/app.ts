@@ -73,25 +73,20 @@ async function PostgresSeeding()
     await AddPostgresData<OrderItem_post>(OrderItemDescription.name, OrderItemDescription.keys, OrderItemData as OrderItem_post[]);
 }
 
-async function main() {
-
-    console.log("start of the seeder 'main' function");
-
-    
-
+async function mongodbSeeding() {
     // get the denormalized, query-shaped documents of the data we added to the postgres
     
 
     // mongo
-    // await setDbAndFirstUser();
-    // await AddData<Item>(ItemData, "item");
-    // await AddData<Order>(OrderData, "order");
-    // await AddData<OrderItem>(OrderItemData, "orderitem");
-    // await AddData<ItemGroup>(ItemGroupData, "itemgroup");
-    // await AddData<User>(UserData, "user");
+    await setDbAndFirstUser();
+    await AddData<Item>(ItemData, "item");
+    await AddData<Order>(OrderData, "order");
+    await AddData<OrderItem>(OrderItemData, "orderitem");
+    await AddData<ItemGroup>(ItemGroupData, "itemgroup");
+    await AddData<User>(UserData, "user");
 
-    //let allTheNewItemJoinedDataFromPostgres = await GetPostItems();
-    //console.log("test1 values - get postItems:", allTheNewItemJoinedDataFromPostgres);
+    let allTheNewItemJoinedDataFromPostgres = await GetPostItems();
+    console.log("test1 values - get postItems:", allTheNewItemJoinedDataFromPostgres);
 
 
 
@@ -99,6 +94,16 @@ async function main() {
     //console.log("test2 values - get GetOrders:", test2);    
     // let test3 = await GetUsers();
     // console.log("test3 values - get GetUsers:", test3);
+}
+
+async function main() {
+
+    console.log("start of the seeder 'main' function");
+
+    await PostgresSeeding();
+    
+    await mongodbSeeding();
+
 
     await endAll();
 
