@@ -1,10 +1,10 @@
-import { Button, Container, Center, Text, Spinner, VStack, Stack} from '@chakra-ui/react';
+import { Button, Container, Center, Text, Spinner, VStack, Stack } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import orsLogo from './assets/ors-192.png';
 import { useState, useEffect } from 'react';
 import ProductElement from './components/ProductElement';
 import { Item } from './domain/Item';
-import { getData , newGetData} from './helpers/HandleApiCalls';
+import { getData, newGetData } from './helpers/HandleApiCalls';
 // import { getData } from './helpers/HandleApiCalls';
 
 function App() {
@@ -13,42 +13,52 @@ function App() {
   //   console.log(getData("item")); 
   // };
 
-   const [items, setItems] = useState<Item[]>([]);
-    const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  let randomNums = [1,2,3,4];
+  let randomNums = [1, 2, 3, 4];
+
+  const fetchItems = async () => {
+    setLoading(true)
+    try {
+      let output: Item[] = [];
+
+      randomNums.forEach((element) => {
+        newGetData<Item>(`item/${element}`).then((res: Item) => {
+          console.log("testing", res);
+          output.push(res);
+          console.log("output", output);
+
+        }).catch((err) => {
+          console.log(err);
+        })
+
+      });
+
+      return output;
+
+    } catch (err) {
+      console.error("Error fetching items:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // Fetch random data
-    useEffect(() => {
-      const fetchItems = async () => {
-        setLoading(true)
-        try {
-          let output: Item[] = []; 
+  useEffect(() => {
 
-          randomNums.forEach((element) => {
-            newGetData<Item>(`item/${element}`).then((res: Item) => {
-              console.log("testing", res);
-              output.push(res);
-              console.log("output", output);
-              
-            }).catch((err) => {
-              console.log(err);
-            })
-            
-          });
-          
-          setItems(output);
-          
-        } catch (err) {
-          console.error("Error fetching items:", err)
-        } finally {
-          setLoading(false)
-        }
-      }
+    setTimeout(() => {
+      fetchItems().then( (res) => {
+      setItems(res as Item[]);
+    })
+    }, 2000  )
+    
+  }, []);
 
-      fetchItems()
-    }, [])
-  
+  useEffect( () => {
+    console.log("this is items", items) ;
+  }, [items])
+
   return (
     <>
       {/* <div>
@@ -56,26 +66,30 @@ function App() {
       </div>
       <h1>Online Rizz Shop - app page</h1> */}
 
-      <Container>
+      {
+        JSON.stringify(items)
+      }
+
+      {/* <Container>
         {loading ? (
-        <VStack>
-          <Spinner size="xl" />
-          <Text fontWeight="bold">Loading…</Text>
-        </VStack>
-      ) : (
-        <>
-          <Stack direction={{ base: "column", md: "row" }} wrap="wrap" gap={4}>
-            {items.length ? (
-              items.map(item => (
-                <ProductElement key={item._id} ItemValue={item} />
-              ))
-            ) : (
-              <Text>No items found.</Text>
-            )}
-          </Stack>
-        </>
-      )}
-      </Container>
+          <VStack>
+            <Spinner size="xl" />
+            <Text fontWeight="bold">Loading…</Text>
+          </VStack>
+        ) : (
+          <>
+            <Stack direction={{ base: "column", md: "row" }} wrap="wrap" gap={4}>
+              {items.length > 0 ? (
+                items.map(item => (
+                  <ProductElement key={item._id} ItemValue={item} />
+                ))
+              ) : (
+                <Text>No items found.</Text>
+              )}
+            </Stack>
+          </>
+        )}
+      </Container> */}
     </>
   )
 }
