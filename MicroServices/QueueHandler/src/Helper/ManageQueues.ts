@@ -1,9 +1,9 @@
-import { ItemGroupHandler } from "../Handlers/ItemGroupHandler";
-import { ItemHandler } from "../Handlers/ItemHandler";
-import { OrderHandler } from "../Handlers/OrderHandler";
-import { OrderItemHandler } from "../Handlers/OrderItemHandler";
-import { UserHandler } from "../Handlers/UserHandler";
-import { StorageHandler } from "../Handlers/StorageHandler";
+import { ItemGroupHandler } from "../Handlers/post/ItemGroupHandler";
+import { ItemHandler } from "../Handlers/post/ItemHandler";
+import { OrderHandler } from "../Handlers/post/OrderHandler";
+import { OrderItemHandler } from "../Handlers/post/OrderItemHandler";
+import { UserHandler } from "../Handlers/post/UserHandler";
+import { StorageHandler } from "../Handlers/post/StorageHandler";
 
 async function HandlePut(endpointName, data) {
     switch (endpointName) {
