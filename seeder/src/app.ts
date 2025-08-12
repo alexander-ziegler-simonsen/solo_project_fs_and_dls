@@ -79,9 +79,9 @@ async function mongodbSeeding() {
 
     // mongo
     await setDbAndFirstUser();
-    await AddData<Item>(ItemData, "item");
-    await AddData<Order>(OrderData, "order");
-    await AddData<OrderItem>(OrderItemData, "orderitem");
+    //await AddData<item>(ItemData, "item");
+    // await AddData<Order>(OrderData, "order");
+    // await AddData<OrderItem>(OrderItemData, "orderitem");
     await AddData<ItemGroup>(ItemGroupData, "itemgroup");
     await AddData<User>(UserData, "user");
 
