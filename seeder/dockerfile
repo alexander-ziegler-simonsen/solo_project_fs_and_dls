@@ -13,4 +13,4 @@ COPY . .
 # Build TypeScript to JavaScript
 #RUN npm run build
 
-CMD ["npx", "ts-node", "app.ts"]
+CMD ["npm", "run", "start"]

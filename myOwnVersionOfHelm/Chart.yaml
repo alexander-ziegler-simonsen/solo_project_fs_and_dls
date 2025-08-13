@@ -13,9 +13,9 @@ dependencies:
   - name: rabbitmq
     version: 0.1.0
     repository: file://charts/rabbitmq
-  - name: seeder
-    version: 0.1.0
-    repository: file://charts/seeder
+  # - name: seeder
+  #   version: 0.1.0
+  #   repository: file://charts/seeder
   - name: api
     version: 0.1.0
     repository: file://charts/api
