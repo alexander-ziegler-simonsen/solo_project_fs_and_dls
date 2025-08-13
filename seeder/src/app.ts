@@ -1,23 +1,13 @@
 
 import { setDbAndFirstUser, AddData } from "./MongodbSeeder";
-import { setPostgresDb, AddPostgresData, setAllTables, DropTable, GetPostItems, GetOrders, GetUsers } from "./PostgresSeeder";
+import { setPostgresDb, AddPostgresData, setAllTables, DropTable } from "./PostgresSeeder";
 
-// mongo
-import { Item } from "./entities/mongo/Item";
-import { Storage } from "./entities/mongo/Storage";
-import { ItemGroup } from "./entities/mongo/ItemGroup";
-import { User } from "./entities/mongo/User";
-import { OrderDocument } from "./entities/mongo/OrderDocument";
+import { Item } from "../entities/Item";
+import { Order } from "../entities/Order";
+import { OrderItem } from "../entities/OrderItem";
+import { ItemGroup } from "../entities/ItemGroup";
+import { User } from "../entities/User";
 
-// postgres
-import { Item_post } from "./entities/postgres/Item";
-import { ItemGroup_post } from "./entities/postgres/ItemGroup";
-import { Order_post } from "./entities/postgres/Order";
-import { OrderItem_post } from "./entities/postgres/OrderItem";
-import { User_post } from "./entities/postgres/User";
-import { Storage_post } from "./entities/postgres/Storage";
-
-// data
 import ItemData from "./data/Items.json";
 import ItemGroupData from "./data/ItemGroup.json";
 import OrderData from "./data/Orders.json";
@@ -49,8 +39,7 @@ async function endAll() {
     process.exit(0);
 }
 
-async function PostgresSeeding()
-{
+async function seedingPostgresLogic() {
     // postgres
     await setPostgresDb();
 
@@ -64,47 +53,33 @@ async function PostgresSeeding()
     await setAllTables();
 
     // no fk
-    await AddPostgresData<ItemGroup_post>(ItemGroupDescription.name, ItemGroupDescription.keys, ItemGroupData as ItemGroup_post[]);
-    await AddPostgresData<User_post>(userDescription.name, userDescription.keys, UserData as User_post[])
+    await AddPostgresData<ItemGroup>(ItemGroupDescription.name, ItemGroupDescription.keys, ItemGroupData);
+    await AddPostgresData<User>(userDescription.name, userDescription.keys, UserData)
 
     // have fk
-    await AddPostgresData<Item_post>(itemDescription.name, itemDescription.keys, ItemData as Item_post[])
-    await AddPostgresData<Order_post>(OrderDescription.name, OrderDescription.keys,  OrderData as Order_post[]);
-    await AddPostgresData<OrderItem_post>(OrderItemDescription.name, OrderItemDescription.keys, OrderItemData as OrderItem_post[]);
+    await AddPostgresData<Item>(itemDescription.name, itemDescription.keys, ItemData)
+    await AddPostgresData<Order>(OrderDescription.name, OrderDescription.keys,  OrderData);
+    await AddPostgresData<OrderItem>(OrderItemDescription.name, OrderItemDescription.keys, OrderItemData);
+    
 }
 
-async function mongodbSeeding() {
-    // get the denormalized, query-shaped documents of the data we added to the postgres
-    
-
+async function seedingMongodbLogic() {
     // mongo
     await setDbAndFirstUser();
-    //await AddData<item>(ItemData, "item");
-    // await AddData<Order>(OrderData, "order");
-    // await AddData<OrderItem>(OrderItemData, "orderitem");
+    await AddData<Item>(ItemData, "item");
+    await AddData<Order>(OrderData, "order");
+    await AddData<OrderItem>(OrderItemData, "orderitem");
     await AddData<ItemGroup>(ItemGroupData, "itemgroup");
     await AddData<User>(UserData, "user");
-
-    let allTheNewItemJoinedDataFromPostgres = await GetPostItems();
-    console.log("test1 values - get postItems:", allTheNewItemJoinedDataFromPostgres);
-
-
-
-    //let test2 = await GetOrders();
-    //console.log("test2 values - get GetOrders:", test2);    
-    // let test3 = await GetUsers();
-    // console.log("test3 values - get GetUsers:", test3);
 }
 
 async function main() {
+    // postgres
+    await seedingPostgresLogic();
 
-    console.log("start of the seeder 'main' function");
-
-    await PostgresSeeding();
+    // mongo
+    await seedingMongodbLogic();
     
-    await mongodbSeeding();
-
-
     await endAll();
 
     return "done";
