@@ -10,7 +10,6 @@ kubectl delete -n ors deployment postgres-svc
 kubectl delete -n ors deployment mongo-svc
 kubectl delete -n ors deployment seeder-job
 kubectl delete -n ors deployment rabbitmq-svc
-kubectl delete -n ors deployment client-svc
 kubectl delete -n ors deployment api-svc
 kubectl delete -n ors deployment queue-handler-svc
 
