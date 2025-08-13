@@ -22,7 +22,7 @@ dependencies:
   - name: queuehandler
     version: 0.1.0
     repository: file://charts/queuehandler
-  - name: client
-    version: 0.1.0
-    repository: file://charts/client
+  # - name: client
+  #   version: 0.1.0
+  #   repository: file://charts/client
 
