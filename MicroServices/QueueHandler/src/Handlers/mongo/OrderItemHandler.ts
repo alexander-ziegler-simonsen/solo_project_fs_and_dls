@@ -31,8 +31,9 @@ async function OrderItemUpdate(data:OrderItem) {
         console.log("itemToUpdateRef value:", orderToUpdateRef);
 
         orderToUpdateRef.count = data.count;
-        orderToUpdateRef.item = data.item;
+        orderToUpdateRef.fk_item_id = data.fk_item_id;
         orderToUpdateRef.price = data.price;
+        orderToUpdateRef.fk_order_id = data.fk_order_id;
 
         await orderRepository.save(orderToUpdateRef);
     }
