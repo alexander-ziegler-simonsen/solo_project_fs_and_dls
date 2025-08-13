@@ -1,4 +1,4 @@
-testseeder:
+seeder:
   image: my-seeder
   mongoNewUser: user1
   mongoNewPassword: password1
