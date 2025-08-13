@@ -12,7 +12,7 @@ import 'dotenv/config';
 // const mon_new_user= process.env.MONGO_NEW_USERNAME;
 // const mon_new_pass= process.env.MONGO_NEW_PASSWORD;
 
-const mongo_port: number = parseInt(process.env.MONGO_PORT) || 5433;
+const mongo_port: number = parseInt(process.env.MONGO_PORT) || 27017;
 const mongo_use: string = process.env.MONGO_USERNAME || "admin";
 const mongo_pass: string = process.env.MONGO_PASSWORD || "password";
 const mongo_db = process.env.MONGO_DB || "rizz";

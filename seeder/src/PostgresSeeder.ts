@@ -4,7 +4,7 @@ import 'dotenv/config';
 const postgres_user = process.env.POSTGRES_USERNAME || "admin";
 const postgres_pass = process.env.POSTGRES_PASSWORD || "password";
 const postgres_host = process.env.POSTGRES_HOST || "localhost";
-const postgres_port = process.env.POSTGRES_PORT || 5433;
+const postgres_port = process.env.POSTGRES_PORT || 5432;
 const postgres_db = process.env.POSTGRES_DB || "rizz";
 
 const FIRST_URL = `posgres://${postgres_user}:${postgres_pass}@${postgres_host}:${postgres_port}`; // or your MongoDB connection string

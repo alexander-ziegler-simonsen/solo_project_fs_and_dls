@@ -29,7 +29,7 @@ export async function setDbAndFirstUser() {
             roles: [{ role: "readWrite", db: mon_new_db }]
         });
 
-        console.log("mongo-User created:", commandResult);
+        //console.log("mongo-User created:", commandResult);
     } catch (err) {
         console.error("mongo-Error creating user:", err);
     } finally {
@@ -42,7 +42,7 @@ export async function AddData<T>( insertData: OptionalUnlessRequiredId<T>[], tab
 
         console.log("mongo-the AddData<T> function was called");
         console.log("mongo-table name", tablename);
-        console.log("mongo-data adding", JSON.stringify(insertData));
+        //console.log("mongo-data adding", JSON.stringify(insertData));
 
 
         await client.connect();
