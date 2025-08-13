@@ -1,9 +1,0 @@
-client:
-  image: my-client
-  apiHost: api
-  apiPort: 3003
-  clientPort: 80
-  buildArgs:
-    VITE_API_HOST: api
-    VITE_API_PORT: "3003"
-    VITE_CLIENT_PORT: "80"
