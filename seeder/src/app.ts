@@ -2,11 +2,11 @@
 import { setDbAndFirstUser, AddData } from "./MongodbSeeder";
 import { setPostgresDb, AddPostgresData, setAllTables, DropTable } from "./PostgresSeeder";
 
-import { Item } from "../entities/Item";
-import { Order } from "../entities/Order";
-import { OrderItem } from "../entities/OrderItem";
-import { ItemGroup } from "../entities/ItemGroup";
-import { User } from "../entities/User";
+import { Item } from "./entities/Item";
+import { Order } from "./entities/Order";
+import { OrderItem } from "./entities/OrderItem";
+import { ItemGroup } from "./entities/ItemGroup";
+import { User } from "./entities/User";
 
 import ItemData from "./data/Items.json";
 import ItemGroupData from "./data/ItemGroup.json";
