@@ -38,10 +38,19 @@ async function main() {
     
     app.use(bodyParser.json());
 
+    // clients 
+    // let origins = [
+    //     `${CLIENT_HOST}:${CLIENT_PORT}`,
+    //     "client:80"
+    // ]
+
     app.use(cors({
-        origin: `${CLIENT_HOST}:${CLIENT_PORT}`,
-        credentials: true
+        origin: `*`
     }));
+
+    // app.use(cors());
+    // app.options('*', cors());
+    
 
     // when json errors, DON'T leak errors to the client
     app.use((err, req, res, next) => {
